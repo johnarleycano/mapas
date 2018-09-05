@@ -12,11 +12,11 @@
                     </ul>
                 </li> -->
 
-                <li class="uk-nav-header">MEDICIONES</li>
+                <li class="uk-nav-header">MANTENIMIENTO</li>
                 <li><a onCLick="javascript:medir_roceria()"><i class="far fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Realizar medición</a></li>
                 <li><a href="<?php // echo site_url('mediciones/ver'); ?>"><i class="fas fa-list-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ver mediciones</a></li>
                 
-                <li class="uk-nav-header">BÁSCULAS</li>
+                <li class="uk-nav-header">INVENTARIO</li>
                 <li><a href="<?php // echo site_url('basculas/pesaje'); ?>"><i class="fas fa-truck fa-lg"></i>&nbsp;&nbsp;&nbsp;Pesaje</a></li>
                 
                 <!-- Menús pendientes de habilitar -->
