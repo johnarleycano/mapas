@@ -37,4 +37,5 @@
 <script src="<?php echo base_url(); ?>js/jquery-3.2.1.min.js"></script> <!-- jQuery -->
 <script src="<?php echo base_url(); ?>js/leaflet/leaflet.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/bing.js"></script>
+<script src="<?php echo base_url(); ?>js/leaflet/minimap.js"type="text/javascript"></script>		
 <script src="<?php echo base_url(); ?>js/funciones.js"></script>
