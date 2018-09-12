@@ -32,5 +32,5 @@ class Inicio extends CI_Controller {
         $this->load->view('core/template', $this->data);
 	}
 }
-/* Fin del archivo Mapas.php */
-/* Ubicación: ./application/controllers/Mapas.php */
+/* Fin del archivo Inicio.php */
+/* Ubicación: ./application/controllers/Inicio.php */
