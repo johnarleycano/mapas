@@ -26,6 +26,10 @@ class Filtros extends CI_Controller {
         // $this->load->model(array('filtros_model'));
     }
 
+    function index(){
+        echo "Conectado";
+    }
+
     function wkb_to_json($wkb) {
         $geom = geoPHP::load($wkb,'wkb');
         return $geom->out('json');

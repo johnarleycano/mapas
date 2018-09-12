@@ -26,7 +26,7 @@ class Operaciones extends CI_Controller {
 
     /**
      * Carga de interfaz vía Ajax
-     * 
+     *     
      * @return [void]
      */
     function cargar_interfaz()

@@ -70,16 +70,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'mantenimiento';
+$active_group = 'configuracion';
 $query_builder = TRUE;
 
-// Conexión a la base de datos de mantenimiento
-$db['mantenimiento'] = array(
+// Conexión a la base de datos de configuración
+$db['configuracion'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'publicador',
 	'password' => 'd3v1m3d',
-	'database' => 'mantenimiento',
+	'database' => 'configuracion',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
@@ -98,7 +98,7 @@ $db['mantenimiento'] = array(
 
 // Conexión a la base de datos
 // de configuración del sistema
-$db['configuracion'] = array(
+$db['incidentes'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'publicador',
