@@ -17,6 +17,7 @@
 	<script src="<?php echo base_url(); ?>js/uikit.js"></script> <!-- Scripts para UI Kit -->
 	<script src="<?php echo base_url(); ?>js/uikit-icons.js"></script> <!-- Scripts para UI Kit -->
 	<script src="<?php echo base_url(); ?>js/fontawesome-all.js"></script>
+	<script src="<?php echo base_url(); ?>js/sweetalert.min.js"></script>
 <?php } ?>
 
 <?php if(ENVIRONMENT === 'production') { ?>
@@ -28,6 +29,7 @@
 	<script src="<?php echo base_url(); ?>js/uikit.min.js"></script> <!-- Scripts para UI Kit -->
 	<script src="<?php echo base_url(); ?>js/uikit-icons.min.js"></script> <!-- Scripts para UI Kit -->
 	<script src="<?php echo base_url(); ?>js/fontawesome-all.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php } ?>
 
 <!-- Estilos -->
