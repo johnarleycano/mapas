@@ -3,7 +3,6 @@
 <script type="text/javascript">
 	
 	function generar_marcador(punto) {
-	swal(`Has elegido crear un marcador en las coordenadas ${punto.latlng.toString()}`);
 		
 		imprimir(punto)
 	    imprimir(`Has elegido crear un marcador en las coordenadas ${punto.latlng}`)

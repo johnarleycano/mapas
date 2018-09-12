@@ -3,4 +3,9 @@
     <a class="uk-navbar-toggle" href="#" uk-toggle="target: #offcanvas-nav" title="Visualice el menú principal" uk-tooltip="pos: right">
         <span uk-navbar-toggle-icon></span>
     </a>
+
+    <!-- Filtro superior -->
+    <div class="uk-navbar-center" id="filtro_superior">
+        <?php $this->load->view("filtros/superior"); ?>
+    </div>
 </nav>
