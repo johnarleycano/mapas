@@ -45,28 +45,8 @@ class Configuracion extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
-                case "vias_geometria":
-     //                // Build GeoJSON feature collection array
-			  //       $geojson = array(
-			  //          'type'      => 'FeatureCollection',
-			  //          'features'  => array()
-			  //       );
-
-			  //       foreach ($this->configuracion_model->obtener("vias_geometrias", $id) as $registro) {
-			  //           $feature = array(
-			  //                'type' => 'Feature',
-			  //                'geometry' => json_decode($this->wkb_to_json($registro->wkb)),
-			  //                'properties' => $registro
-			  //           );
-
-			  //           unset($registro->wkb);
-			  //           unset($registro->Shape);
-			  //           # Add feature arrays to feature collection array
-			  //           array_push($geojson['features'], $feature);
-
-			  //       }
-
-					// echo json_encode($geojson, JSON_NUMERIC_CHECK);
+                case "abscisas":
+                    print json_encode($this->configuracion_model->obtener($tipo, $id));
                 break;
             }
         } else {
