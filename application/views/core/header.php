@@ -34,10 +34,12 @@
 
 <!-- Estilos -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/leaflet.css" />
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
 
 <!-- Scripts -->
 <script src="<?php echo base_url(); ?>js/jquery-3.2.1.min.js"></script> <!-- jQuery -->
 <script src="<?php echo base_url(); ?>js/leaflet/leaflet.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/bing.js"></script>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
 <script src="<?php echo base_url(); ?>js/leaflet/minimap.js"type="text/javascript"></script>		
 <script src="<?php echo base_url(); ?>js/funciones.js"></script>
