@@ -2,11 +2,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		let mapa = generar_mapa("cont_mapa")
-		marcar("vias", mapa)
+		var mapa = generar_mapa("cont_mapa")
+		marcar(mapa)
 
 		$("select").on("change", function(){
-			marcar("vias", mapa)
+			marcar(mapa)
 		})
 
     mapa.on('click', generar_marcador)
