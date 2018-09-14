@@ -14,15 +14,15 @@
 
                 <li class="uk-nav-header">OPERACIONES</li>
                 <li><a onCLick="javascript:historico_accidentes(mapa)"><i class="far fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Accidentes</a></li>
-                <li><a href="<?php // echo site_url('mediciones/ver'); ?>"><i class="fas fa-list-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ver mediciones</a></li>
+                <li><a href="<?php // echo site_url('mediciones/ver'); ?>"><i class="fas fa-list-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Menú 2</a></li>
                 
-                <li class="uk-nav-header">INVENTARIO</li>
-                <li><a href="<?php // echo site_url('basculas/pesaje'); ?>"><i class="fas fa-truck fa-lg"></i>&nbsp;&nbsp;&nbsp;Pesaje</a></li>
+                <li class="uk-nav-header">MANTENIMIENTO</li>
+                <li><a href="<?php // echo site_url('basculas/pesaje'); ?>"><i class="fas fa-truck fa-lg"></i>&nbsp;&nbsp;&nbsp;Señales verticales</a></li>
+                <li><a href="<?php // echo site_url('basculas/pesaje'); ?>"><i class="fas fa-truck fa-lg"></i>&nbsp;&nbsp;&nbsp;Señales horizontales</a></li>
+                <li><a href="<?php // echo site_url('basculas/pesaje'); ?>"><i class="fas fa-truck fa-lg"></i>&nbsp;&nbsp;&nbsp;Obras de arte</a></li>
                 
                 <!-- Menús pendientes de habilitar -->
                 <?php // if(ENVIRONMENT === 'development'){ ?>
-                <li><a onCLick="javascript:certificados_calibracion()"><i class="fas fa-server fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cert. calibración</a></li>
-                    
                     <li class="uk-nav-header">INVENTARIO</li>
                     <li><a onCLick="javascript:medir_roceria()"><i class="far fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Agregar</a></li>
                     <li><a href="<?php // echo site_url('mediciones/ver'); ?>"><i class="fas fa-list-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Ver</a></li>
@@ -66,6 +66,7 @@
 
         // Se consultan los puntos
         let puntos = ajax("<?php echo site_url('operaciones/obtener') ?>", {"tipo": "historico_accidentes", "id": {id_sector: id_sector, id_via: id_via}}, 'JSON')
+        imprimir(puntos)
 
         mapa.eachLayer(function (layer) {
             // imprimir(layer)

@@ -49,7 +49,5 @@
             }
             cargar_lista_desplegable(datos)
         })
-
-        
     })
 </script>

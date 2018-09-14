@@ -132,7 +132,6 @@ function convertir_mayusculas(elemento)
     $(elemento).val($(elemento).val().toUpperCase())
 }
 
-
 /**
  * Configura los filtros por defecto guardados previamente
  * 
