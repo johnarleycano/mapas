@@ -38,6 +38,19 @@ Class Operaciones_model extends CI_Model{
 		        // return $this->db_incidentes->get_compiled_select();
                 return $this->db_incidentes->query($sql)->result();
 			break;
+
+			case 'incidentes_hoy':
+				$sql = 
+				"SELECT
+					i.id 
+				FROM
+					dvm_incidente AS i 
+				WHERE
+					i.fecha = '2018-09-18'";
+
+				// return $this->db_incidentes->get_compiled_select();
+                return $this->db_incidentes->query($sql)->result();
+			break;
 		}
 	}
 }

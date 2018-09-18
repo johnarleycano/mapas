@@ -69,6 +69,12 @@ class Operaciones extends CI_Controller {
             redirect('');
         }
     }
+
+    function index()
+    {
+        print json_encode($this->operaciones_model->obtener("incidentes_hoy"));
+
+    }
 }
 /* Fin del archivo Operaciones.php */
 /* Ubicación: ./application/controllers/Operaciones.php */
