@@ -76,10 +76,10 @@ $query_builder = TRUE;
 // Conexión a la base de datos de configuración
 $db['configuracion'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.0.50',
-	'username' => 'desarrollo',
+	'hostname' => 'localhost',
+	'username' => 'publicador',
 	'password' => 'd3v1m3d',
-	'database' => 'incidentes',
+	'database' => 'configuracion',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
@@ -100,10 +100,10 @@ $db['configuracion'] = array(
 // de configuración del sistema
 $db['incidentes'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'publicador',
+	'hostname' => '192.168.0.50',
+	'username' => 'desarrollo',
 	'password' => 'd3v1m3d',
-	'database' => 'configuracion',
+	'database' => 'incidentes',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
