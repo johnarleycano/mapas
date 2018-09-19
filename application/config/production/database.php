@@ -100,8 +100,8 @@ $db['configuracion'] = array(
 // de configuración del sistema
 $db['incidentes'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.0.50',
-	'username' => 'desarrollo',
+	'hostname' => '192.168.0.12',
+	'username' => 'publicador',
 	'password' => 'd3v1m3d',
 	'database' => 'incidentes',
 	'dbdriver' => 'mysqli',
