@@ -13,7 +13,7 @@
                 </li> -->
 
                 <li class="uk-nav-header">OPERACIONES</li>
-                <li><a onCLick="javascript:historico_accidentes(mapa)"><i class="far fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Accidentes</a></li>
+                <li><a href="<?php echo site_url('Operaciones/incidentes'); ?>"><i class="far fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Incidentes</a></li>
                 <li><a href="<?php // echo site_url('mediciones/ver'); ?>"><i class="fas fa-list-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Menú 2</a></li>
                 
                 <li class="uk-nav-header">MANTENIMIENTO</li>

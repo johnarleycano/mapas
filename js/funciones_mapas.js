@@ -42,17 +42,13 @@ function generar_marcador(punto) {
     imprimir(`Has elegido crear un marcador en las coordenadas ${punto.latlng}`)
 }
 
-function marcar(mapa)
+function marcar(mapa, capa = null)
 {
     // Variables
     let sector = parseFloat($("#select_sector_filtro").val())
     let via = parseFloat($("#select_via_filtro").val())
     let id_sector = (sector || sector > 0) ? sector : null
     let id_via = (via || via > 0) ? via : null
-
-    /**
-     * 
-     */
 
     // Se recorren los layers
     mapa.eachLayer(function (layer) {
@@ -61,16 +57,31 @@ function marcar(mapa)
     })
 
     // Se consultan las vías    
-    var vias = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
+    var kilometros = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
 
+    var lineas = []
+    
     // Se agrega la capa de vías
-    var capa_vias = new L.geoJson(vias, {
+    var capa_vias = new L.geoJson(kilometros, {
         style: {
             "color": "#555555",
             "weight": 5,
             "opacity": 1
-        }
-    }).addTo(mapa)
+        },
+        // onEachFeature: function(feature, layer) {
+        //     let km = feature.geometry.coordinates
+
+        //     for (i = 0; i < km.length; i++) {
+        //         lineas.push(km[i].reverse())
+        //     }
+
+        //     L.polyline(lineas, 
+        //         {color: 'red'}
+        //     )
+        // },
+    })
+    .bindPopup("ok")
+    // .addTo(mapa)
 
     // Se centra en la capa
     mapa.fitBounds(capa_vias.getBounds())
@@ -78,18 +89,14 @@ function marcar(mapa)
     // Se agregan las capas de mapas
     var capas_mapas = agregar_capas_mapas(mapa)
 
-    /**
-     * 
-     */
-
     // Se consultan las abscisas    
     abscisas = ajax(`${$("#url").val()}/configuracion/obtener`, {"tipo": "abscisas", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
     // imprimir(abscisas)
     
-    var circulos = new Array()
+    var puntos = new Array()
 
     $.each(abscisas, function(key, abscisa) {
-        let circulo = L.circleMarker(
+        let punto = L.circleMarker(
             [abscisa.Latitud, abscisa.Longitud],
             {
                 radius: 5,
@@ -102,18 +109,72 @@ function marcar(mapa)
                 Abscisa: ${abscisa.Abscisa}`
             )
         })
-        circulos.push(circulo)
+        puntos.push(punto)
     })
 
-    var capa_abscisas = L.layerGroup(circulos).addTo(mapa)
+    var capa_abscisas = L.layerGroup(puntos)/*.addTo(mapa)*/
+
+    if(capa == "incidentes"){
+        // Consulta de incidentes
+        let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
+        grupo = []
+        
+        $.each(incidentes, function(key, incidente) {
+            var coordenadas = []
+                abscisa = parseInt(incidente.abscisa)
+                kilometro = Math.trunc(abscisa / 1000) * 1000  
+                punto =  (abscisa % 1000) / 1000
+                
+            imprimir(`Vía ${incidente.id_via_configuracion}, abscisa ${abscisa}`)
+
+            var puntos = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id":  {"id_sector": id_sector, "id_via": incidente.id_via_configuracion, "kilometro": kilometro}}, 'JSON')
+
+            // Si existen coordenadas (Porque puede tener una abscisa fuera de perímetro)
+            if(puntos.features[0]){
+                var valores = puntos.features[0].geometry.coordinates
+
+                for (i = 0; i < valores.length; i++){
+                    coordenadas.push(valores[i].reverse())
+                }
+                
+                var polyline = new L.polyline(coordenadas)
+                    
+                var arrayOfPoints = polyline.getLatLngs()
+                
+                var point1 = L.GeometryUtil.interpolateOnLine(mapa, arrayOfPoints, punto)
+                
+                var marcador = L.marker(point1.latLng)
+                .on("click", function(){
+                    swal({
+                      title: `Incidente número ${incidente.id}`,
+                      text: `
+                        Tipo de incidente: ${incidente.nombre}
+                        Abscisa: ${incidente.abscisa}
+                        Fecha: ${incidente.fecha}
+                        `,
+                      icon: "success",
+                      buttons: false,
+                      timer: 5000
+                    })
+                })
+                
+                grupo.push(marcador)
+            }
+        })
+
+        var capa_incidentes = L.layerGroup(grupo)
+        .addTo(mapa);
+    }
 
     // Capas específicas
     var capas = {
         "Vías": capa_vias,
-        "Abscisas": capa_abscisas
+        "Abscisas": capa_abscisas,
+        "Incidentes": capa_incidentes,
     }
 
-    // Agregado el control
-    var control = L.control.layers(capas_mapas, capas).addTo(mapa)
-    // mapa.control.removeFrom(mapa)
+    if(!control){
+        // Agregado el control
+        var control = L.control.layers(capas_mapas, capas).addTo(mapa)
+    }
 }

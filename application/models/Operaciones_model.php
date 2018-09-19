@@ -39,14 +39,30 @@ Class Operaciones_model extends CI_Model{
                 return $this->db_incidentes->query($sql)->result();
 			break;
 
-			case 'incidentes_hoy':
+			case 'incidentes':
+				$filtro = "";
+                if ($id['id_sector'] || $id["id_via"]) $filtro = ($id["id_via"]) ? "AND v.id_via_configuracion = {$id['id_via']}" : "AND vc.Fk_Id_Sector = {$id['id_sector']}";
+
 				$sql = 
 				"SELECT
-					i.id 
+					i.id,
+					i.abscisa,
+					ta.nombre,
+					i.fecha,
+					v.id_via_configuracion 
 				FROM
-					dvm_incidente AS i 
+					incidentes_desarrollo.dvm_incidente AS i
+					INNER JOIN incidentes_desarrollo.dvm_via AS v ON i.via = v.id
+					INNER JOIN incidentes_desarrollo.dvm_tipo_atencion AS ta ON i.tipo_atencion = ta.id
+					INNER JOIN configuracion.vias AS vc ON v.id_via_configuracion = vc.Pk_Id 
 				WHERE
-					i.fecha = '2018-09-18'";
+					i.fecha BETWEEN '2018-09-01' AND '2018-09-30' 
+					AND i.abscisa_real <> '' 
+					$filtro
+				ORDER BY
+					vc.Fk_Id_Sector ASC,
+					v.id_via_configuracion ASC,
+					i.abscisa ASC";
 
 				// return $this->db_incidentes->get_compiled_select();
                 return $this->db_incidentes->query($sql)->result();

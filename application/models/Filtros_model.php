@@ -58,7 +58,9 @@ Class Filtros_Model extends CI_Model{
 
             case "vias_geometrias":
                     $filtro = "";
-                if ($id['id_sector'] || $id["id_via"]) $filtro = ($id["id_via"]) ? "WHERE g.Fk_Id_Via = {$id['id_via']}" : "WHERE vias.Fk_Id_Sector = {$id['id_sector']}";
+                if ($id['id_sector'] || $id["id_via"]) $filtro = ($id["id_via"]) ? "AND g.Fk_Id_Via = {$id['id_via']}" : "AND vias.Fk_Id_Sector = {$id['id_sector']}";
+
+                $filtro_kilometro = (isset($id['kilometro'])) ? "AND g.Abscisa_Inicial = {$id['kilometro']}": "";
                 
                 $sql =
                 "SELECT
@@ -70,8 +72,11 @@ Class Filtros_Model extends CI_Model{
                     AsWKB ( g.Shape ) AS wkb
                 FROM
                     vias_geometrias AS g
-                INNER JOIN vias ON g.Fk_Id_Via = vias.Pk_Id 
-                    $filtro";
+                INNER JOIN vias ON g.Fk_Id_Via = vias.Pk_Id
+                WHERE
+                    g.Pk_Id IS NOT NULL
+                    $filtro
+                    $filtro_kilometro";
 
                 return $this->db->query($sql)->result();
             break;

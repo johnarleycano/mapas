@@ -61,6 +61,10 @@ class Operaciones extends CI_Controller {
 
             switch ($tipo) {
                 case "historico_accidentes":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+
+                case "incidentes":
                 	print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
             }
@@ -70,10 +74,15 @@ class Operaciones extends CI_Controller {
         }
     }
 
-    function index()
+    /**
+     * Mapa de incidentes
+     * @return [type] [description]
+     */
+    function incidentes()
     {
-        print json_encode($this->operaciones_model->obtener("incidentes_hoy"));
-
+        $this->data['titulo'] = 'Incidentes';
+        $this->data['contenido_principal'] = 'operaciones/incidentes/index';
+        $this->load->view('core/template', $this->data);
     }
 }
 /* Fin del archivo Operaciones.php */
