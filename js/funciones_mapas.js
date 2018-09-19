@@ -114,7 +114,14 @@ function marcar(mapa, capa = null)
 
     var capa_abscisas = L.layerGroup(puntos)/*.addTo(mapa)*/
 
+    // Capas específicas
+    var capas = {
+        "Vías": capa_vias,
+        "Abscisas": capa_abscisas,
+    }
+
     if(capa == "incidentes"){
+
         // Consulta de incidentes
         let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
         grupo = []
@@ -125,7 +132,7 @@ function marcar(mapa, capa = null)
                 kilometro = Math.trunc(abscisa / 1000) * 1000  
                 punto =  (abscisa % 1000) / 1000
                 
-            imprimir(`Vía ${incidente.id_via_configuracion}, abscisa ${abscisa}`)
+            // imprimir(`Vía ${incidente.id_via_configuracion}, abscisa ${abscisa}`)
 
             var puntos = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id":  {"id_sector": id_sector, "id_via": incidente.id_via_configuracion, "kilometro": kilometro}}, 'JSON')
 
@@ -164,13 +171,9 @@ function marcar(mapa, capa = null)
 
         var capa_incidentes = L.layerGroup(grupo)
         .addTo(mapa);
-    }
 
-    // Capas específicas
-    var capas = {
-        "Vías": capa_vias,
-        "Abscisas": capa_abscisas,
-        "Incidentes": capa_incidentes,
+        capas["Incidentes"] = capa_incidentes
+
     }
 
     if(!control){
