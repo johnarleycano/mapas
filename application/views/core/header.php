@@ -35,6 +35,7 @@
 <!-- Estilos -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/leaflet.css" />
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/L.Control.Locate.min.css">
 
 <!-- Scripts -->
 <script src="<?php echo base_url(); ?>js/jquery-3.2.1.min.js"></script> <!-- jQuery -->
@@ -45,3 +46,4 @@
 <script src="<?php echo base_url(); ?>js/leaflet/geometryutil.js"></script>
 <script src="<?php echo base_url(); ?>js/funciones_mapas.js"></script>
 <script src="<?php echo base_url(); ?>js/funcion.js"></script>
+<script src="<?php echo base_url(); ?>js/leaflet/L.Control.Locate.min.js"></script>
