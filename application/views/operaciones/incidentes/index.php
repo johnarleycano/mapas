@@ -1,4 +1,4 @@
-<div id='cont_mapa'></div>
+<div id="cont_mapa" class="margen_mapa"></div>
 
 <script type="text/javascript">
 	$(document).ready(function(){

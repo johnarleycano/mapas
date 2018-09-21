@@ -8,14 +8,15 @@
         <?php
         // Si ha iniciado sesión
         // if ($this->session->userdata("Pk_Id_Usuario")) {
+        if ($menu) {
             // Menús de la aplicación
             $this->load->view('core/menu_superior');
             $this->load->view('core/menu_lateral');
-        // }
+        }
         ?>
 
     	<!-- Contenedor principal -->
-        <div id="contenedor_principal">
+        <div id="contenedor_principal" class="margen">
             <!--Se carga el contenido principal -->
             <?php $this->load->view($contenido_principal); ?>
         </div>

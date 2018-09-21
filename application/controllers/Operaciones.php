@@ -81,6 +81,8 @@ class Operaciones extends CI_Controller {
     function incidentes()
     {
         $this->data['titulo'] = 'Incidentes';
+        $this->data['filtro_superior'] = true;
+        $this->data['menu'] = true;
         $this->data['contenido_principal'] = 'operaciones/incidentes/index';
         $this->load->view('core/template', $this->data);
     }

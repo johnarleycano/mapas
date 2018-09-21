@@ -6,6 +6,6 @@
 
     <!-- Filtro superior -->
     <div class="uk-navbar-center" id="filtro_superior">
-        <?php $this->load->view("filtros/superior"); ?>
+        <?php if($filtro_superior) $this->load->view("filtros/superior"); ?>
     </div>
 </nav>
