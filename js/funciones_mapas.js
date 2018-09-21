@@ -30,6 +30,9 @@ function generar_mapa(contenedor)
     let escala = L.control.scale({ position: 'bottomright', imperial: false})
     mapa.addControl(escala)
 
+    // Control de ubicación actual
+    L.control.locate().addTo(mapa)
+
     // Minimapa
     // let mini_mapa = new L.TileLayer('https://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {minZoom:0, maxZoom: 13})
     // new L.Control.MiniMap(mini_mapa, { toggleDisplay: true }).addTo(mapa)
