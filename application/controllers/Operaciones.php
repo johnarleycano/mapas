@@ -64,6 +64,10 @@ class Operaciones extends CI_Controller {
                     print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
 
+                case "incidente":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+
                 case "incidentes":
                 	print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
@@ -84,6 +88,19 @@ class Operaciones extends CI_Controller {
         $this->data['filtro_superior'] = true;
         $this->data['menu'] = true;
         $this->data['contenido_principal'] = 'operaciones/incidentes/index';
+        $this->load->view('core/template', $this->data);
+    }
+
+    /**
+     * Mapa de incidentes
+     * @return [type] [description]
+     */
+    function incidente()
+    {
+        $this->data['titulo'] = 'Punto';
+        $this->data['filtro_superior'] = false;
+        $this->data['menu'] = false;
+        $this->data['contenido_principal'] = 'operaciones/incidentes/punto';
         $this->load->view('core/template', $this->data);
     }
 }

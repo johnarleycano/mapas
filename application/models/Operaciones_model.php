@@ -39,6 +39,22 @@ Class Operaciones_model extends CI_Model{
                 return $this->db_incidentes->query($sql)->result();
 			break;
 
+			case "incidente":
+				$this->db_incidentes
+		        	->select(array(
+			            'i.*',
+			            'v.id_via_configuracion',
+			            'v.nombre nombre_via_configuracion',
+			            ))
+		            ->from('dvm_incidente i')
+		            ->join('dvm_via v', 'i.via = v.id ')
+		            ->where('i.id', $id)
+	            ;
+		        
+		        // return $this->db_configuracion->get_compiled_select(); // string de la consulta
+		        return $this->db_incidentes->get()->row();
+			break;
+
 			case 'incidentes':
 				$filtro = "";
                 if ($id['id_sector'] || $id["id_via"]) $filtro = ($id["id_via"]) ? "AND v.id_via_configuracion = {$id['id_via']}" : "AND vc.Fk_Id_Sector = {$id['id_sector']}";
