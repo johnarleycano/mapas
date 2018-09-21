@@ -6,6 +6,7 @@
 		var id_incidente = "<?php echo $this->uri->segment(3); ?>"
 
 		$("#contenedor_principal").removeClass("margen");
+		
 		var mapa = generar_mapa("cont_mapa")
 		marcar(mapa)
 
@@ -25,7 +26,7 @@
 			calcular() {
 				// Consulta de los datos del incidente
 			    var incidente = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidente", "id":  this.id_incidente}, 'JSON')
-
+			    
 			    // Variables
 				var coordenadas = []
 			    var abscisa = parseInt(incidente.abscisa)
@@ -75,6 +76,9 @@
 					// Se hace zoom al kilómetro
 					mapa.fitBounds(polilinea.getBounds())
 			    }
+
+			    // Al incidente se le insertan las coordenadas
+			    ajax(`${$("#url").val()}/operaciones/actualizar`, {"tipo": "incidente", "id": this.id_incidente, "datos": {"longitud": coordenada.latLng.lng, "latitud": coordenada.latLng.lat}}, 'JSON')
 
 			    // Se retornan las coordenadas
 				return coordenada.latLng

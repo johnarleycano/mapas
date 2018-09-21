@@ -25,6 +25,28 @@ class Operaciones extends CI_Controller {
     }
 
     /**
+     * Actualización de registros en base de datos
+     */
+    function actualizar(){
+        //Se valida que la peticion venga mediante ajax y no mediante el navegador
+        if($this->input->is_ajax_request()){
+            // Se reciben los datos por POST
+            $datos = $this->input->post('datos');
+            $tipo = $this->input->post('tipo');
+
+            // Dependiendo del tipo
+            switch ($tipo) {
+                case 'incidente':
+                    echo $this->operaciones_model->actualizar($tipo, $this->input->post('id'), $datos);
+                break;
+            } // switch
+        }else{
+            //Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
+            redirect('');
+        }
+    }
+
+    /**
      * Carga de interfaz vía Ajax
      *     
      * @return [void]
@@ -38,38 +60,6 @@ class Operaciones extends CI_Controller {
             switch ($tipo) {
                 case "historico_accidentes":
                 	$this->load->view("operaciones/index");
-                break;
-            }
-        } else {
-            // Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
-            redirect('');
-        }
-    }
-
-    /**
-     * Obtiene registros de base de datos
-     * y los retorna a las vistas
-     * 
-     * @return [vois]
-     */
-    function obtener()
-    {
-        //Se valida que la peticion venga mediante ajax y no mediante el navegador
-        if($this->input->is_ajax_request()){
-            $tipo = $this->input->post("tipo");
-            $id = $this->input->post("id");
-
-            switch ($tipo) {
-                case "historico_accidentes":
-                    print json_encode($this->operaciones_model->obtener($tipo, $id));
-                break;
-
-                case "incidente":
-                    print json_encode($this->operaciones_model->obtener($tipo, $id));
-                break;
-
-                case "incidentes":
-                	print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
             }
         } else {
@@ -102,6 +92,38 @@ class Operaciones extends CI_Controller {
         $this->data['menu'] = false;
         $this->data['contenido_principal'] = 'operaciones/incidentes/punto';
         $this->load->view('core/template', $this->data);
+    }
+
+    /**
+     * Obtiene registros de base de datos
+     * y los retorna a las vistas
+     * 
+     * @return [vois]
+     */
+    function obtener()
+    {
+        //Se valida que la peticion venga mediante ajax y no mediante el navegador
+        if($this->input->is_ajax_request()){
+            $tipo = $this->input->post("tipo");
+            $id = $this->input->post("id");
+
+            switch ($tipo) {
+                case "historico_accidentes":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+
+                case "incidente":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+
+                case "incidentes":
+                	print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+            }
+        } else {
+            // Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
+            redirect('');
+        }
     }
 }
 /* Fin del archivo Operaciones.php */

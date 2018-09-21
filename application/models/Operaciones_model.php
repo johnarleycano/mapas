@@ -6,6 +6,24 @@ Class Operaciones_model extends CI_Model{
         $this->db_incidentes = $this->load->database('incidentes', TRUE);
     }
 
+    /**
+	 * Actualización en base de datos base de datos
+	 * @param  string $tipo Tipo de dato
+	 * @param  int $id   Identificador
+	 * @return array       Datos
+	 */
+	function actualizar($tipo, $id, $datos){
+		// Según el tipo
+		switch ($tipo) {
+			case 'incidente':
+				return $this->db_incidentes
+					->where("id",$id)
+					->set("coordenadas","geomfromtext('POINT({$datos['longitud']} {$datos['latitud']})')",false)
+					->update("dvm_incidente");
+			break;
+		}
+	}
+
 	/**
 	 * Obtiene registros de base de datos
 	 * y los retorna a las vistas
@@ -42,7 +60,10 @@ Class Operaciones_model extends CI_Model{
 			case "incidente":
 				$this->db_incidentes
 		        	->select(array(
-			            'i.*',
+			            'i.abscisa',
+			            'i.abscisa_real',
+			            'i.informado_por_nombre',
+			            'i.fecha',
 			            'v.id_via_configuracion',
 			            'v.nombre nombre_via_configuracion',
 			            ))
@@ -51,8 +72,9 @@ Class Operaciones_model extends CI_Model{
 		            ->where('i.id', $id)
 	            ;
 		        
-		        // return $this->db_configuracion->get_compiled_select(); // string de la consulta
+		        // return $this->db_incidentes->get_compiled_select(); // string de la consulta
 		        return $this->db_incidentes->get()->row();
+		        // return $this->db_incidentes->query($sql)->row();
 			break;
 
 			case 'incidentes':
