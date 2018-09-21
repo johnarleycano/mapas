@@ -99,8 +99,8 @@ $db['configuracion'] = array(
 // Conexión a la base de datos de incidentes
 $db['incidentes'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.0.12',
-	'username' => 'publicador',
+	'hostname' => '192.168.0.50',
+	'username' => 'desarrollo',
 	'password' => 'd3v1m3d',
 	'database' => 'incidentes_desarrollo',
 	'dbdriver' => 'mysqli',
