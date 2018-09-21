@@ -129,17 +129,50 @@ function marcar(mapa, capa = null)
      **************************************************/
     if(capa == "incidentes"){
         // Consulta de incidentes
-        let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
+        let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes2", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
         
-        // Arreglo con el grupo
-        grupo = []
+        // Arreglo que contiene los puntos
+        var puntos = new Array()
+        
+        // Recorrido de los incidentes
+        $.each(incidentes, function(key, incidente) {
+            var punto = L.marker([incidente.Latitud, incidente.Longitud])
+            .on("click", function(){
+                swal({
+                  title: `${incidente.nombre} en la vía`,
+                  text: `
+                    Abscisa: ${incidente.abscisa_real}
+                    Fecha: ${incidente.fecha}
+                    `,
+                  icon: "success",
+                  buttons: false,
+                  timer: 5000
+                })
+            })
+
+            // El punto se agrega al arreglo
+            puntos.push(punto)
+        })
+
+        // Se agrega el layer en el arreglo de capas
+        capas["Incidentes"] = L.layerGroup(puntos).addTo(mapa)
+
+
+
+
+
+
+
+
+        // // Arreglo con el grupo
+        // grupo = []
         
         // $.each(incidentes, function(key, incidente) {
         //     var coordenadas = []
         //         kilometro = Math.trunc(abscisa / 1000) * 1000  
         //         punto =  (abscisa % 1000) / 1000
                 
-        //     // imprimir(`Vía ${incidente.id_via_configuracion}, abscisa ${abscisa}`)
+        //     imprimir(`Vía ${incidente.id_via_configuracion}, abscisa ${abscisa}`)
 
         //     var puntos = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id":  {"id_sector": id_sector, "id_via": incidente.id_via_configuracion, "kilometro": kilometro}}, 'JSON')
 
