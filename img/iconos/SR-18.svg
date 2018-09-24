@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="90.400002cm"
+   height="90.400002cm"
+   viewBox="0 0 9040.0003 9039.9996"
+   version="1.1"
+   id="svg4496"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="Colombia_road_sign_SR-18.svg">
+  <defs
+     id="defs4490" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.11252527"
+     inkscape:cx="1726.4083"
+     inkscape:cy="2663.9453"
+     inkscape:document-units="cm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="cm"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata4493">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,6710.0001)">
+    <circle
+       style="fill:#be141e;fill-opacity:1;stroke:none;stroke-width:1933.07995605;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path5041"
+       cx="4520"
+       cy="-2190"
+       r="4500" />
+    <circle
+       r="3600"
+       cy="-2190"
+       cx="4520"
+       id="circle5043"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1546.46398926;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       sodipodi:nodetypes="ccccccccccccccccccc"
+       inkscape:connector-curvature="0"
+       id="path5490"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:33.22802353"
+       d="M 1814.9999,-2919.9995 H 2670 v 580 H 1590 Z m 5855.0001,1340 H 2870 v -1590 H 1700 l -330,900 v 1240 h 5470 l 830,-310 z m 0,-140 V -3849.9994 H 3010 v 2129.9999 z" />
+    <circle
+       r="639.99994"
+       cy="-1022.9996"
+       cx="2223"
+       id="circle5566"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:217.97897339;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <circle
+       r="533"
+       cy="-1022.9996"
+       cx="2223"
+       id="circle5568"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:181.53562927;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:85.14803314;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle5570"
+       cx="2223"
+       cy="-1022.9996"
+       r="249.99998" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:217.97897339;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle7697"
+       cx="6283.001"
+       cy="-1022.9996"
+       r="639.99994" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:181.53562927;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle7699"
+       cx="6283.001"
+       cy="-1022.9996"
+       r="533" />
+    <circle
+       r="249.99998"
+       cy="-1022.9996"
+       cx="6283.001"
+       id="circle7701"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:85.14803314;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       style="fill:#be141e;fill-opacity:1;stroke:none;stroke-width:418.02685547;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect7061"
+       width="900"
+       height="8000"
+       x="4294.6865"
+       y="-2352.4404"
+       transform="rotate(-45)" />
+  </g>
+</svg>

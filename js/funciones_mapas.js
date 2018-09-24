@@ -21,9 +21,9 @@ function generar_mapa(contenedor)
     // Opciones del mapa
     let mapa = L.map(contenedor, {
         center: [6.176188, -75.354868],
-        zoom: 15,
+        zoom: 13,
         minZoom: 5,
-        maxZoom: 17,
+        maxZoom: 18,
     })
 
     // Control de escala
@@ -32,10 +32,6 @@ function generar_mapa(contenedor)
 
     // Control de ubicación actual
     L.control.locate().addTo(mapa)
-
-    // Minimapa
-    // let mini_mapa = new L.TileLayer('https://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {minZoom:0, maxZoom: 13})
-    // new L.Control.MiniMap(mini_mapa, { toggleDisplay: true }).addTo(mapa)
 
     // Se retorna el mapa
     return mapa
@@ -88,7 +84,7 @@ function marcar(mapa, capa = null)
     capas["Vías"] = capa_vias
 
     // Se centra en la capa
-    mapa.fitBounds(capa_vias.getBounds())
+    if(capa != "senales_verticales") mapa.fitBounds(capa_vias.getBounds())
 
     // Se agregan las capas de mapas
     var capas_mapas = agregar_capas_mapas(mapa)
@@ -159,67 +155,75 @@ function marcar(mapa, capa = null)
 
         // Se agrega el layer en el arreglo de capas
         capas["Incidentes"] = L.layerGroup(puntos).addTo(mapa)
+    }
 
+    /***************************************************
+     *** Dibujo de inventario de señales verticales ****
+     **************************************************/
+    if(capa == "senales_verticales"){
+        // Variable para mantener la ubicación del mapa
+        var hash = new L.Hash(mapa)
 
+        // Información de las señales verticales
+        var capa_senales_verticales = new L.geoJson(null, {
+            pointToLayer: function (feature, latlng) {
+                // Código del ícono
+                var codigo = String(feature.properties["codsen"])
 
+                // Ícono
+                var smallIcon = new L.Icon({
+                    "iconSize": [21, 21],
+                    "iconUrl": `${$("#url_base").val()}img/iconos/${codigo}.svg`,
+                })
+                
+                // Marcador
+                return L.marker(latlng, {icon: smallIcon});
+            },
+            onEachFeature: function pop_SealesVerticales_1(feature, layer) {
+                var popupContent =
+                    `
+                    <b>Kilómetro:</b> ${(feature.properties['kilómetro']) ? feature.properties['kilómetro'] : ''}<br>
+                    <b>Margen:</b> ${(feature.properties['costado']) ? feature.properties['costado'] : ''}<br>
+                    <b>Código de señal:</b> ${(feature.properties['codseñal']) ? feature.properties['codseñal'] : ''}<br>
+                    <b>Color:</b> ${(feature.properties['color']) ? feature.properties['color'] : ''}<br>
+                    <b>Fecha de inspección:</b> ${(feature.properties['fechainspe']) ? feature.properties['fechainspe'] : ''}<br>
+                    <b>Medición:</b> ${(feature.properties['medición']) ? feature.properties['medición'] : ''}<br>
+                    <b>Observación:</b> ${(feature.properties['observ']) ? feature.properties['observ'] : ''}<br>
+                    <b>Antigraf:</b> ${(feature.properties['antigraf']) ? feature.properties['antigraf'] : ''}
+                    `
+                layer.bindPopup(popupContent, {maxHeight: 400});
+            },
+        })
 
+        // Cuadro del perímetro del que va a cargar los datos
+        var perimetro = mapa.getBounds().toBBoxString()
 
+        // Consulta de las señales verticales
+        senales_verticales = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "senales_verticales", "id": {"id_sector": null, "id_via": id_via, "perimetro": perimetro}}, 'JSON')
 
-
-
-        // // Arreglo con el grupo
-        // grupo = []
+        // Se agregan los datos a la capa
+        capa_senales_verticales.addData(senales_verticales)
         
-        // $.each(incidentes, function(key, incidente) {
-        //     var coordenadas = []
-        //         kilometro = Math.trunc(abscisa / 1000) * 1000  
-        //         punto =  (abscisa % 1000) / 1000
-                
-        //     imprimir(`Vía ${incidente.id_via_configuracion}, abscisa ${abscisa}`)
+        // Cuando se mueva la capa
+        mapa.on('moveend', function(e) {
+            // Se limpian las señales
+            capa_senales_verticales.clearLayers()
 
-        //     var puntos = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id":  {"id_sector": id_sector, "id_via": incidente.id_via_configuracion, "kilometro": kilometro}}, 'JSON')
+            // Se consultan las señales en el perímetro
+            senales_verticales = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "senales_verticales", "id": {"id_sector": id_sector, "id_via": id_via, "perimetro": mapa.getBounds().toBBoxString()}}, 'JSON')
 
-        //     // Si existen coordenadas (Porque puede tener una abscisa fuera de perímetro)
-        //     if(puntos.features[0]){
-        //         var valores = puntos.features[0].geometry.coordinates
+            // Se agregan a la capa
+            capa_senales_verticales.addData(senales_verticales)
+        }) 
 
-        //         for (i = 0; i < valores.length; i++){
-        //             coordenadas.push(valores[i].reverse())
-        //         }
+        // Se agrega la capa
+        mapa.addLayer(capa_senales_verticales)
+    
+        // Se agrega la capa
+        capas["Señales verticales"] = capa_senales_verticales
 
-        //         var polyline = new L.polyline(coordenadas)
-                    
-        //         var arrayOfPoints = polyline.getLatLngs()
-                
-        //         var point1 = L.GeometryUtil.interpolateOnLine(mapa, arrayOfPoints, punto)
-                
-        //         var marcador = L.marker(point1.latLng)
-        //         .on("mouseover", function(){
-        //             swal({
-        //               title: `Incidente número ${incidente.id}`,
-        //               text: `
-        //                 Tipo de incidente: ${incidente.nombre}
-        //                 Abscisa: ${incidente.abscisa}
-        //                 Fecha: ${incidente.fecha}
-        //                 `,
-        //               icon: "success",
-        //               buttons: false,
-        //               timer: 5000
-        //             })
-        //         })
-                
-        //         grupo.push(marcador)
-        //     }
-        // })
-
-        // var capa_incidentes = L.layerGroup(grupo)
-        // .addTo(mapa);
-
-        // capas["Incidentes"] = capa_incidentes
+        mapa.setView(new L.LatLng(6.17456,-75.34895), 18)
     }
 
-    if(!control){
-        // Agregado el control
-        var control = L.control.layers(capas_mapas, capas).addTo(mapa)
-    }
+    if(!control) var control = L.control.layers(capas_mapas, capas).addTo(mapa)
 }

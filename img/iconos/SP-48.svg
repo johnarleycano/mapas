@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="81.945999cm"
+   height="81.945999cm"
+   viewBox="0 0 819.45999 819.45997"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="Colombia_road_sign_SP-48.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.15879247"
+     inkscape:cx="522.93863"
+     inkscape:cy="1616.158"
+     inkscape:document-units="cm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="cm"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,522.46001)">
+    <rect
+       style="fill:#a0ff32;fill-opacity:1;stroke:none;stroke-width:59.79019928;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect815"
+       width="600"
+       height="600"
+       x="69.437714"
+       y="-89.989281"
+       rx="40"
+       ry="40"
+       transform="rotate(-45)" />
+    <rect
+       y="-77.989281"
+       x="81.437714"
+       height="576"
+       width="576"
+       id="rect12551"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:57.39859009;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       rx="28"
+       ry="28"
+       transform="rotate(-45)" />
+    <rect
+       y="-65.989281"
+       x="93.437706"
+       height="552"
+       width="552"
+       id="rect12553"
+       style="fill:#a0ff32;fill-opacity:1;stroke:none;stroke-width:55.00698471;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       rx="16"
+       ry="16"
+       transform="rotate(-45)" />
+    <path
+       d="m 374.00914,-258.4077 57.86489,-30.76815 107.92449,40.41074 74.84071,52.45193 c 9.40017,8.28684 0.70797,25.79217 -13.83706,23.31057 l -79.83583,-48.20961 -61.5362,-11.02052 50.05643,115.27364 -0.45931,24.337704 31.68674,62.458106 74.92678,-21.546596 c 28.97549,-1.98087 29.94205,27.071203 14.20387,34.503255 l -95.71739,33.543295 c -7.63946,3.256658 -14.88969,3.696806 -20.74603,-5.913763 L 461.26417,-65.065279 391.00079,5.6574444 358.85471,123.2245 c -7.51179,18.1687 -39.61328,7.92647 -35.82073,-11.47986 l 30.76819,-116.645259 60.62399,-107.927751 -32.14923,-77.61251 -29.39339,48.22238 -93.72703,19.90388 c -17.53079,-0.48192 -20.60572,-20.45252 -8.35713,-26.26425 l 82.3365,-22.57371 c 0,0 41.7919,-88.63304 40.87326,-87.25512"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.18973064"
+       id="path1787"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccccccccccccccc" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:38.33576202;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path2424"
+       cx="193.7"
+       cy="-67.699997"
+       r="43.700001" />
+    <circle
+       r="37.900002"
+       cy="-309.39999"
+       cx="371.89999"
+       id="circle2437"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:33.24771881;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>

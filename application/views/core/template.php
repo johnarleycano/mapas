@@ -26,5 +26,6 @@
 
         <!-- Input que entrega url base para archivos en JS -->
         <input type="hidden" id="url" value="<?php echo site_url(''); ?>">
+        <input type="hidden" id="url_base" value="<?php echo base_url(''); ?>">
 	</body>
 </html>
