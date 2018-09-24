@@ -45,5 +45,6 @@
 <script src="<?php echo base_url(); ?>js/leaflet/minimap.js"type="text/javascript"></script>		
 <script src="<?php echo base_url(); ?>js/leaflet/geometryutil.js"></script>
 <script src="<?php echo base_url(); ?>js/funciones_mapas.js"></script>
+<script src="<?php echo base_url(); ?>js/leaflet/hash.js"></script>
 <script src="<?php echo base_url(); ?>js/funcion.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/L.Control.Locate.min.js"></script>
