@@ -119,3 +119,27 @@ $db['incidentes'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+// Conexión a la base de datos de mediciones en Postgres
+$db['inventario'] = array(
+	'dsn'	=> '',
+	'hostname' => '192.168.0.19',
+	'username' => 'postgres',
+	'password' => 'D3v1m3d*',
+	'database' => 'db_mediciones',
+	'dbdriver' => 'postgre',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'port' => 5432,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
