@@ -18,7 +18,7 @@
 
 <?php if(isset($filtros["tipos_atencion"])){ ?>
     <!-- Tipos de atención -->
-    <select class="uk-select uk-form-width-medium uk-margin-small-left uk-form-small" id="select_tipo_atencion">
+    <select class="uk-select uk-form-width-medium uk-margin-small-left uk-form-small" id="select_tipo_atencion_filtro">
         <option value="0">Todos los tipos de atención</option>
         <?php foreach ($this->operaciones_model->obtener("tipos_atencion") as $tipo_atencion) { ?>
             <option value="<?php echo $tipo_atencion->Pk_Id; ?>"><?php echo "$tipo_atencion->Nombre"; ?></option>
