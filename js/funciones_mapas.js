@@ -128,17 +128,17 @@ function marcar(mapa, capa = null)
      **************************************************/
     if(capa == "incidentes"){
         // Consulta de incidentes
-        let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes2", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
+        let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
         
         // Arreglo que contiene los puntos
         var puntos = new Array()
         
         // Recorrido de los incidentes
         $.each(incidentes, function(key, incidente) {
-            var punto = L.marker([incidente.Latitud, incidente.Longitud])
+            var punto = L.marker([incidente.longitud, incidente.latitud])
             .on("click", function(){
                 swal({
-                  title: `${incidente.nombre} en la vía`,
+                  title: `Incidente en la vía`,
                   text: `
                     Abscisa: ${incidente.abscisa_real}
                     Fecha: ${incidente.fecha}

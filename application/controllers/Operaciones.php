@@ -119,10 +119,6 @@ class Operaciones extends CI_Controller {
                 case "incidentes":
                     print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
-
-                case "incidentes2":
-                	print json_encode($this->operaciones_model->obtener($tipo, $id));
-                break;
             }
         } else {
             // Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
