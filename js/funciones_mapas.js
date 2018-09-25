@@ -178,7 +178,7 @@ function marcar(mapa, capa = null)
         var capa_senales_verticales = new L.geoJson(null, {
             pointToLayer: function (feature, latlng) {
                 // Código del ícono
-                var codigo = String(feature.properties["codsen"])
+                var codigo = String(feature.properties["codsen"]).toUpperCase()
 
                 // Ícono
                 var smallIcon = new L.Icon({
