@@ -72,12 +72,12 @@ class Operaciones extends CI_Controller {
      * Mapa de incidentes
      * @return [type] [description]
      */
-    function incidentes()
+    function incidente()
     {
-        $this->data['titulo'] = 'Incidentes';
-        $this->data['filtro_superior'] = true;
-        $this->data['menu'] = true;
-        $this->data['contenido_principal'] = 'operaciones/incidentes/index';
+        $this->data['titulo'] = 'Punto';
+        $this->data['filtro_superior'] = false;
+        $this->data['menu'] = false;
+        $this->data['contenido_principal'] = 'operaciones/incidentes/punto';
         $this->load->view('core/template', $this->data);
     }
 
@@ -85,12 +85,12 @@ class Operaciones extends CI_Controller {
      * Mapa de incidentes
      * @return [type] [description]
      */
-    function incidente()
+    function incidentes()
     {
-        $this->data['titulo'] = 'Punto';
-        $this->data['filtro_superior'] = false;
-        $this->data['menu'] = false;
-        $this->data['contenido_principal'] = 'operaciones/incidentes/punto';
+        $this->data['titulo'] = 'Incidentes';
+        $this->data['filtro_superior'] = true;
+        $this->data['menu'] = true;
+        $this->data['contenido_principal'] = 'operaciones/incidentes/index';
         $this->load->view('core/template', $this->data);
     }
 
@@ -117,7 +117,7 @@ class Operaciones extends CI_Controller {
                 break;
 
                 case "incidentes":
-                	print json_encode($this->operaciones_model->obtener($tipo, $id));
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
 
                 case "incidentes2":

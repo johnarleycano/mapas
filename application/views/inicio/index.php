@@ -9,7 +9,8 @@
 			marcar(mapa)
 		})
 
-    mapa.on('click', generar_marcador)
-		
+		// Al dar clic sobre cualquier parte del mapa, ejecuta
+		// la función para generar un marcador
+    	mapa.on('click', generar_marcador)
 	})
 </script>
