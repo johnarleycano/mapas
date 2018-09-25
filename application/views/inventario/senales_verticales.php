@@ -2,12 +2,19 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
+		var opciones = {
+			"Vias": [true, true, false],
+			"Abscisas": [true, false],
+			"Incidentes": [false],
+			"Senales_Verticales": [true, true, true],
+		}
+
 		var mapa = generar_mapa("cont_mapa")
-		marcar(mapa, "senales_verticales")
+		marcar(mapa, opciones)
 
 		$("select").on("change", function(){
-			marcar(mapa, "senales_verticales")
+			marcar(mapa, opciones)
 		})
-
 	})
 </script>

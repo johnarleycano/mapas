@@ -92,6 +92,7 @@ Class Operaciones_model extends CI_Model{
 			            'ta.id Pk_Id',
 			            'ta.nombre Nombre',
 			        ))
+		            ->order_by('Nombre')
 		            ->from('dvm_tipo_atencion ta')
 	            ;
 		        
