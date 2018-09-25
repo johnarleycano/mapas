@@ -199,7 +199,8 @@ function marcar(mapa, capa = null)
                     <b>Fecha de inspección:</b> ${(feature.properties['fechainspe']) ? feature.properties['fechainspe'] : ''}<br>
                     <b>Medición:</b> ${(feature.properties['medición']) ? feature.properties['medición'] : ''}<br>
                     <b>Observación:</b> ${(feature.properties['observ']) ? feature.properties['observ'] : ''}<br>
-                    <b>Antigraf:</b> ${(feature.properties['antigraf']) ? feature.properties['antigraf'] : ''}
+                    <b>Antigraf:</b> ${(feature.properties['antigraf']) ? feature.properties['antigraf'] : ''}<br>
+                    ${(feature.properties['foto']) ? `${feature.properties['foto']}` : ''}
                     `
                 layer.bindPopup(popupContent, {maxHeight: 400});
             },
