@@ -78,10 +78,25 @@ Class Operaciones_model extends CI_Model{
 					i.coordenadas IS NOT NULL 
 					AND i.fecha BETWEEN '2018-09-01' 
 					AND '2018-09-31'
-					$filtro";
+					$filtro
+					$filtro_tipo_atencion";
 
 				// return $this->db_incidentes->get_compiled_select();
                 return $this->db_incidentes->query($sql)->result();
+			break;
+
+			case "tipos_atencion":
+				$this->db_incidentes
+		            ->select(array(
+			            'ta.*',
+			            'ta.id Pk_Id',
+			            'ta.nombre Nombre',
+			        ))
+		            ->from('dvm_tipo_atencion ta')
+	            ;
+		        
+		        // return $this->db_incidentes->get_compiled_select(); // string de la consulta
+		        return $this->db_incidentes->get()->result();
 			break;
 		}
 	}

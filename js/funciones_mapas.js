@@ -48,8 +48,11 @@ function marcar(mapa, capa = null)
      *********************************/
     let sector = parseFloat($("#select_sector_filtro").val())
     let via = parseFloat($("#select_via_filtro").val())
+    let tipo_atencion = parseFloat($("#select_tipo_atencion").val())
+
     let id_sector = (sector || sector > 0) ? sector : null
     let id_via = (via || via > 0) ? via : null
+    let id_tipo_atencion = (tipo_atencion || tipo_atencion > 0) ? tipo_atencion : null
 
     // Arreglo que contendrá todas las capas
     var capas = {}
@@ -127,8 +130,15 @@ function marcar(mapa, capa = null)
      ******* Dibujo de incidentes de operaciones *******
      **************************************************/
     if(capa == "incidentes"){
+        // Recolección de datos
+        datos = {
+            "id_sector": id_sector,
+            "id_via": id_via,
+            "id_tipo_atencion": id_tipo_atencion
+        }
+
         // Consulta de incidentes
-        let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": {"id_sector": id_sector, "id_via": id_via}}, 'JSON')
+        let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": datos}, 'JSON')
         
         // Arreglo que contiene los puntos
         var puntos = new Array()

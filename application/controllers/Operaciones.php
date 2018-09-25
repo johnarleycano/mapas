@@ -90,6 +90,7 @@ class Operaciones extends CI_Controller {
         $this->data['titulo'] = 'Incidentes';
         $this->data['filtro_superior'] = true;
         $this->data['menu'] = true;
+        $this->data['filtros'] = array("tipos_atencion" => true);
         $this->data['contenido_principal'] = 'operaciones/incidentes/index';
         $this->load->view('core/template', $this->data);
     }
