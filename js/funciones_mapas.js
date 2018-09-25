@@ -80,8 +80,8 @@ function marcar(mapa, capa = null)
             "opacity": 1
         }
     })
-    .bindPopup("ok")
-    // .addTo(mapa)
+    // .bindPopup("ok")
+    .addTo(mapa)
 
     // Se agrega la capa
     capas["Vías"] = capa_vias
