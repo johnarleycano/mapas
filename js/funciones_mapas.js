@@ -151,11 +151,13 @@ function dibujar_senales_verticales(mapa, filtros){
                 <b>Margen:</b> ${(feature.properties['costado']) ? feature.properties['costado'] : ''}<br>
                 <b>Código de señal:</b> ${(feature.properties['codseñal']) ? feature.properties['codseñal'] : ''}<br>
                 <b>Color:</b> ${(feature.properties['color']) ? feature.properties['color'] : ''}<br>
-                <b>Fecha de inspección:</b> ${(feature.properties['fechainspe']) ? feature.properties['fechainspe'] : ''}<br>
+                <b>Fecha:</b> ${(feature.properties['fechainspe']) ? feature.properties['fechainspe'] : ''}<br>
                 <b>Medición:</b> ${(feature.properties['medición']) ? feature.properties['medición'] : ''}<br>
                 <b>Observación:</b> ${(feature.properties['observ']) ? feature.properties['observ'] : ''}<br>
                 <b>Antigraf:</b> ${(feature.properties['antigraf']) ? feature.properties['antigraf'] : ''}<br>
-                ${(feature.properties['foto']) ? `${feature.properties['foto']}` : ''}
+                <center>
+                    <img src="${$("#url_base").val()}DCIM/${feature.properties['archivo']}" />
+                </center>
                 `
             layer.bindPopup(popupContent, {maxHeight: 400});
         },
