@@ -8,9 +8,10 @@
 			"Abscisas": [true, false],
 			"Incidentes": [false],
 			"Senales_Verticales": [true, true, true],
+			"Capa_Mapa": "Bing",
 		}
 
-		var mapa = generar_mapa("cont_mapa")
+		var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18})
 		marcar(mapa, opciones)
 
 		$("select").on("change", function(){

@@ -1,29 +1,41 @@
-function agregar_capas_mapas(mapa)
+function agregar_capas_mapas(mapa, capa = "Bing")
 {
     // Mapa de Bing
-    var bing = new L.BingLayer("Pl2wXFOEKQ0lIT6FDWrM~7S7lA5j_F2sDUhSdCeQVzw~AvN-ATn5N1EQzxbEEBkYWNUYY1AyXIzXPwXex81xLAN1RyJYJaML4e2gD9QTzsIU", {type: "Aerial"})
+    var bing = new L.BingLayer("Pl2wXFOEKQ0lIT6FDWrM~7S7lA5j_F2sDUhSdCeQVzw~AvN-ATn5N1EQzxbEEBkYWNUYY1AyXIzXPwXex81xLAN1RyJYJaML4e2gD9QTzsIU", {
+        type: "Aerial"
+    })
 
     // Mapa de Open Street
     var open_street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(mapa)
+    })
 
+    // Arreglo de las capas de mapas
     var capas_mapas = {
         "Bing": bing,
         "Open Street": open_street,
     }
 
+    // Se activa el mapa seleccionado
+    capas_mapas[capa].addTo(mapa)
+
     return capas_mapas
 }
 
-function generar_mapa(contenedor)
+function generar_mapa(contenedor, opciones = null)
 {
+    if (opciones) {
+        var zoom = (typeof opciones.zoom !== 'undefined') ? opciones.zoom : 18
+        var zoom_minimo = (typeof opciones.minZoom !== 'undefined') ? opciones.minZoom : 15
+        var zoom_maximo = (typeof opciones.maxZoom !== 'undefined') ? opciones.maxZoom : 18
+    }
+
     // Opciones del mapa
     let mapa = L.map(contenedor, {
-        center: [6.176188, -75.354868],
-        zoom: 13,
-        minZoom: 5,
-        maxZoom: 18,
+        "center": [6.176188, -75.354868],
+        "zoom": zoom,
+        "minZoom": zoom_minimo,
+        "maxZoom": zoom_maximo,
     })
 
     // Control de escala
@@ -256,7 +268,7 @@ function marcar(mapa, opciones)
         if(opciones["Incidentes"][1]) capa_incidentes.addTo(mapa)
 
         // Si tiene activa la opción, centra el dibujo en la capa
-        // if(opciones["Incidentes"][2]) mapa.fitBounds(capa_incidentes.getBounds())
+        // if(opciones["Incidentes"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
 
     /***************************************************
@@ -273,14 +285,14 @@ function marcar(mapa, opciones)
         if(opciones["Senales_Verticales"][1]) capa_senales_verticales.addTo(mapa)
 
         // Si tiene activa la opción, centra el dibujo en la capa
-        if(opciones["Senales_Verticales"][2]) mapa.setView(new L.LatLng(6.17456,-75.3484), 17)
+        // if(opciones["Senales_Verticales"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
 
     // Variable para mantener la ubicación del mapa
     var hash = new L.Hash(mapa)
 
     // Se agregan las capas de mapas
-    var capas_mapas = agregar_capas_mapas(mapa)
+    var capas_mapas = agregar_capas_mapas(mapa, opciones.Capa_Mapa)
     
     if(!control) var control = L.control.layers(capas_mapas, capas).addTo(mapa)
 }
