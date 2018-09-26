@@ -88,6 +88,7 @@ class Operaciones extends CI_Controller {
     function incidentes()
     {
         $this->data['titulo'] = 'Incidentes';
+        $this->data['titulo_mapa'] = 'Operaciones | Incidentes ocurridos este mes';
         $this->data['filtro_superior'] = true;
         $this->data['menu'] = true;
         $this->data['filtros'] = array("tipos_atencion" => true);

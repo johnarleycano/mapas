@@ -1,15 +1,19 @@
-<!-- Sector -->
-<select class="uk-select uk-form-width-medium uk-form-small" id="select_sector_filtro">
-    <option value="0">Todos los sectores</option>
-    <?php foreach ($this->filtros_model->obtener("sectores") as $sector) { ?>
-        <option value="<?php echo $sector->Pk_Id; ?>"><?php echo "$sector->Codigo"; ?></option>
-    <?php } ?>
-</select>
+<?php if(isset($filtros["sectores"])){ ?>
+    <!-- Sector -->
+    <select class="uk-select uk-form-width-medium uk-form-small" id="select_sector_filtro">
+        <option value="0">Todos los sectores</option>
+        <?php foreach ($this->filtros_model->obtener("sectores") as $sector) { ?>
+            <option value="<?php echo $sector->Pk_Id; ?>"><?php echo "$sector->Codigo"; ?></option>
+        <?php } ?>
+    </select>
+<?php } ?>
 
-<!-- Vía -->
-<select class="uk-select uk-form-width-medium uk-margin-small-left uk-form-small" id="select_via_filtro">
-    <option value="0">Elija primero un sector...</option>
-</select>
+<?php if(isset($filtros["vias"])){ ?>
+    <!-- Vías -->
+    <select class="uk-select uk-form-width-medium uk-margin-small-left uk-form-small" id="select_via_filtro">
+        <option value="0">Elija primero un sector...</option>
+    </select>
+<?php } ?>
 
 <?php if(isset($filtros["costados"])){ ?>
     <!-- Costado -->

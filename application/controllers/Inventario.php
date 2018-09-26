@@ -84,6 +84,7 @@ class Inventario extends CI_Controller {
     function senales_verticales()
     {
         $this->data['titulo'] = 'Señalización vertical';
+        $this->data['titulo_mapa'] = 'Mantenimiento | Señalización vertical';
         $this->data['filtro_superior'] = true;
         $this->data['menu'] = true;
         $this->data['contenido_principal'] = 'inventario/senales_verticales';
