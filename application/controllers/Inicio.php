@@ -18,6 +18,11 @@ class Inicio extends CI_Controller {
      */
     function __construct() {
         parent::__construct();
+
+        // Si no ha iniciado sesión, se redirige a la aplicación de configuración
+        if(!$this->session->userdata('Pk_Id_Usuario')){
+            redirect("sesion/cerrar");
+        }
     }
 
 	/**
