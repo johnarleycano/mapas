@@ -40,7 +40,6 @@
                 
                 <li class="uk-nav-divider"></li>
                 <li><a href="<?php echo site_url('sesion/cerrar'); ?>"><i class="fas fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Salir</a></li>
-                <li><a href="<?php // echo site_url('sesion/cerrar'); ?>"><i class="fas fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Salir</a></li>
             </ul>
         </div>
     </div>
