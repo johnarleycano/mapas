@@ -138,7 +138,7 @@ function dibujar_senales_verticales(mapa, filtros){
             // Ícono
             var smallIcon = new L.Icon({
                 "iconSize": [21, 21],
-                "iconUrl": `${$("#url_base").val()}img/iconos/${codigo}.svg`,
+                "iconUrl": `${$("#url_base").val()}img/iconos/senales_verticales/${codigo}.svg`,
             })
             
             // Marcador
