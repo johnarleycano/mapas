@@ -62,6 +62,7 @@
             "Abscisas": [true, false],
             "Incidentes": [true, true, true],
             "Senales_Verticales": [false],
+            "Fotos_Aereas": [false],
             "Capa_Mapa": "Open Street",
         }
         

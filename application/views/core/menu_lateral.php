@@ -15,13 +15,12 @@
 
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label>
-                                <?php if(ENVIRONMENT == 'development'){ ?>
-                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
-                                <?php } ?>
-                                
-                                <a href="<?php echo site_url('operaciones/eventos'); ?>" class="uk-link-text">Eventos diarios</a>
-                            </label>
+                            <?php if(ENVIRONMENT == 'development'){ ?>
+                                <label>
+                                        <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
+                                        <a href="<?php echo site_url('operaciones/eventos'); ?>" class="uk-link-text">Eventos diarios</a>
+                                </label>
+                            <?php } ?>
 
                             <label>
                                 <?php if(ENVIRONMENT == 'development'){ ?>
@@ -47,6 +46,24 @@
                                 <?php } ?>
                                 
                                 <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Señales verticales</a>
+                            </label>
+                        </div>
+                    </ul>
+                </li>
+
+                <li class="uk-parent">
+                    <a href="#">
+                        <i class="fas fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;RECORRIDOS</li>
+                    </a>
+                    
+                    <ul class="uk-nav-sub">
+                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
+                            <label>
+                                <?php if(ENVIRONMENT == 'development'){ ?>
+                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
+                                <?php } ?>
+
+                                <a href="<?php echo site_url('inventario/fotos_aereas'); ?>" class="uk-link-text">Aéreos</a>
                             </label>
                         </div>
                     </ul>
