@@ -51,6 +51,24 @@
                         </div>
                     </ul>
                 </li>
+
+                <li class="uk-parent">
+                    <a href="#">
+                        <i class="fas fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;RECORRIDOS</li>
+                    </a>
+                    
+                    <ul class="uk-nav-sub">
+                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
+                            <label>
+                                <?php if(ENVIRONMENT == 'development'){ ?>
+                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
+                                <?php } ?>
+
+                                <a href="<?php echo site_url('inventario/fotos_aereas'); ?>" class="uk-link-text">Aéreos</a>
+                            </label>
+                        </div>
+                    </ul>
+                </li>
                     
                 <!-- <li class="uk-nav-header"></li> -->
                 <li class="uk-nav-divider"></li>

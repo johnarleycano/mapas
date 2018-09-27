@@ -48,3 +48,4 @@
 <script src="<?php echo base_url(); ?>js/leaflet/L.Control.Locate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/hash.js"></script>
 <script src="<?php echo base_url(); ?>js/funcion.js"></script>
+<script src="<?php echo base_url(); ?>js/cvb_0.js"></script>

@@ -78,6 +78,21 @@ class Inventario extends CI_Controller {
     }
 
     /**
+     * Mapa de fotos aéreas
+     * @return [type] [description]
+     */
+    function fotos_aereas()
+    {
+        $this->data['titulo'] = 'Fotos aéreas';
+        $this->data['titulo_mapa'] = 'Registro fotográfico aéreo';
+        $this->data['filtros'] = array();
+        $this->data['filtro_superior'] = true;
+        $this->data['menu'] = true;
+        $this->data['contenido_principal'] = 'inventario/recorridos/aereos';
+        $this->load->view('core/template', $this->data);
+    }
+
+    /**
      * Mapa de señalización vertical
      * @return [type] [description]
      */

@@ -97,6 +97,62 @@ function dibujar_abscisas(mapa, filtros)
     return L.layerGroup(puntos) 
 }
 
+function dibujar_fotos_aereas(mapa, opciones)
+{
+    var bounds_group = new L.featureGroup([])
+    function setBounds() {
+    }
+
+    function pop_cvb_0(feature, layer) {
+        var foto = (feature.properties['Name'] !== null ? String(feature.properties['Name']) : '')
+        var popupContent = '<table>\
+                <tr>\
+                    <td colspan="2">' + `<img width='547' height='307' src="${$("#url_base").val()}archivos/inventario/fotos_aereas/${foto}" />` + '</td>\
+                </tr>\
+            </table>';
+        layer.bindPopup(popupContent, {maxHeight: 400, closeButton: false});
+    }
+
+    function style_cvb_0_0() {
+        return {
+            pane: 'pane_cvb_0',
+            radius: 4.0,
+            opacity: 1,
+            color: 'rgba(35,35,35,1.0)',
+            dashArray: '',
+            lineCap: 'butt',
+            lineJoin: 'miter',
+            weight: 1,
+            fill: true,
+            fillOpacity: 1,
+            fillColor: 'rgba(133,182,111,1.0)',
+        }
+    }
+
+    mapa.createPane('pane_cvb_0');
+    mapa.getPane('pane_cvb_0').style.zIndex = 400;
+    mapa.getPane('pane_cvb_0').style['mix-blend-mode'] = 'normal';
+
+    var layer_cvb_0 = new L.geoJson(json_cvb_0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_cvb_0',
+        onEachFeature: pop_cvb_0,
+        pointToLayer: function (feature, latlng) {
+            
+            var smallIcon = new L.Icon({
+            iconSize: [12, 12],
+            iconUrl: `${$("#url_base").val()}img/camera-solid.svg`,
+            });
+            return L.marker(latlng, {icon: smallIcon})            
+            
+        },
+    })
+        var hash = new L.Hash(mapa);
+        setBounds();
+
+        return layer_cvb_0
+}
+
 function dibujar_incidentes(mapa, filtros)
 {
     var anio = $("#select_anio_incidente_filtro").val()
@@ -303,6 +359,25 @@ function marcar(mapa, opciones)
 
         // Si tiene activa la opción, centra el dibujo en la capa
         // if(opciones["Senales_Verticales"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
+    }
+    
+    /***************************************************
+     ************* Dibujo de fotos aéreas **************
+     **************************************************/
+     // Si tiene activa la carga de fotos aéreas
+    if(opciones["Fotos_Aereas"][0]){
+        // Se dibuja la capa
+        var capa_fotos_aereas = dibujar_fotos_aereas(mapa, opciones)
+        // imprimir(opciones)
+
+        // Se agrega la capa
+        capas["Fotos Aéreas"] = capa_fotos_aereas
+
+        // Si tiene activa la opción de dibujar las abscisas
+        if(opciones["Fotos_Aereas"][1]) capa_fotos_aereas.addTo(mapa)
+
+        // Si tiene activa la opción, centra el dibujo en la capa
+        if(opciones["Fotos_Aereas"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
 
     // Variable para mantener la ubicación del mapa
