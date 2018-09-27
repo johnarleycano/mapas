@@ -13,7 +13,7 @@
                 </li> -->
 
                 <li class="uk-nav-header">OPERACIONES</li>
-                <li><a href="<?php echo site_url('operaciones/incidentes'); ?>"><i class="far fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Incidentes</a></li>
+                <!-- <li><a href="<?php // echo site_url('operaciones/eventos'); ?>"><i class="far fa-calendar-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Eventos diarios</a></li> -->
                 <li><a href="<?php echo site_url('operaciones/incidentes'); ?>"><i class="fas fa-car fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Incidentes</a></li>
                 
                 <li class="uk-nav-header">INVENTARIO</li>
