@@ -6,7 +6,7 @@
 		var opciones = {
 			"Vias": [true, true, false],
 			"Abscisas": [true],
-			"Incidentes": [true, true],
+			"Incidentes": [false],
 			"Senales_Verticales": [true, true, true],
 			"Capa_Mapa": "Bing",
 		}

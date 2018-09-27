@@ -99,8 +99,25 @@ function dibujar_abscisas(mapa, filtros)
 
 function dibujar_incidentes(mapa, filtros)
 {
+    var anio = $("#select_anio_incidente_filtro").val()
+    var mes = $("#select_mes_incidente_filtro").val()
+    var tipo_atencion = $("#select_tipo_atencion_filtro").val()
+
+    anio = (anio || anio > 0) ? anio : null
+    mes = (mes || mes > 0) ? mes : null
+    id_tipo_atencion = (tipo_atencion || tipo_atencion > 0) ? tipo_atencion : null
+
+    var datos = {
+        "id_sector": null,
+        "id_via": null,
+        "anio": anio,
+        "mes": mes,
+        "id_tipo_atencion": id_tipo_atencion,
+    }
+    // imprimir(datos)
+
     // Consulta de incidentes
-    let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": {"id_sector": null, "id_via": filtros.id_via, "id_tipo_atencion": filtros.id_tipo_atencion}}, 'JSON')
+    let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": datos}, 'JSON')
 
     // Arreglo que contiene los puntos
     var puntos = new Array()
@@ -201,13 +218,11 @@ function marcar(mapa, opciones)
      *********************************/
     let sector = parseFloat($("#select_sector_filtro").val())
     let via = parseFloat($("#select_via_filtro").val())
-    let tipo_atencion = parseFloat($("#select_tipo_atencion_filtro").val())
 
     // Variables de filtros
     var filtros = {
         "id_sector": (sector || sector > 0) ? sector : null,
         "id_via": (via || via > 0) ? via : null,
-        "id_tipo_atencion": (tipo_atencion || tipo_atencion > 0) ? tipo_atencion : null,
     }
 
     // Arreglo que contendrá todas las capas

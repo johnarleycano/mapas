@@ -22,49 +22,17 @@
     </select>
 <?php } ?>
 
-<?php if(isset($filtros["tipos_atencion"])){ ?>
-    <!-- Tipos de atención -->
-    <select class="uk-select uk-form-width-medium uk-margin-small-left uk-form-small" id="select_tipo_atencion_filtro">
-        <option value="0">Todos los tipos de atención</option>
-        <?php foreach ($this->operaciones_model->obtener("tipos_atencion") as $tipo_atencion) { ?>
-            <option value="<?php echo $tipo_atencion->Pk_Id; ?>"><?php echo "$tipo_atencion->Nombre"; ?></option>
-        <?php } ?>
-    </select>
+<?php if(isset($filtros["anios_incidentes"])){ ?>
+    <!-- Año de los incidentes -->
+    <select class="uk-select uk-form-width-medium uk-margin-small-left uk-form-small" id="select_anio_incidente_filtro"></select>
 <?php } ?>
 
+<?php if(isset($filtros["meses_incidentes"])){ ?>
+    <!-- Meses de los incidentes -->
+    <select class="uk-select uk-form-width-medium uk-margin-small-left uk-form-small" id="select_mes_incidente_filtro"></select>
+<?php } ?>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-    	// Al seleccionar un sector
-        $("#select_sector_filtro").on("change", function(){
-            // Se consultan las vías del sector
-            datos = {
-                url: "<?php echo site_url('filtros/obtener'); ?>",
-                tipo: "vias",
-                id: $(this).val(),
-                elemento_padre: $("#select_sector_filtro"),
-                elemento_hijo: $("#select_via_filtro"),
-                mensaje_padre: "Elija primero un sector",
-                mensaje_hijo: "Todas las vías"
-            }
-            cargar_lista_desplegable(datos)
-
-            limpiar_lista($("#select_costado_filtro"), "Elija primero una vía...")
-        })
-
-        // Al seleccionar una vía
-        $("#select_via_filtro").on("change", function(){
-            // Se consultan los costados de la vía
-            datos = {
-                url: "<?php echo site_url('filtros/obtener'); ?>",
-                tipo: "costados",
-                id: $(this).val(),
-                elemento_padre: $("#select_via_filtro"),
-                elemento_hijo: $("#select_costado_filtro"),
-                mensaje_padre: "Elija primero una vía",
-                mensaje_hijo: "Todos los costados"
-            }
-            cargar_lista_desplegable(datos)
-        })
-    })
-</script>
+<?php if(isset($filtros["tipos_atencion"])){ ?>
+    <!-- Tipos de atención -->
+    <select class="uk-select uk-form-width-medium uk-margin-small-left uk-form-small" id="select_tipo_atencion_filtro"></select>
+<?php } ?>

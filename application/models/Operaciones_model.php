@@ -36,6 +36,20 @@ Class Operaciones_model extends CI_Model{
 	function obtener($tipo, $id = null, $adicional = null)
 	{
 		switch ($tipo) {
+			case "anios_incidentes":
+				$this->db_incidentes
+		        	->select(array(
+			            'YEAR(i.fecha) Numero',
+			            ))
+		            ->group_by('Numero')
+		            ->order_by('Numero', 'DESC')
+		            ->from('dvm_incidente i')
+	            ;
+		        
+		        // return $this->db_incidentes->get_compiled_select(); // string de la consulta
+		        return $this->db_incidentes->get()->result();
+			break;
+
 			case "incidente":
 				$this->db_incidentes
 		        	->select(array(
@@ -76,8 +90,8 @@ Class Operaciones_model extends CI_Model{
 					LEFT JOIN dvm_tipo_atencion AS ta ON i.tipo_atencion = ta.id 
 				WHERE
 					i.coordenadas IS NOT NULL 
-					AND i.fecha BETWEEN '2018-09-01' 
-					AND '2018-09-31'
+					AND YEAR(i.fecha ) = {$id['anio']}
+					AND MONTH(i.fecha ) = {$id['mes']}
 					$filtro
 					$filtro_tipo_atencion";
 
@@ -85,15 +99,34 @@ Class Operaciones_model extends CI_Model{
                 return $this->db_incidentes->query($sql)->result();
 			break;
 
-			case "tipos_atencion":
+			case "meses_incidentes":
 				$this->db_incidentes
-		            ->select(array(
-			            'ta.*',
-			            'ta.id Pk_Id',
-			            'ta.nombre Nombre',
-			        ))
-		            ->order_by('Nombre')
-		            ->from('dvm_tipo_atencion ta')
+		        	->select(array(
+			            'LPAD(MONTH(i.fecha), 2, 0) Numero',
+			            ))
+		            ->group_by('Numero')
+		            ->where('YEAR(i.fecha)', $id)
+		            ->order_by('Numero')
+		            // ->order_by('Numero', 'DESC')
+		            ->from('dvm_incidente i')
+	            ;
+		        
+		        // return $this->db_incidentes->get_compiled_select(); // string de la consulta
+		        return $this->db_incidentes->get()->result();
+			break;
+
+			case "tipos_atencion_incidente":
+				$this->db_incidentes
+		        	->select(array(
+			            "ta.id Pk_Id",
+						"ta.nombre Nombre"
+		            ))
+		            ->from('dvm_incidente i')
+		            ->join('dvm_tipo_atencion ta', 'i.tipo_atencion = ta.id ')
+		            ->where('YEAR(i.fecha)', $id["anio"])
+		            ->where('MONTH(i.fecha)', $id["mes"])
+		            ->group_by('i.tipo_atencion')
+		            ->order_by('ta.nombre')
 	            ;
 		        
 		        // return $this->db_incidentes->get_compiled_select(); // string de la consulta

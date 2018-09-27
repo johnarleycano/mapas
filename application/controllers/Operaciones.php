@@ -91,7 +91,7 @@ class Operaciones extends CI_Controller {
         $this->data['titulo_mapa'] = 'Operaciones | Incidentes ocurridos este mes';
         $this->data['filtro_superior'] = true;
         $this->data['menu'] = true;
-        $this->data['filtros'] = array("tipos_atencion" => true);
+        $this->data['filtros'] = array("tipos_atencion" => true, "anios_incidentes" => true, "meses_incidentes" => true);
         $this->data['contenido_principal'] = 'operaciones/incidentes/index';
         $this->load->view('core/template', $this->data);
     }
@@ -110,6 +110,10 @@ class Operaciones extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
+                case "anios_incidentes":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+                
                 case "historico_accidentes":
                     print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
@@ -119,6 +123,14 @@ class Operaciones extends CI_Controller {
                 break;
 
                 case "incidentes":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+
+                case "meses_incidentes":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+
+                case "tipos_atencion_incidente":
                     print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
             }
