@@ -1,8 +1,7 @@
-
+# Archivos
 /index.php
 
+# Directorios
 \.vscode/
-
-DCIM/
-
 archivos/inventario/fotos_aereas/
+archivos/inventario/senales_verticales/

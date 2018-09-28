@@ -229,7 +229,7 @@ function dibujar_senales_verticales(mapa, filtros){
                 <b>Observación:</b> ${(feature.properties['observ']) ? feature.properties['observ'] : ''}<br>
                 <b>Antigraf:</b> ${(feature.properties['antigraf']) ? feature.properties['antigraf'] : ''}<br>
                 <center>
-                    <img src="${$("#url_base").val()}DCIM/${feature.properties['archivo']}" />
+                    <img src="${$("#url_base").val()}archivos/inventario/senales_verticales/${feature.properties['archivo']}" />
                 </center>
                 `
             layer.bindPopup(popupContent, {maxHeight: 400});
