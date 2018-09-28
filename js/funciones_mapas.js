@@ -10,10 +10,16 @@ function agregar_mapas_base(mapa, capa = "Bing")
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     })
 
-    // Arreglo de las capas de mapas
+    // Mapa de Open Street en gris
+    var open_street_gris = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+    })
+
+    // Arreglo de los mapas base
     var mapas_base = {
         "Bing": bing,
         "Open Street": open_street,
+        "Open Street Gris": open_street_gris,
     }
 
     // Se activa el mapa seleccionado
@@ -386,5 +392,5 @@ function marcar(mapa, opciones)
     // Se agregan los mapas base
     var mapas_base = agregar_mapas_base(mapa, opciones.Mapa_Base)
     
-    if(!control) var control = L.control.layers(mapas_base, capas).addTo(mapa)
+    var control = L.control.layers(mapas_base, capas).addTo(mapa)
 }
