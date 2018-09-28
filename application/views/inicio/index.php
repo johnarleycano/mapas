@@ -8,7 +8,7 @@
 			"Abscisas": [true],
 			"Incidentes": [false],
 			"Senales_Verticales": [true, true, true],
-			"Fotos_Aereas": [false],
+			"Fotos_Aereas": [true, true],
 			"Capa_Mapa": "Bing",
 		}
 
