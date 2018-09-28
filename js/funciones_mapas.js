@@ -63,7 +63,7 @@ function dibujar_vias(mapa, filtros)
     // Se agrega la capa de vías
     return new L.geoJson(kilometros, {
         style: {
-            "color": "#555555",
+            "color": "#FACD00",
             "weight": 5,
             "opacity": 1
         }
