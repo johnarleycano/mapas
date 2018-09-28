@@ -140,8 +140,8 @@ function dibujar_fotos_aereas(mapa, opciones)
         pointToLayer: function (feature, latlng) {
             
             var smallIcon = new L.Icon({
-            iconSize: [12, 12],
-            iconUrl: `${$("#url_base").val()}img/camera-solid.svg`,
+            iconSize: [15, 15],
+            iconUrl: `${$("#url_base").val()}img/iconos/foto.svg`,
             });
             return L.marker(latlng, {icon: smallIcon})            
             
