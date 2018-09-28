@@ -64,7 +64,7 @@
             "Mapa_Base": "open_street",
         }
         
-        var mapa = generar_mapa("cont_mapa")
+        var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18})
         marcar(mapa, opciones)
 
         $("#select_anio_incidente_filtro").on("change", function(){

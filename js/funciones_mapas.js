@@ -11,7 +11,7 @@ function agregar_mapas_base(mapa, capa = "bing")
     })
 
     // Mapa de Open Street en gris
-    var open_street_gris = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
+    var open_street_dark = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
     })
 
@@ -19,7 +19,7 @@ function agregar_mapas_base(mapa, capa = "bing")
     var mapas_base = {
         "bing": bing,
         "open_street": open_street,
-        "open_street_gris": open_street_gris,
+        "open_street_dark": open_street_dark,
     }
 
     // Se checkea el radio del mapa base
@@ -43,13 +43,85 @@ function agregar_mapas_base(mapa, capa = "bing")
     return mapas_base
 }
 
+function agregar_cartografia_base(mapa, filtros)
+{
+   var capa
+
+    // Almacenamiento de los mapas
+    var cartografia_base = {}
+
+    /***************************************************
+     ***************** Dibujo de vías ******************
+     **************************************************/
+    // Se dibuja la capa
+    var capa_vias = dibujar_vias(mapa, filtros)
+
+    // Se agrega la capa
+    cartografia_base["vias"] = capa_vias
+
+    // Si tiene activa la opción de dibujar las vías
+    if(typeof filtros["opciones"]["Vias"] !== 'undefined' && filtros["opciones"]["Vias"][1]){
+        // Se adiciona la capa
+        mapa.addLayer(capa_vias)
+        // Se Chequea la capa
+        $("#vias").prop("checked", true)
+    }
+        
+    // Cuando se selecciona otro mapa base
+    $("#vias").on("click", function(){
+        capa = $(this).attr("id")
+
+        if ($("#vias").prop('checked')){
+            mapa.addLayer(capa_vias)
+            $("#vias").prop("checked", true)
+        } else {
+            mapa.removeLayer(capa_vias)
+            $("#vias").prop("checked", false)
+        }
+    })
+
+    /***************************************************
+     ************** Dibujo de kilómetros ***************
+     **************************************************/
+     // Se dibuja la capa
+    var capa_kilometros = dibujar_abscisas(mapa, filtros)
+
+    // Se agrega la capa
+    cartografia_base["kilometros"] = capa_kilometros
+
+    // // Si tiene activa la opción de dibujar las abscisas
+    if(typeof filtros["opciones"]["Kilometros"] !== 'undefined' && filtros["opciones"]["Kilometros"][1]){
+        // Se adiciona la capa
+        mapa.addLayer(capa_kilometros)
+        // Se Chequea la capa
+        $("#kilometros").prop("checked", true)
+    }
+        
+    // Cuando se selecciona otro mapa base
+    $("#kilometros").on("click", function(){
+        capa = $(this).attr("id")
+
+        if ($("#kilometros").prop('checked')){
+            mapa.addLayer(capa_kilometros)
+            $("#kilometros").prop("checked", true)
+        } else {
+            mapa.removeLayer(capa_kilometros)
+            $("#kilometros").prop("checked", false)
+        }
+    })
+
+    // // Si tiene activa la opción, centra el dibujo en la capa
+    // if(filtros["opciones"]["Vias"][2]) mapa.fitBounds(capa_vias.getBounds())
+    // if(filtros["opciones"]["Abscisas"][2]) mapa.fitBounds(capa_abscisas.getBounds())
+}
+
 function generar_mapa(contenedor, opciones = null)
 {
     if (opciones) {
-        var zoom = (typeof opciones.zoom !== 'undefined') ? opciones.zoom : 18
-        var zoom_minimo = (typeof opciones.minZoom !== 'undefined') ? opciones.minZoom : 15
-        var zoom_maximo = (typeof opciones.maxZoom !== 'undefined') ? opciones.maxZoom : 18
-        var control_zoom = (typeof opciones.zoomControl !== 'undefined') ? opciones.zoomControl : true
+        var zoom = (typeof opciones.zoom !== 'undefined' || !opciones.zoom) ? opciones.zoom : 18
+        var zoom_minimo = (typeof opciones.minZoom !== 'undefined' || !opciones.zoom) ? opciones.minZoom : 15
+        var zoom_maximo = (typeof opciones.maxZoom !== 'undefined' || ! opciones.zoom) ? opciones.maxZoom : 18
+        var control_zoom = (typeof opciones.zoomControl !== 'undefined' || ! opciones.zoom) ? opciones.zoomControl : true
     }
 
     // Opciones del mapa
@@ -311,6 +383,8 @@ function marcar(mapa, opciones)
         "id_via": (via || via > 0) ? via : null,
     }
 
+    filtros["opciones"] = opciones 
+
     // Arreglo que contendrá todas las capas
     var capas = {}
 
@@ -320,41 +394,7 @@ function marcar(mapa, opciones)
         mapa.removeLayer(layer);
     })
 
-    /**********************************
-     ******* Dibujo de las vías *******
-     *********************************/
-    // Si tiene activa la carga de vías
-    if(typeof opciones["Vias"] !== 'undefined' && opciones["Vias"][0]){
-        // Se dibuja la capa
-        var capa_vias = dibujar_vias(mapa, filtros)
-
-        // Se agrega la capa
-        capas["Vías"] = capa_vias
-
-        // Si tiene activa la opción de dibujar las vías
-        if(opciones["Vias"][1]) capa_vias.addTo(mapa)
-
-        // Si tiene activa la opción, centra el dibujo en la capa
-        if(opciones["Vias"][2]) mapa.fitBounds(capa_vias.getBounds())
-    }
-
-    /**********************************
-     ****** Dibujo de las abscisas ****
-     *********************************/
-    // Si tiene activa la carga de abscisas
-    if(typeof opciones["Abscisas"] !== 'undefined' && opciones["Abscisas"][0]){
-        // Se dibuja la capa
-        var capa_abscisas = dibujar_abscisas(mapa, filtros)
-
-        // Se agrega la capa
-        capas["Abscisas"] = capa_abscisas
-
-        // Si tiene activa la opción de dibujar las abscisas
-        if(opciones["Abscisas"][1]) capa_abscisas.addTo(mapa)
-
-        // Si tiene activa la opción, centra el dibujo en la capa
-        // if(opciones["Abscisas"][2]) mapa.fitBounds(capa_abscisas.getBounds())
-    }
+    agregar_cartografia_base(mapa, filtros)
     
     /***************************************************
      ******* Dibujo de incidentes de operaciones *******

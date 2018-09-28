@@ -11,19 +11,69 @@
                 <li class="uk-nav-divider"></li>
                 <li class="uk-parent">
                     <a href="#">
+                        <i class="fas fa-globe fa-lg"></i>&nbsp;&nbsp;&nbsp;MAPAS BASE</li>
+                    </a>
+
+                    <ul class="uk-nav-sub">
+                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
+                            <label class="enlace">
+                                <input class="uk-radio" type="radio" name="mapas_base" id="bing"> Bing
+                            </label>
+                            
+                            <label class="enlace">
+                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street
+                            </label>
+                            
+                            <label class="enlace">
+                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street_dark"> Open Street Dark
+                            </label>
+                        </div>
+                    </ul>
+                </li>
+
+                <li class="uk-parent">
+                    <a href="#">
+                        <i class="fas fa-map fa-lg"></i>&nbsp;&nbsp;&nbsp;CARTOGRAFÍA BASE</li>
+                    </a>
+
+                    <ul class="uk-nav-sub">
+                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
+                            <label class="enlace">
+                                <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="vias">&nbsp;&nbsp;&nbsp;
+                                Vías
+                            </label>
+
+                            <label class="enlace">
+                                <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="kilometros">&nbsp;&nbsp;&nbsp;
+                                Kilómetros
+                            </label>
+
+                            <?php if(ENVIRONMENT == 'development'){ ?>
+                                <label class="enlace">
+                                    <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="abscisas">&nbsp;&nbsp;&nbsp;
+                                    Abscisas
+                                </label>
+                            <?php } ?>
+                        </div>
+                    </ul>
+                </li>
+                
+                <li class="uk-nav-divider"></li>
+                <li class="uk-parent">
+                    <a href="#">
                         <i class="fas fa-car fa-lg"></i>&nbsp;&nbsp;&nbsp;OPERACIONES</li>
                     </a>
 
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <?php if(ENVIRONMENT == 'development'){ ?>
-                                <label>
+                                <label class="enlace">
                                         <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
                                         <a href="<?php echo site_url('operaciones/eventos'); ?>" class="uk-link-text">Eventos diarios</a>
                                 </label>
                             <?php } ?>
 
-                            <label>
+                            <label class="enlace">
                                 <?php if(ENVIRONMENT == 'development'){ ?>
                                     <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
                                 <?php } ?>
@@ -41,7 +91,7 @@
                     
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label>
+                            <label class="enlace">
                                 <?php if(ENVIRONMENT == 'development'){ ?>
                                     <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
                                 <?php } ?>
@@ -59,63 +109,13 @@
                     
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label>
+                            <label class="enlace">
                                 <?php if(ENVIRONMENT == 'development'){ ?>
                                     <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
                                 <?php } ?>
 
                                 <a href="<?php echo site_url('inventario/fotos_aereas'); ?>" class="uk-link-text">Aéreos</a>
                             </label>
-                        </div>
-                    </ul>
-                </li>
-
-                <li class="uk-nav-divider"></li>
-                <li class="uk-parent">
-                    <a href="#">
-                        <i class="fas fa-map fa-lg"></i>&nbsp;&nbsp;&nbsp;MAPAS BASE</li>
-                    </a>
-
-                    <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label>
-                                <input class="uk-radio" type="radio" name="mapas_base" id="bing"> Bing
-                            </label>
-                            
-                            <label>
-                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street
-                            </label>
-                            
-                            <label>
-                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street_gris"> Open Street (Gris)
-                            </label>
-                        </div>
-                    </ul>
-                </li>
-
-                <li class="uk-parent">
-                    <a href="#">
-                        <i class="fas fa-map fa-lg"></i>&nbsp;&nbsp;&nbsp;CARTOGRAFÍA BASE</li>
-                    </a>
-
-                    <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <?php if(ENVIRONMENT == 'development'){ ?>
-                                <label>
-                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
-                                    <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Vías</a>
-                                </label>
-
-                                <label>
-                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
-                                    <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Kilómetros</a>
-                                </label>
-
-                                <label>
-                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
-                                    <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Abscisas</a>
-                                </label>
-                            <?php } ?>
                         </div>
                     </ul>
                 </li>
