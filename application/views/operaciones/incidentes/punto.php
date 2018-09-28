@@ -12,7 +12,9 @@
 			"Vias": [false],
 			"Abscisas": [false],
 			"Incidentes": [false],
+			"Fotos_Aereas": [false],
 			"Senales_Verticales": [false],
+			"Capa_Mapa": "Bing",
 		}
 
 		var mapa = generar_mapa("cont_mapa")
