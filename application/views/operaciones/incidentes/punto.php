@@ -7,11 +7,11 @@
 
 		$("#contenedor_principal").removeClass("margen");
 		
-		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
-		var opciones = {}
+		// capas: [0]: incluir; [1]: dibujar; [2]: centrar
+		var capas = {}
 
-		var mapa = generar_mapa("cont_mapa")
-		marcar(mapa, opciones)
+		var mapa = generar_mapa("cont_mapa", {zoomControl: false})
+		marcar(mapa, capas)
 
 		/**
 		 * Clase que contiene la gestión de

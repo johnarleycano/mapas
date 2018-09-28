@@ -34,26 +34,36 @@ function generar_mapa(contenedor, opciones = null)
         var zoom = (typeof opciones.zoom !== 'undefined') ? opciones.zoom : 18
         var zoom_minimo = (typeof opciones.minZoom !== 'undefined') ? opciones.minZoom : 15
         var zoom_maximo = (typeof opciones.maxZoom !== 'undefined') ? opciones.maxZoom : 18
+        var control_zoom = (typeof opciones.zoomControl !== 'undefined') ? opciones.zoomControl : true
     }
 
     // Opciones del mapa
     let mapa = L.map(contenedor, {
         "center": [6.176188, -75.354868],
+        "zoomControl": control_zoom,
         "zoom": zoom,
-        "minZoom": zoom_minimo,
+        "maxZoom": zoom_maximo,
         "maxZoom": zoom_maximo,
     })
 
+    
+
+    agregar_controles(mapa)
+
+    // Se retorna el mapa
+    return mapa
+}
+
+function agregar_controles(mapa)
+{
     // Control de escala
     let escala = L.control.scale({ position: 'bottomright', imperial: false})
     mapa.addControl(escala)
 
     // Control de ubicación actual
     L.control.locate().addTo(mapa)
-
-    // Se retorna el mapa
-    return mapa
 }
+
 
 function dibujar_vias(mapa, filtros)
 {
