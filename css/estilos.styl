@@ -1,9 +1,13 @@
 tamanio_menu = 50px
 
 @media (max-width: 450px)
-	#select_sector_filtro, #select_via_filtro, #select_costado_filtro, #select_tipo_atencion_filtro
+	#select_sector_filtro, #select_via_filtro, #select_costado_filtro, #select_tipo_atencion_filtro, #select_anio_incidente_filtro, #select_mes_incidente_filtro
 		width 60px
 		font-size 0.7em
+	
+@media (max-width: 730px)
+	#titulo_mapa
+		display none
 		
 #cont_mapa
 	height 100vh
@@ -31,6 +35,12 @@ tamanio_menu = 50px
 	
 	div
 		margin-right 10px
+		
+#select_anio_incidente_filtro
+	width 70px
+
+#select_mes_incidente_filtro, #select_tipo_atencion_filtro
+	width 90px
 		
 .margen
 	margin-top tamanio_menu
