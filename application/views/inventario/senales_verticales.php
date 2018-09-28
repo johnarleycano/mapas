@@ -4,12 +4,9 @@
 	$(document).ready(function(){
 		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
 		var opciones = {
-			"Vias": [true, true, false],
-			"Abscisas": [true, false],
-			"Incidentes": [false],
+			"Vias": [true, true],
+			"Abscisas": [true],
 			"Senales_Verticales": [true, true, true],
-			"Fotos_Aereas": [false],
-			"Capa_Mapa": "Bing",
 		}
 
 		var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18})

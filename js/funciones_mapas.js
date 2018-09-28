@@ -294,7 +294,7 @@ function marcar(mapa, opciones)
      ******* Dibujo de las vías *******
      *********************************/
     // Si tiene activa la carga de vías
-    if(opciones["Vias"][0]){
+    if(typeof opciones["Vias"] !== 'undefined' && opciones["Vias"][0]){
         // Se dibuja la capa
         var capa_vias = dibujar_vias(mapa, filtros)
 
@@ -312,7 +312,7 @@ function marcar(mapa, opciones)
      ****** Dibujo de las abscisas ****
      *********************************/
     // Si tiene activa la carga de abscisas
-    if(opciones["Abscisas"][0]){
+    if(typeof opciones["Abscisas"] !== 'undefined' && opciones["Abscisas"][0]){
         // Se dibuja la capa
         var capa_abscisas = dibujar_abscisas(mapa, filtros)
 
@@ -329,8 +329,8 @@ function marcar(mapa, opciones)
     /***************************************************
      ******* Dibujo de incidentes de operaciones *******
      **************************************************/
-     // Si tiene activa la carga de incidentes
-    if(opciones["Incidentes"][0]){
+    // Si tiene activa la carga de incidentes
+    if(typeof opciones["Incidentes"] !== 'undefined' && opciones["Incidentes"][0]){
         // Se dibuja la capa
         var capa_incidentes = dibujar_incidentes(mapa, filtros)
 
@@ -347,7 +347,7 @@ function marcar(mapa, opciones)
     /***************************************************
      *** Dibujo de inventario de señales verticales ****
      **************************************************/
-    if(opciones["Senales_Verticales"][0]){
+    if(typeof opciones["Senales_Verticales"] !== 'undefined' && opciones["Senales_Verticales"][0]){
         // Se dibuja la capa
         var capa_senales_verticales = dibujar_senales_verticales(mapa, filtros)
 
@@ -365,7 +365,7 @@ function marcar(mapa, opciones)
      ************* Dibujo de fotos aéreas **************
      **************************************************/
      // Si tiene activa la carga de fotos aéreas
-    if(opciones["Fotos_Aereas"][0]){
+    if(typeof opciones["Fotos_Aereas"] !== 'undefined' && opciones["Fotos_Aereas"][0]){
         // Se dibuja la capa
         var capa_fotos_aereas = dibujar_fotos_aereas(mapa, opciones)
         // imprimir(opciones)

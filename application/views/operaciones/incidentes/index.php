@@ -59,10 +59,8 @@
         // Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
         var opciones = {
             "Vias": [true, true, true],
-            "Abscisas": [true, false],
+            "Abscisas": [true],
             "Incidentes": [true, true, true],
-            "Senales_Verticales": [false],
-            "Fotos_Aereas": [false],
             "Capa_Mapa": "Open Street",
         }
         

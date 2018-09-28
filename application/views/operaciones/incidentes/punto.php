@@ -8,14 +8,7 @@
 		$("#contenedor_principal").removeClass("margen");
 		
 		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
-		var opciones = {
-			"Vias": [false],
-			"Abscisas": [false],
-			"Incidentes": [false],
-			"Fotos_Aereas": [false],
-			"Senales_Verticales": [false],
-			"Capa_Mapa": "Bing",
-		}
+		var opciones = {}
 
 		var mapa = generar_mapa("cont_mapa")
 		marcar(mapa, opciones)
