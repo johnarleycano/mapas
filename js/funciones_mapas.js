@@ -1,4 +1,4 @@
-function agregar_mapas_base(mapa, capa = "Bing")
+function agregar_mapas_base(mapa, capa = "bing")
 {
     // Mapa de Bing
     var bing = new L.BingLayer("Pl2wXFOEKQ0lIT6FDWrM~7S7lA5j_F2sDUhSdCeQVzw~AvN-ATn5N1EQzxbEEBkYWNUYY1AyXIzXPwXex81xLAN1RyJYJaML4e2gD9QTzsIU", {
@@ -17,10 +17,25 @@ function agregar_mapas_base(mapa, capa = "Bing")
 
     // Arreglo de los mapas base
     var mapas_base = {
-        "Bing": bing,
-        "Open Street": open_street,
-        "Open Street Gris": open_street_gris,
+        "bing": bing,
+        "open_street": open_street,
+        "open_street_gris": open_street_gris,
     }
+
+    // Se checkea el radio del mapa base
+    $(`#${capa}`).prop("checked", true)
+    
+    // Cuando se selecciona otro mapa base
+    $("input[name='mapas_base']").on("click", function(){
+        // Se recorren los mapas base
+         $.each(mapas_base, function(key, mapa_base) {
+            // Se quita el mapa base
+            mapa.removeLayer(mapa_base)
+        })
+
+        // Se activa el mapa base
+        mapas_base[$(this).attr("id")].addTo(mapa)
+    })
 
     // Se activa el mapa seleccionado
     mapas_base[capa].addTo(mapa)
@@ -46,8 +61,7 @@ function generar_mapa(contenedor, opciones = null)
         "maxZoom": zoom_maximo,
     })
 
-    
-
+    // Se agregan los controles
     agregar_controles(mapa)
 
     // Se retorna el mapa
@@ -61,9 +75,9 @@ function agregar_controles(mapa)
     mapa.addControl(escala)
 
     // Control de ubicación actual
-    L.control.locate().addTo(mapa)
+    var ubicacion_actual = L.control.locate()
+    ubicacion_actual.addTo(mapa)
 }
-
 
 function dibujar_vias(mapa, filtros)
 {
@@ -402,5 +416,5 @@ function marcar(mapa, opciones)
     // Se agregan los mapas base
     var mapas_base = agregar_mapas_base(mapa, opciones.Mapa_Base)
     
-    var control = L.control.layers(mapas_base, capas).addTo(mapa)
+    var control = L.control.layers(null, capas).addTo(mapa)
 }

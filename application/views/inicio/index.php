@@ -13,12 +13,8 @@
 		var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18})
 		marcar(mapa, opciones)
 
-		$("select").on("change", function(){
-			marcar(mapa, opciones)
-		})
-
-		// Al dar clic sobre cualquier parte del mapa, ejecuta
-		// la función para generar un marcador
-    	mapa.on('click', generar_marcador)
+		// // Al dar clic sobre cualquier parte del mapa, ejecuta
+		// // la función para generar un marcador
+  //   	mapa.on('click', generar_marcador)
 	})
 </script>
