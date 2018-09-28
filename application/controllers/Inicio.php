@@ -33,7 +33,7 @@ class Inicio extends CI_Controller {
 	function index()
 	{
         $this->data['titulo'] = 'Inicio';
-        $this->data['titulo_mapa'] = 'Sistema de mapas - Devimed S.A.';
+        $this->data['titulo_mapa'] = 'Sistema de información geográfica - Devimed S.A.';
         $this->data['menu'] = true;
         $this->data['filtro_superior'] = true;
         $this->data['filtros'] = array();

@@ -3,7 +3,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- Título que viene desde el controlador de cada interfaz -->
-<title><?php echo $titulo; ?> | Mapas</title>
+<title><?php echo $titulo; ?> | Sistema de Información Geográfica | Devimed S.A.</title>
 
 <!-- Estilos -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/estilos.css?<?php echo date('YmdHis'); ?>" />

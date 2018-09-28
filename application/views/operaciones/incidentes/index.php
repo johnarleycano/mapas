@@ -61,7 +61,7 @@
             "Vias": [true, true, true],
             "Abscisas": [true],
             "Incidentes": [true, true, true],
-            "Capa_Mapa": "Open Street",
+            "Mapa_Base": "Open Street",
         }
         
         var mapa = generar_mapa("cont_mapa")

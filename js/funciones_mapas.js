@@ -1,4 +1,4 @@
-function agregar_capas_mapas(mapa, capa = "Bing")
+function agregar_mapas_base(mapa, capa = "Bing")
 {
     // Mapa de Bing
     var bing = new L.BingLayer("Pl2wXFOEKQ0lIT6FDWrM~7S7lA5j_F2sDUhSdCeQVzw~AvN-ATn5N1EQzxbEEBkYWNUYY1AyXIzXPwXex81xLAN1RyJYJaML4e2gD9QTzsIU", {
@@ -11,15 +11,15 @@ function agregar_capas_mapas(mapa, capa = "Bing")
     })
 
     // Arreglo de las capas de mapas
-    var capas_mapas = {
+    var mapas_base = {
         "Bing": bing,
         "Open Street": open_street,
     }
 
     // Se activa el mapa seleccionado
-    capas_mapas[capa].addTo(mapa)
+    mapas_base[capa].addTo(mapa)
 
-    return capas_mapas
+    return mapas_base
 }
 
 function generar_mapa(contenedor, opciones = null)
@@ -383,8 +383,8 @@ function marcar(mapa, opciones)
     // Variable para mantener la ubicación del mapa
     var hash = new L.Hash(mapa)
 
-    // Se agregan las capas de mapas
-    var capas_mapas = agregar_capas_mapas(mapa, opciones.Capa_Mapa)
+    // Se agregan los mapas base
+    var mapas_base = agregar_mapas_base(mapa, opciones.Mapa_Base)
     
-    if(!control) var control = L.control.layers(capas_mapas, capas).addTo(mapa)
+    if(!control) var control = L.control.layers(mapas_base, capas).addTo(mapa)
 }
