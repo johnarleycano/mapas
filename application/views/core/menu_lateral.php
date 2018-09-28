@@ -78,19 +78,17 @@
 
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <?php if(ENVIRONMENT == 'development'){ ?>
-                                <label>
-                                    <input class="uk-radio" type="radio" name="mapas_base" id="bing"> Bing
-                                </label>
-                                
-                                <label>
-                                    <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street
-                                </label>
-                                
-                                <label>
-                                    <input class="uk-radio" type="radio" name="mapas_base" id="open_street_gris"> Open Street (Gris)
-                                </label>
-                            <?php } ?>
+                            <label>
+                                <input class="uk-radio" type="radio" name="mapas_base" id="bing"> Bing
+                            </label>
+                            
+                            <label>
+                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street
+                            </label>
+                            
+                            <label>
+                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street_gris"> Open Street (Gris)
+                            </label>
                         </div>
                     </ul>
                 </li>
