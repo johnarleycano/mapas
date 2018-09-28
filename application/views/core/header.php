@@ -6,7 +6,7 @@
 <title><?php echo $titulo; ?> | Mapas</title>
 
 <!-- Estilos -->
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/estilos.css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/estilos.css?<?php echo date('YmdHis'); ?>" />
 
 <?php if(ENVIRONMENT === 'development') { ?>
 	<!-- Estilos -->
@@ -44,8 +44,8 @@
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
 <script src="<?php echo base_url(); ?>js/leaflet/minimap.js"type="text/javascript"></script>		
 <script src="<?php echo base_url(); ?>js/leaflet/geometryutil.js"></script>
-<script src="<?php echo base_url(); ?>js/funciones_mapas.js"></script>
+<script src="<?php echo base_url(); ?>js/funciones_mapas.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/L.Control.Locate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/hash.js"></script>
-<script src="<?php echo base_url(); ?>js/funcion.js"></script>
+<script src="<?php echo base_url(); ?>js/funcion.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/cvb_0.js"></script>
