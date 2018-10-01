@@ -173,12 +173,15 @@ function generar_mapa(contenedor, opciones = null)
 
 function agregar_controles(mapa)
 {
+    // Posición del control zoom movida a la derecha
+    mapa.zoomControl.setPosition('topright')
+
     // Control de escala
     let escala = L.control.scale({ position: 'bottomright', imperial: false})
     mapa.addControl(escala)
 
     // Control de ubicación actual
-    var ubicacion_actual = L.control.locate()
+    var ubicacion_actual = L.control.locate({ position: 'topright'})
     ubicacion_actual.addTo(mapa)
 }
 
@@ -431,7 +434,7 @@ function dibujar_municipios(mapa, filtros){
     })
 
     // Consulta de los municipios
-    municipios = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "municipios_geometria", "id": {"id_sector": null, "id_via": null}}, 'JSON')
+    municipios = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "municipios_geometria", "id": {"id_sector": null, "id_via": null}}, 'JSON')
 
     // Se agregan los datos a la capa
     capas_municipios.addData(municipios)
@@ -459,9 +462,6 @@ function marcar(mapa, opciones)
 
     filtros["opciones"] = opciones 
 
-    // Arreglo que contendrá todas las capas
-    var capas = {}
-
     // Se recorren los layers
     mapa.eachLayer(function (layer) {
         // Se elimina cada layer
@@ -477,9 +477,6 @@ function marcar(mapa, opciones)
     if(typeof opciones["Incidentes"] !== 'undefined' && opciones["Incidentes"][0]){
         // Se dibuja la capa
         var capa_incidentes = dibujar_incidentes(mapa, filtros)
-
-        // Se agrega la capa
-        capas["Incidentes"] = capa_incidentes
 
         // Si tiene activa la opción de dibujar las abscisas
         if(opciones["Incidentes"][1]) capa_incidentes.addTo(mapa)
@@ -614,5 +611,5 @@ function marcar(mapa, opciones)
     // Se agregan los mapas base
     var mapas_base = agregar_mapas_base(mapa, opciones.Mapa_Base)
     
-    var control = L.control.layers(null, capas).addTo(mapa)
+    // var control = L.control.layers(null, capas).addTo(mapa)
 }

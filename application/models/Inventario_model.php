@@ -18,6 +18,16 @@ Class Inventario_model extends CI_Model{
 	function obtener($tipo, $id = null, $adicional = null)
 	{
 		switch ($tipo) {
+            case "municipios_geometria":
+                $this->db_inventario
+                    ->select("id")
+                    ->select("PUBLIC.ST_AsGeoJSON ( PUBLIC.ST_Transform (( geom ), 4326 ), 6 ) geojson")
+                    ->from("Municipios")
+                ;
+
+                return $this->db_inventario->get()->result();
+            break;
+
 			case "obras":
 				// if($id["id_via"]) $this->db_inventario->where("id_vias", $id["id_via"]);
 

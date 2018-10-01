@@ -40,16 +40,6 @@ Class Filtros_Model extends CI_Model{
                 // return $this->db_configuracion->get_compiled_select(); // string de la consulta
                 return $this->db_configuracion->get()->result();
             break;
-
-            case "municipios_geometria":
-                $this->db_configuracion
-                    ->select("Pk_Id")
-                    ->select("AsWKB ( Coordenadas ) Poligono")
-                    ->from("municipios")
-                    ;
-
-                return $this->db_configuracion->get()->result();
-            break;
         
             case "sectores":
 				return $this->db_configuracion

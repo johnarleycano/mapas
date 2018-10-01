@@ -39,6 +39,30 @@ class Inventario extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
+                case "municipios_geometria":
+                    $resultado = $this->inventario_model->obtener($tipo, $id);
+                    
+                    $geojson = array(
+                       'type'      => 'FeatureCollection',
+                       'features'  => array()
+                    );
+
+                    foreach ($resultado as $registro) {
+                        $properties = $registro;
+                        $feature = array(
+                             'type' => 'Feature',
+                             'geometry' => json_decode($registro->geojson, true),
+                             'properties' => $registro
+                        );
+                        // unset($registro->geojson);
+
+                        array_push($geojson['features'], $feature);
+                    }
+
+                    echo json_encode($geojson, JSON_NUMERIC_CHECK);
+                    // print json_encode($geojson, JSON_NUMERIC_CHECK);
+                break;
+
                 case "obras":
                     $id["perimetro"] = explode(',', $id["perimetro"]);
 
