@@ -86,7 +86,6 @@ class Filtros extends CI_Controller {
 	            break;
 
                 case "vias_geometria":
-                    // Build GeoJSON feature collection array
 			        $geojson = array(
 			           'type'      => 'FeatureCollection',
 			           'features'  => array()
@@ -101,7 +100,7 @@ class Filtros extends CI_Controller {
 
 			            unset($registro->wkb);
 			            unset($registro->Shape);
-			            # Add feature arrays to feature collection array
+			            
 			            array_push($geojson['features'], $feature);
 
 			        }

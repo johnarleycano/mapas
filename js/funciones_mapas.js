@@ -495,14 +495,49 @@ function marcar(mapa, opciones)
         // Se dibuja la capa
         var capa_senales_verticales = dibujar_senales_verticales(mapa, filtros)
 
-        // Se agrega la capa
-        capas["Señales verticales"] = capa_senales_verticales
+        // Si tiene activa la opción de dibujar
+        if(typeof filtros["opciones"]["Senales_Verticales"] !== 'undefined' && filtros["opciones"]["Senales_Verticales"][1]){
+            // Se adiciona la capa
+            mapa.addLayer(capa_senales_verticales)
 
-        // Si tiene activa la opción de dibujar las abscisas
-        if(opciones["Senales_Verticales"][1]) capa_senales_verticales.addTo(mapa)
+            // Se Chequea la capa
+            $("#senales_verticales").prop("checked", true)
+        }
+
+        // Cuando se selecciona otro mapa base
+        $("#senales_verticales").on("click", function(){
+            capa = $(this).attr("id")
+
+            if ($(this).prop('checked')){
+                mapa.addLayer(capa_senales_verticales)
+                $(this).prop("checked", true)
+            } else {
+                mapa.removeLayer(capa_senales_verticales)
+                $(this).prop("checked", false)
+            }
+        })
 
         // Si tiene activa la opción, centra el dibujo en la capa
         // if(opciones["Senales_Verticales"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
+    }
+    
+    /***************************************************
+     **** Dibujo de eventos diarios de operaciones *****
+     **************************************************/
+     // Si tiene activa la carga de eventos diarios
+    if(typeof opciones["Eventos_Diarios"] !== 'undefined' && opciones["Eventos_Diarios"][0]){
+        // Se dibuja la capa
+        var capa_eventos_diarios = dibujar_eventos_diarios(mapa, opciones)
+        imprimir(opciones)
+
+        // // Se agrega la capa
+        // capas["Incidentes"] = capa_incidentes
+
+        // // Si tiene activa la opción de dibujar las abscisas
+        // if(opciones["Incidentes"][1]) capa_incidentes.addTo(mapa)
+
+        // Si tiene activa la opción, centra el dibujo en la capa
+        // if(opciones["Incidentes"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
     
     /***************************************************
@@ -512,16 +547,31 @@ function marcar(mapa, opciones)
     if(typeof opciones["Fotos_Aereas"] !== 'undefined' && opciones["Fotos_Aereas"][0]){
         // Se dibuja la capa
         var capa_fotos_aereas = dibujar_fotos_aereas(mapa, opciones)
-        // imprimir(opciones)
 
-        // Se agrega la capa
-        capas["Fotos Aéreas"] = capa_fotos_aereas
+        // Si tiene activa la opción de dibujar
+        if(typeof opciones["Fotos_Aereas"] !== 'undefined' && opciones["Fotos_Aereas"][0]){
+            // Se adiciona la capa
+            mapa.addLayer(capa_fotos_aereas)
 
-        // Si tiene activa la opción de dibujar las abscisas
-        if(opciones["Fotos_Aereas"][1]) capa_fotos_aereas.addTo(mapa)
+            // Se Chequea la capa
+            $("#fotos_aereas").prop("checked", true)
+        }
+
+        // Cuando se selecciona otro mapa base
+        $("#fotos_aereas").on("click", function(){
+            capa = $(this).attr("id")
+
+            if ($(this).prop('checked')){
+                mapa.addLayer(capa_fotos_aereas)
+                $(this).prop("checked", true)
+            } else {
+                mapa.removeLayer(capa_fotos_aereas)
+                $(this).prop("checked", false)
+            }
+        })
 
         // Si tiene activa la opción, centra el dibujo en la capa
-        if(opciones["Fotos_Aereas"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
+        // if(opciones["Fotos_Aereas"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
     
     /***************************************************

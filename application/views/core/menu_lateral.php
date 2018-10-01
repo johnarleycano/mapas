@@ -97,10 +97,7 @@
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <label class="enlace">
-                                <?php if(ENVIRONMENT == 'development'){ ?>
-                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
-                                <?php } ?>
-                                
+                                <input class="uk-checkbox" type="checkbox" id="senales_verticales">&nbsp;&nbsp;&nbsp;
                                 <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Señales verticales</a>
                                 <br>
                                 
@@ -119,10 +116,7 @@
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <label class="enlace">
-                                <?php if(ENVIRONMENT == 'development'){ ?>
-                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
-                                <?php } ?>
-
+                                <input class="uk-checkbox" type="checkbox" id="fotos_aereas">&nbsp;&nbsp;&nbsp;
                                 <a href="<?php echo site_url('inventario/fotos_aereas'); ?>" class="uk-link-text">Aéreos</a>
                             </label>
                         </div>
