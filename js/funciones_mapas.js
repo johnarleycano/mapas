@@ -201,58 +201,21 @@ function dibujar_abscisas(mapa, filtros)
 
 function dibujar_fotos_aereas(mapa, opciones)
 {
-    var bounds_group = new L.featureGroup([])
-    function setBounds() {
-    }
-
-    function pop_cvb_0(feature, layer) {
-        var foto = (feature.properties['Name'] !== null ? String(feature.properties['Name']) : '')
-        var popupContent = '<table>\
-                <tr>\
-                    <td colspan="2">' + `<img width='547' height='307' src="${$("#url_base").val()}archivos/inventario/fotos_aereas/${foto}" />` + '</td>\
-                </tr>\
-            </table>';
-        layer.bindPopup(popupContent, {maxHeight: 400, closeButton: false});
-    }
-
-    function style_cvb_0_0() {
-        return {
-            pane: 'pane_cvb_0',
-            radius: 4.0,
-            opacity: 1,
-            color: 'rgba(35,35,35,1.0)',
-            dashArray: '',
-            lineCap: 'butt',
-            lineJoin: 'miter',
-            weight: 1,
-            fill: true,
-            fillOpacity: 1,
-            fillColor: 'rgba(133,182,111,1.0)',
-        }
-    }
-
-    mapa.createPane('pane_cvb_0');
-    mapa.getPane('pane_cvb_0').style.zIndex = 400;
-    mapa.getPane('pane_cvb_0').style['mix-blend-mode'] = 'normal';
-
-    var layer_cvb_0 = new L.geoJson(json_cvb_0, {
+    return L.geoJson(json_cvb_0, {
         attribution: '<a href=""></a>',
-        pane: 'pane_cvb_0',
-        onEachFeature: pop_cvb_0,
         pointToLayer: function (feature, latlng) {
-            
-            var smallIcon = new L.Icon({
-            iconSize: [15, 15],
-            iconUrl: `${$("#url_base").val()}img/iconos/foto.svg`,
-            });
-            return L.marker(latlng, {icon: smallIcon})            
-            
+            var contenido = `
+                <img src='${$("#url_base").val()}/archivos/inventario/fotos_aereas/${feature.properties['Name']}' width='auto'/>
+            `
+            var icono = L.icon({
+                iconUrl: `${$("#url_base").val()}img/iconos/foto.svg`,
+                iconSize: [20, 20],
+                popupAnchor: [0,-15]
+            })
+
+            return L.marker(latlng, {"icon": icono}).bindPopup(contenido,  { 'minWidth': '640' }).bindPopup(contenido)        
         },
     })
-        var hash = new L.Hash(mapa);
-        setBounds();
-
-        return layer_cvb_0
 }
 
 function dibujar_incidentes(mapa, filtros)
