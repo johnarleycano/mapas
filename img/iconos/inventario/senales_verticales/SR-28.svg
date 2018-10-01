@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.175"
-     inkscape:cx="1469.1234"
+     inkscape:cx="2397.6948"
      inkscape:cy="1542.9056"
      inkscape:document-units="cm"
      inkscape:current-layer="layer1"
@@ -84,13 +84,5 @@
        id="rect1795"
        style="fill:#be141e;fill-opacity:1;stroke:none;stroke-width:2.38932729"
        transform="rotate(-45)" />
-    <rect
-       transform="matrix(-0.70710678,-0.70710678,-0.70710678,0.70710678,0,0)"
-       style="fill:#be141e;fill-opacity:1;stroke:none;stroke-width:2.38932729"
-       id="rect821"
-       width="900"
-       height="8000"
-       x="-7125.7612"
-       y="-2305.3" />
   </g>
 </svg>
