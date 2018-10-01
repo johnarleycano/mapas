@@ -57,6 +57,30 @@ class Filtros extends CI_Controller {
                     print json_encode($this->filtros_model->obtener($tipo, $id));
                 break;
 
+                case "municipios_geometria":
+                    $resultado = $this->filtros_model->obtener($tipo, $id);
+                    
+                    $geojson = array(
+                       'type'      => 'FeatureCollection',
+                       'features'  => array()
+                    );
+
+                    foreach ($resultado as $registro) {
+                        if($registro->Poligono){
+                            $feature = array(
+                                 'type' => 'Feature',
+                                 'geometry' => json_decode($this->wkb_to_json($registro->Poligono)),
+                                 'properties' => $registro
+                            );
+                            unset($registro->Poligono);
+
+                            array_push($geojson['features'], $feature);
+                        }
+                    }
+
+                    echo json_encode($geojson, JSON_NUMERIC_CHECK);
+                break;
+
 	            case "vias":
 	                print json_encode($this->filtros_model->obtener($tipo, $id));
 	            break;

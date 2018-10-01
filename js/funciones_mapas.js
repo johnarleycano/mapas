@@ -110,6 +110,37 @@ function agregar_cartografia_base(mapa, filtros)
         }
     })
 
+    /***************************************************
+     ************** Dibujo de municipios ***************
+     **************************************************/
+     // Se dibuja la capa
+    var capa_municipios = dibujar_municipios(mapa, filtros)
+
+    // Se agrega la capa
+    // cartografia_base["Municipios"] = capa_municipios
+
+    // Si tiene activa la opción de dibujar las abscisas
+    if(typeof filtros["opciones"]["Municipios"] !== 'undefined' && filtros["opciones"]["Municipios"][1]){
+        // Se adiciona la capa
+        mapa.addLayer(capa_municipios)
+    
+        // Se Chequea la capa
+        $("#municipios").prop("checked", true)
+    }
+        
+    // Cuando se selecciona otro mapa base
+    $("#municipios").on("click", function(){
+        capa = $(this).attr("id")
+
+        if ($(this).prop('checked')){
+            mapa.addLayer(capa_municipios)
+            $(this).prop("checked", true)
+        } else {
+            mapa.removeLayer(capa_municipios)
+            $(this).prop("checked", false)
+        }
+    })
+
     // // Si tiene activa la opción, centra el dibujo en la capa
     // if(filtros["opciones"]["Vias"][2]) mapa.fitBounds(capa_vias.getBounds())
     // if(filtros["opciones"]["Abscisas"][2]) mapa.fitBounds(capa_abscisas.getBounds())
@@ -385,6 +416,27 @@ function dibujar_obras(mapa, filtros){
     })
 
     return capas_obras
+}
+
+function dibujar_municipios(mapa, filtros){
+    // Información de los municipios
+    
+    var capas_municipios = new L.geoJson(null, {
+        style: function(feature){
+
+        },
+        onEachFeature: function(feature, layer) {
+            return L.polygon(feature.geometry.coordinates)
+        },
+    })
+
+    // Consulta de los municipios
+    municipios = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "municipios_geometria", "id": {"id_sector": null, "id_via": null}}, 'JSON')
+
+    // Se agregan los datos a la capa
+    capas_municipios.addData(municipios)
+
+    return capas_municipios
 }
 
 function generar_marcador(punto) {

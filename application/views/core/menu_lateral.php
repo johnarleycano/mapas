@@ -44,6 +44,11 @@
                             </label>
 
                             <label class="enlace">
+                                <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="municipios">&nbsp;&nbsp;&nbsp;
+                                Municipios
+                            </label>
+
+                            <label class="enlace">
                                 <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="kilometros">&nbsp;&nbsp;&nbsp;
                                 Kilómetros
                             </label>
