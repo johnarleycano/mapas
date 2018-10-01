@@ -97,6 +97,7 @@
                                 <?php } ?>
                                 
                                 <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Señales verticales</a>
+                                <br>
                                 
                                 <input class="uk-checkbox" type="checkbox" id="obras">&nbsp;&nbsp;&nbsp;
                                 <a href="<?php echo site_url('inventario/obras'); ?>" class="uk-link-text">Obras de arte</a>

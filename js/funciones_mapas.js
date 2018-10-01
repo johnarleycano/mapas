@@ -84,7 +84,7 @@ function agregar_cartografia_base(mapa, filtros)
      ************** Dibujo de kilómetros ***************
      **************************************************/
      // Se dibuja la capa
-    var capa_kilometros = dibujar_abscisas(mapa, filtros)
+    var capa_kilometros = dibujar_kilometros(mapa, filtros)
 
     // Se agrega la capa
     cartografia_base["kilometros"] = capa_kilometros
@@ -166,7 +166,7 @@ function dibujar_vias(mapa, filtros)
     })
 }
 
-function dibujar_abscisas(mapa, filtros)
+function dibujar_kilometros(mapa, filtros)
 {
     // Se consultan las abscisas    
     var abscisas = ajax(`${$("#url").val()}/configuracion/obtener`, {"tipo": "abscisas", "id": {"id_sector": filtros.id_sector, "id_via": filtros.id_via}}, 'JSON')
