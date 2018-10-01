@@ -11,7 +11,7 @@
                 <li class="uk-nav-divider"></li>
                 <li class="uk-parent">
                     <a href="#">
-                        <i class="fas fa-globe fa-lg"></i>&nbsp;&nbsp;&nbsp;MAPAS BASE</li>
+                        <i class="fas fa-globe fa-lg"></i>&nbsp;&nbsp;&nbsp;MAPAS BASE
                     </a>
 
                     <ul class="uk-nav-sub">
@@ -33,7 +33,7 @@
 
                 <li class="uk-parent">
                     <a href="#">
-                        <i class="fas fa-map fa-lg"></i>&nbsp;&nbsp;&nbsp;CARTOGRAFÍA BASE</li>
+                        <i class="fas fa-map fa-lg"></i>&nbsp;&nbsp;&nbsp;CARTOGRAFÍA BASE
                     </a>
 
                     <ul class="uk-nav-sub">
@@ -61,15 +61,15 @@
                 <li class="uk-nav-divider"></li>
                 <li class="uk-parent">
                     <a href="#">
-                        <i class="fas fa-car fa-lg"></i>&nbsp;&nbsp;&nbsp;OPERACIONES</li>
+                        <i class="fas fa-car fa-lg"></i>&nbsp;&nbsp;&nbsp;OPERACIONES
                     </a>
 
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <?php if(ENVIRONMENT == 'development'){ ?>
                                 <label class="enlace">
-                                        <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
-                                        <a href="<?php echo site_url('operaciones/eventos'); ?>" class="uk-link-text">Eventos diarios</a>
+                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
+                                    <a href="<?php echo site_url('operaciones/eventos'); ?>" class="uk-link-text">Eventos diarios</a>
                                 </label>
                             <?php } ?>
 
@@ -86,7 +86,7 @@
 
                 <li class="uk-parent">
                     <a href="#">
-                        <i class="fas fa-map fa-lg"></i>&nbsp;&nbsp;&nbsp;INVENTARIO</li>
+                        <i class="fas fa-map fa-lg"></i>&nbsp;&nbsp;&nbsp;INVENTARIO
                     </a>
                     
                     <ul class="uk-nav-sub">
@@ -104,7 +104,7 @@
 
                 <li class="uk-parent">
                     <a href="#">
-                        <i class="fas fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;RECORRIDOS</li>
+                        <i class="fas fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;RECORRIDOS
                     </a>
                     
                     <ul class="uk-nav-sub">
