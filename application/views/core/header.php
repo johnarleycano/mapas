@@ -47,5 +47,6 @@
 <script src="<?php echo base_url(); ?>js/funciones_mapas.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/L.Control.Locate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/hash.js"></script>
+<script src="<?php echo base_url(); ?>js/leaflet/rotatedMarker.js"></script>
 <script src="<?php echo base_url(); ?>js/funcion.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/cvb_0.js"></script>

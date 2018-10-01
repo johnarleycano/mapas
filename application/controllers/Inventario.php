@@ -39,6 +39,35 @@ class Inventario extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
+                case "obras":
+                    $id["perimetro"] = explode(',', $id["perimetro"]);
+
+                    $resultado = $this->inventario_model->obtener($tipo, $id);
+                    
+                    $geojson = array(
+                       'type'      => 'FeatureCollection',
+                       'features'  => array()
+                    );
+
+                    foreach ($resultado as $registro) {
+                        $properties = $registro;
+
+                        // unset($properties->geojson);
+                        // unset($properties->geom);
+
+                        $feature = array(
+                             'type' => 'Feature',
+                             'geometry' => json_decode($registro->geojson, true),
+                             'properties' => $properties
+                        );
+
+                        array_push($geojson['features'], $feature);
+
+                    }
+
+                    print json_encode($geojson, JSON_NUMERIC_CHECK);
+                break;
+
                 case "senales_verticales":
                     $id["perimetro"] = explode(',', $id["perimetro"]);
                     
@@ -89,6 +118,20 @@ class Inventario extends CI_Controller {
         $this->data['filtro_superior'] = true;
         $this->data['menu'] = true;
         $this->data['contenido_principal'] = 'inventario/recorridos/aereos';
+        $this->load->view('core/template', $this->data);
+    }
+
+    /**
+     * Mapa de obras de arte
+     * @return [type] [description]
+     */
+    function obras()
+    {
+        $this->data['titulo'] = 'Obras de arte';
+        $this->data['titulo_mapa'] = 'Mantenimiento | Obras de arte';
+        $this->data['filtro_superior'] = true;
+        $this->data['menu'] = true;
+        $this->data['contenido_principal'] = 'inventario/obras';
         $this->load->view('core/template', $this->data);
     }
 

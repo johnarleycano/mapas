@@ -18,6 +18,20 @@ Class Inventario_model extends CI_Model{
 	function obtener($tipo, $id = null, $adicional = null)
 	{
 		switch ($tipo) {
+			case "obras":
+				// if($id["id_via"]) $this->db_inventario->where("id_vias", $id["id_via"]);
+
+				$this->db_inventario
+					->select("*")
+					->select("PUBLIC.ST_AsGeoJSON ( PUBLIC.ST_Transform (( geom ), 4326 ), 6 ) geojson")
+					->from("Obras")
+					->where("PUBLIC.ST_Transform ( geom, 4326 ) && PUBLIC.ST_SetSRID ( PUBLIC.ST_MakeBox2D ( PUBLIC.ST_Point ( {$id['perimetro'][0]}, {$id['perimetro'][1]} ), PUBLIC.ST_Point ( {$id['perimetro'][2]}, {$id['perimetro'][3]} )), 4326 )")
+					// ->where("id_vias", 3)
+					;
+
+		        return $this->db_inventario->get()->result();
+			break;
+
 			case "senales_verticales":
 				if($id["id_via"]) $this->db_inventario->where("id_vias", $id["id_via"]);
 

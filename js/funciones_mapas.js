@@ -328,6 +328,65 @@ function dibujar_senales_verticales(mapa, filtros){
     return capa_senales_verticales
 }
 
+function dibujar_obras(mapa, filtros){
+    // Información de las obras
+    var capas_obras = new L.geoJson(null, {
+        pointToLayer: function (feature, latlng) {
+            // Ícono
+            var icono = new L.Icon({
+                "iconUrl": `${$("#url_base").val()}img/iconos/inventario/obras/icono.svg`,
+                "iconSize": [76, 76],
+                "iconAnchor": [38, 30],
+            })
+            
+            // Marcador
+            return L.marker(latlng, {icon: icono, rotationAngle: feature.properties.direccion})
+        },
+        onEachFeature: function(feature, layer) {
+            var contenido =
+            `
+                <h4><b>Obra de arte número ${feature.properties['numero']}</b></h4>
+                <b>Abscisa:</b> ${(feature.properties['abscisa']) ? feature.properties['abscisa'] : ""}<br>
+                <b>Tipo:</b> ${(feature.properties['tipo']) ? feature.properties['tipo'] : ""}<br>
+                <b>Obra:</b> ${(feature.properties['obra']) ? feature.properties['obra'] : ""}<br>
+                <b>Ancho:</b> ${(feature.properties['ancho']) ? feature.properties['ancho'] : ""}<br>
+                <b>Altura:</b> ${(feature.properties['altura']) ? feature.properties['altura'] : ""}<br>
+                <b>Encole (I/D):</b> ${(feature.properties['encole_i_d']) ? feature.properties['encole_i_d'] : ""}<br>
+                <b>Descole (I/D):</b> ${(feature.properties['descole_i_d']) ? feature.properties['descole_i_d'] : ""}<br>
+                <b>Longitud:</b> ${(feature.properties['longitud']) ? feature.properties['longitud'] : ""}<br>
+                <b>Entrada:</b> ${(feature.properties['entrada']) ? feature.properties['entrada'] : ""}<br>
+                <b>Salida:</b> ${(feature.properties['salida']) ? feature.properties['salida'] : ""}<br><br>
+                <b>Observación:</b> ${(feature.properties['observacion']) ? feature.properties['observacion'] : ""}<br>
+            `
+
+            layer.bindPopup(contenido, {maxHeight: 400})
+        },
+    })
+
+    // Cuadro del perímetro del que va a cargar los datos
+    var perimetro = mapa.getBounds().toBBoxString()
+
+    // Consulta de las obras de arte
+    obras = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "obras", "id": {"id_sector": null, "id_via": null, "perimetro": perimetro}}, 'JSON')
+
+    // Se agregan los datos a la capa
+    capas_obras.addData(obras)
+
+    // Cuando se mueva el mapa
+    mapa.on('moveend', function(e) {
+        // Se limpian las señales
+        capas_obras.clearLayers()
+
+        // Se consultan las señales en el perímetro
+        obras = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "obras", "id": {"id_sector": null, "id_via": null, "perimetro": mapa.getBounds().toBBoxString()}}, 'JSON')
+
+        // Se agregan a la capa
+        capas_obras.addData(obras)
+    })
+
+    return capas_obras
+}
+
 function generar_marcador(punto) {
     imprimir(`Has elegido crear un marcador en las coordenadas ${punto.latlng}`)
 }
@@ -411,6 +470,40 @@ function marcar(mapa, opciones)
 
         // Si tiene activa la opción, centra el dibujo en la capa
         if(opciones["Fotos_Aereas"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
+    }
+    
+    /***************************************************
+     ************* Dibujo de obras de arte *************
+     **************************************************/
+     // Si tiene activa la carga de obras de arte
+    if(typeof opciones["Obras"] !== 'undefined' && opciones["Obras"][0]){
+        // Se dibuja la capa
+        var capa_obras = dibujar_obras(mapa, opciones)
+
+        // Si tiene activa la opción de dibujar
+        if(typeof filtros["opciones"]["Obras"] !== 'undefined' && filtros["opciones"]["Obras"][1]){
+            // Se adiciona la capa
+            mapa.addLayer(capa_obras)
+
+            // Se Chequea la capa
+            $("#obras").prop("checked", true)
+        }
+
+        // Cuando se selecciona otro mapa base
+        $("#obras").on("click", function(){
+            capa = $(this).attr("id")
+
+            if ($(this).prop('checked')){
+                mapa.addLayer(capa_obras)
+                $(this).prop("checked", true)
+            } else {
+                mapa.removeLayer(capa_obras)
+                $(this).prop("checked", false)
+            }
+        })
+
+        // // Si tiene activa la opción, centra el dibujo en la capa
+        // if(opciones["Fotos_Aereas"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
 
     // Variable para mantener la ubicación del mapa
