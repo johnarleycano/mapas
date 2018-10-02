@@ -256,16 +256,13 @@ function dibujar_incidentes(mapa, filtros)
     // Información de la capa
     var capa_incidentes = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
-            // imprimir(feature)
-
             // Se retorna el marcador
-            return L.marker(latlng) 
+            return L.marker(latlng)
         },
     })
 
     // Consulta de incidentes
     let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": datos}, 'JSON')
-    imprimir(incidentes)
     
     // Se agregan los datos a la capa
     capa_incidentes.addData(incidentes)

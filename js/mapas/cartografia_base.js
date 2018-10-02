@@ -157,7 +157,7 @@ function dibujar_kilometros(mapa, filtros)
     $.each(kilometros, function(key, kilometro) {
         // Creación del punto
         let punto = L.circleMarker(
-            [kilometro.latitud, kilometro.longitud],
+            [kilometro.Latitud, kilometro.Longitud],
             {
                 radius: 5,
                 color: "#438E32",
