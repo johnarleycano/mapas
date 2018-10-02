@@ -71,12 +71,12 @@ function agregar_cartografia_base(mapa, filtros)
     $("#vias").on("click", function(){
         capa = $(this).attr("id")
 
-        if ($("#vias").prop('checked')){
+        if ($(this).prop('checked')){
             mapa.addLayer(capa_vias)
-            $("#vias").prop("checked", true)
+            $(this).prop("checked", true)
         } else {
             mapa.removeLayer(capa_vias)
-            $("#vias").prop("checked", false)
+            $(this).prop("checked", false)
         }
     })
 
@@ -103,10 +103,10 @@ function agregar_cartografia_base(mapa, filtros)
 
         if ($("#kilometros").prop('checked')){
             mapa.addLayer(capa_kilometros)
-            $("#kilometros").prop("checked", true)
+            $(this).prop("checked", true)
         } else {
             mapa.removeLayer(capa_kilometros)
-            $("#kilometros").prop("checked", false)
+            $(this).prop("checked", false)
         }
     })
 
@@ -238,11 +238,17 @@ function dibujar_kilometros(mapa, filtros)
 
 function dibujar_fotos_aereas(mapa, opciones)
 {
-    return L.geoJson(json_cvb_0, {
-        attribution: '<a href=""></a>',
+    // Información de los recorridos aéreos
+    var capa_fotos_aereas = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
+            var url = `${$("#url_base").val()}/archivos/inventario/fotos_aereas/${feature.properties['Date']}/${feature.properties['Name']}`
+
             var contenido = `
-                <img src='${$("#url_base").val()}/archivos/inventario/fotos_aereas/${feature.properties['Name']}' width='auto'/>
+                <b>Fecha de captura de la foto:</b> ${feature.properties['Date']}<br><br>
+                <img src='${url}' width='auto'/>
+                <a href="${url}" download>
+                    <input type='submit' class='uk-button uk-button-secondary uk-button-large uk-width-1-1' value='Descargar'>
+                </a>
             `
             var icono = L.icon({
                 iconUrl: `${$("#url_base").val()}img/iconos/foto.svg`,
@@ -250,9 +256,32 @@ function dibujar_fotos_aereas(mapa, opciones)
                 popupAnchor: [0,-15]
             })
 
-            return L.marker(latlng, {"icon": icono}).bindPopup(contenido,  { 'minWidth': '640' }).bindPopup(contenido)        
+            return L.marker(latlng, {"icon": icono}).bindPopup(contenido,  { 'minWidth': '640', 'height': '480' }).bindPopup(contenido) 
         },
     })
+
+    // Cuadro del perímetro del que va a cargar los datos
+    var perimetro = mapa.getBounds().toBBoxString()
+
+    // Consulta de las fotos aéreas
+    var fotos_aereas = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "fotos_aereas", "id": {"perimetro": perimetro}}, 'JSON')
+
+    // Cuando se mueva el mapa
+    mapa.on('moveend', function(e) {
+        // Se limpian las señales
+        capa_fotos_aereas.clearLayers()
+
+        // Se consultan las señales en el perímetro
+        fotos_aereas = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "fotos_aereas", "id": {"perimetro": mapa.getBounds().toBBoxString()}}, 'JSON')
+
+        // Se agregan a la capa
+        capa_fotos_aereas.addData(fotos_aereas)
+    })
+
+    // Se agregan los datos a la capa
+    capa_fotos_aereas.addData(fotos_aereas)
+
+    return capa_fotos_aereas
 }
 
 function dibujar_incidentes(mapa, filtros)
@@ -319,7 +348,7 @@ function dibujar_senales_verticales(mapa, filtros){
             // Marcador
             return L.marker(latlng, {icon: smallIcon});
         },
-        onEachFeature: function pop_SealesVerticales_1(feature, layer) {
+        onEachFeature: function(feature, layer) {
             var popupContent =
                 `
                 <b>Kilómetro:</b> ${(feature.properties['kilómetro']) ? feature.properties['kilómetro'] : ''}<br>
@@ -358,9 +387,6 @@ function dibujar_senales_verticales(mapa, filtros){
         // Se agregan a la capa
         capa_senales_verticales.addData(senales_verticales)
     })
-
-    // Se agrega la capa
-    // mapa.addLayer(capa_senales_verticales)
 
     return capa_senales_verticales
 }
@@ -613,6 +639,4 @@ function marcar(mapa, opciones)
 
     // Se agregan los mapas base
     var mapas_base = agregar_mapas_base(mapa, opciones.Mapa_Base)
-    
-    // var control = L.control.layers(null, capas).addTo(mapa)
 }

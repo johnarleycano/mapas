@@ -39,6 +39,36 @@ class Inventario extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
+                case 'fotos_aereas':
+                    // Se toma el string del perímetro y se divide en cuatro puntos
+                    $id["perimetro"] = explode(',', $id["perimetro"]);
+                    
+                    // Se consulta los registros
+                    $resultado = $this->inventario_model->obtener($tipo, $id);
+                    
+                    $geojson = array(
+                       'type'      => 'FeatureCollection',
+                       'features'  => array()
+                    );
+
+                    foreach ($resultado as $registro) {
+                        $properties = $registro;
+
+                        // unset($properties->geojson);
+                        // unset($properties->geom);
+
+                        $feature = array(
+                             'type' => 'Feature',
+                             'geometry' => json_decode($registro->geojson, true),
+                             'properties' => $properties
+                        );
+
+                        array_push($geojson['features'], $feature);
+                    }
+
+                    print json_encode($geojson, JSON_NUMERIC_CHECK);
+                break;
+
                 case "municipios_geometria":
                     $resultado = $this->inventario_model->obtener($tipo, $id);
                     
@@ -64,6 +94,7 @@ class Inventario extends CI_Controller {
                 break;
 
                 case "obras":
+                    // Se toma el string del perímetro y se divide en cuatro puntos
                     $id["perimetro"] = explode(',', $id["perimetro"]);
 
                     $resultado = $this->inventario_model->obtener($tipo, $id);
@@ -93,6 +124,7 @@ class Inventario extends CI_Controller {
                 break;
 
                 case "senales_verticales":
+                    // Se toma el string del perímetro y se divide en cuatro puntos
                     $id["perimetro"] = explode(',', $id["perimetro"]);
                     
                     $resultado = $this->inventario_model->obtener($tipo, $id);

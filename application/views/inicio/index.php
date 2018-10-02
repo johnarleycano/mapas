@@ -9,7 +9,6 @@
 			"Senales_Verticales": [true, true, true],
 			"Fotos_Aereas": [true, true],
 			"Obras": [true, true],
-			"Municipios": [true, true],
 		}
 
 		var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18})

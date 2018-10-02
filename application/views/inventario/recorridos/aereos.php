@@ -5,7 +5,7 @@
 		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
 		var opciones = {
 			"Vias": [true, true],
-			"Fotos_Aereas": [true, true, true],
+			// "Fotos_Aereas": [true, true],
 		}
 
 		var mapa = generar_mapa("cont_mapa")
