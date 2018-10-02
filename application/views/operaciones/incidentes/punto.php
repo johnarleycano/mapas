@@ -10,7 +10,7 @@
 		// capas: [0]: incluir; [1]: dibujar; [2]: centrar
 		var capas = {}
 
-		var mapa = generar_mapa("cont_mapa", {zoomControl: false})
+		var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18, zoomControl: false})
 		marcar(mapa, capas)
 
 		/**
@@ -29,7 +29,7 @@
 			calcular() {
 				// Consulta de los datos del incidente
 			    var incidente = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidente", "id":  this.id_incidente}, 'JSON')
-			    
+
 			    if(incidente){
 				    // Variables
 					var coordenadas = []

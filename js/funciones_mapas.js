@@ -165,16 +165,19 @@ function generar_mapa(contenedor, opciones = null)
     })
 
     // Se agregan los controles
-    agregar_controles(mapa)
+    agregar_controles(mapa, opciones)
 
     // Se retorna el mapa
     return mapa
 }
 
-function agregar_controles(mapa)
+function agregar_controles(mapa, opciones)
 {
-    // Posición del control zoom movida a la derecha
-    mapa.zoomControl.setPosition('topright')
+    // Si no existe la parametrización del control de zoom
+    if(typeof opciones.zoomControl === 'undefined' && !opciones.zoomControl){
+        // Posición del control zoom movida a la derecha
+        mapa.zoomControl.setPosition('topright')
+    }
 
     // Control de escala
     let escala = L.control.scale({ position: 'bottomright', imperial: false})
