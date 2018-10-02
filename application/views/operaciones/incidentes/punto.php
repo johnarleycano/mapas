@@ -13,9 +13,9 @@
 		var opciones = {
 			"zoom": 18, 
 			"minZoom": 18,
-			"maxZoom": 18,
-			"zoomControl": false,
-			"ubicacionActual": false
+			// "maxZoom": 18,
+			// "zoomControl": false,
+			// "ubicacionActual": false
 		}
 
 		var mapa = crear("cont_mapa", opciones)
@@ -47,7 +47,7 @@
 
 				    // Consulta de puntos del kilómetro
 				    var puntos_kilometro = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id":  {"id_sector": null, "id_via": incidente.id_via_configuracion, "kilometro": kilometro}}, 'JSON')
-				    
+
 				    // Si trae resultados
 				    if(puntos_kilometro.features.length > 0){
 				    	// Se almacena las coordenadas
@@ -85,11 +85,8 @@
 			                })
 			                .addTo(mapa)
 						
-						// Se hace zoom al kilómetro
-						mapa.fitBounds(polilinea.getBounds())
-
 						// Al incidente se le insertan las coordenadas
-					    ajax(`${$("#url").val()}/operaciones/actualizar`, {"tipo": "incidente", "id": this.id_incidente, "datos": {"longitud": coordenada.latLng.lng, "latitud": coordenada.latLng.lat}}, 'JSON')
+					    var actualizar = ajax(`${$("#url").val()}/operaciones/actualizar`, {"tipo": "incidente", "id": this.id_incidente, "datos": {"longitud": coordenada.latLng.lng, "latitud": coordenada.latLng.lat}}, 'JSON')
 
 					    // Se retornan las coordenadas
 						return coordenada.latLng
@@ -100,7 +97,7 @@
 
 		// Se invoca la clase y se ejecuta
 		const coordenadas = new Coordenadas(id_incidente)
-		coordenadas.obtener
+		mapa.setView(new L.LatLng(coordenadas.obtener.lat, coordenadas.obtener.lng), opciones.zoom)
 
 		/***********************************************************************************************************
 		 ************************* Script para generar coordenadas a incidentes existentes *************************
