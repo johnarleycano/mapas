@@ -148,16 +148,16 @@ function agregar_cartografia_base(mapa, filtros)
 function dibujar_kilometros(mapa, filtros)
 {
     // Se consultan los puntos por kilómetro    
-    var kilómetros = ajax(`${$("#url").val()}/configuracion/obtener`, {"tipo": "puntos_kilometros", "id": {"id_sector": filtros.id_sector, "id_via": filtros.id_via}}, 'JSON')
+    var kilometros = ajax(`${$("#url").val()}/configuracion/obtener`, {"tipo": "puntos_kilometros", "id": {"id_sector": filtros.id_sector, "id_via": filtros.id_via}}, 'JSON')
 
     // Arreglo que contiene los puntos
     var puntos = new Array()
 
-    // Recorrido de los kilómetros
-    $.each(kilómetros, function(key, abscisa) {
+    // Recorrido de los kilometros
+    $.each(kilometros, function(key, kilometro) {
         // Creación del punto
         let punto = L.circleMarker(
-            [abscisa.Latitud, abscisa.Longitud],
+            [kilometro.latitud, kilometro.longitud],
             {
                 radius: 5,
                 color: "#438E32",
