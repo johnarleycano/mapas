@@ -3,15 +3,23 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
-		var opciones = {
+		var capas = {
+			// Cartografía base
+			"Municipios": [true],
 			"Vias": [true, true],
-			"Kilometros": [true, true],
+			"Kilometros": [true],
+			"Abscisas": [true],
+			
+			// Capas
 			"Senales_Verticales": [true, true, true],
 			"Fotos_Aereas": [true, true],
 			"Obras": [true, true],
 		}
 
-		var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18})
-		marcar(mapa, opciones)
+		// Creación del mapa
+		var mapa = crear("cont_mapa", {zoom: 17, minZoom: 17})
+
+		// Dibujo de las capas
+		dibujar_capas(mapa, capas)
 	})
 </script>

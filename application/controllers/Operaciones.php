@@ -123,27 +123,7 @@ class Operaciones extends CI_Controller {
                 break;
 
                 case "incidentes":
-                    // Se consulta los registros
-                    $resultado = $this->operaciones_model->obtener($tipo, $id);
-
-                    $geojson = array(
-                       'type'      => 'FeatureCollection',
-                       'features'  => array()
-                    );
-
-                    foreach ($resultado as $registro) {
-                        $properties = $registro;
-
-                        $feature = array(
-                             'type' => 'Feature',
-                             'geometry' => array("coordinates" => array($registro->latitud, $registro->longitud), "type" => "Point"),
-                             'properties' => $properties
-                        );
-
-                        array_push($geojson['features'], $feature);
-                    }
-
-                    print json_encode($geojson, JSON_NUMERIC_CHECK);
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
 
                 case "meses_incidentes":

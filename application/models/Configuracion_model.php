@@ -12,7 +12,7 @@ Class Configuracion_model extends CI_Model{
 	function obtener($tipo, $id = null, $adicional = null)
 	{
 		switch ($tipo) {
-			case "puntos_kilometros":
+			case "abscisas":
 				$filtro = "";
                 if ($id['id_sector'] || $id["id_via"]) $filtro = ($id["id_via"]) ? "WHERE g.Fk_Id_Via = {$id['id_via']}" : "WHERE v.Fk_Id_Sector = {$id['id_sector']}";
 

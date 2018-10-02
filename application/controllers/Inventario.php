@@ -54,6 +54,9 @@ class Inventario extends CI_Controller {
                     foreach ($resultado as $registro) {
                         $properties = $registro;
 
+                        // unset($properties->geojson);
+                        // unset($properties->geom);
+
                         $feature = array(
                              'type' => 'Feature',
                              'geometry' => json_decode($registro->geojson, true),

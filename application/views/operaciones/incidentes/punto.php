@@ -10,8 +10,16 @@
 		// capas: [0]: incluir; [1]: dibujar; [2]: centrar
 		var capas = {}
 
-		var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18, zoomControl: false})
-		marcar(mapa, capas)
+		var opciones = {
+			"zoom": 18, 
+			"minZoom": 18,
+			"maxZoom": 18,
+			"zoomControl": false,
+			"ubicacionActual": false
+		}
+
+		var mapa = crear("cont_mapa", opciones)
+		dibujar_capas(mapa, capas)
 
 		/**
 		 * Clase que contiene la gestión de

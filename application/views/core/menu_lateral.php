@@ -38,24 +38,24 @@
 
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label class="enlace">
-                                <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="vias">&nbsp;&nbsp;&nbsp;
+                            <label class="enlace uk-hidden" id="vias">
+                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                                 Vías
                             </label>
 
-                            <label class="enlace">
-                                <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="municipios">&nbsp;&nbsp;&nbsp;
+                            <label class="enlace uk-hidden" id="municipios">
+                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                                 Municipios
                             </label>
 
-                            <label class="enlace">
-                                <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="kilometros">&nbsp;&nbsp;&nbsp;
+                            <label class="enlace uk-hidden" id="kilometros">
+                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                                 Kilómetros
                             </label>
 
                             <?php if(ENVIRONMENT == 'development'){ ?>
-                                <label class="enlace">
-                                    <input class="uk-checkbox" name="cartografia_base" type="checkbox" id="abscisas">&nbsp;&nbsp;&nbsp;
+                                <label class="enlace" id="abscisas">
+                                    <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                                     Abscisas
                                 </label>
                             <?php } ?>
@@ -72,8 +72,8 @@
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <?php if(ENVIRONMENT == 'development'){ ?>
-                                <label class="enlace">
-                                    <input class="uk-checkbox" type="checkbox" checked>&nbsp;&nbsp;&nbsp;
+                                <label class="enlace" id="eventos_diarios">
+                                    <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
                                     <a href="<?php echo site_url('operaciones/eventos'); ?>" class="uk-link-text">Eventos diarios</a>
                                 </label>
                             <?php } ?>

@@ -64,24 +64,24 @@
             "Mapa_Base": "open_street",
         }
         
-        var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18})
-        marcar(mapa, opciones)
+        var mapa = crear("cont_mapa", {minZoom: 11, maxZoom: 18})
+        dibujar_capas(mapa, opciones)
 
         $("#select_anio_incidente_filtro").on("change", function(){
             cargar_meses()
             cargar_tipos_atencion()
 
-            marcar(mapa, opciones)
+            dibujar_capas(mapa, opciones)
         })
 
         $("#select_mes_incidente_filtro").on("change", function(){
             cargar_tipos_atencion()
         
-            marcar(mapa, opciones)
+            dibujar_capas(mapa, opciones)
         })
 
         $("#select_tipo_atencion_filtro").on("change", function(){
-            marcar(mapa, opciones)
+            dibujar_capas(mapa, opciones)
         })
     })
 </script>

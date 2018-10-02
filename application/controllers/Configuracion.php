@@ -45,7 +45,7 @@ class Configuracion extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
-                case "puntos_kilometros":
+                case "abscisas":
                     print json_encode($this->configuracion_model->obtener($tipo, $id));
                 break;
             }

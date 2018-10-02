@@ -3,17 +3,19 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
-		var opciones = {
+		var capas = {
 			"Vias": [true, true],
+			"Kilometros": [true],
+			"Municipios": [true],
 			"Abscisas": [true],
 			"Senales_Verticales": [true, true, true],
 		}
 
-		var mapa = generar_mapa("cont_mapa", {zoom: 18, minZoom: 15, maxZoom: 18})
-		marcar(mapa, opciones)
+		var mapa = crear("cont_mapa", {zoom: 17, minZoom: 17})
+		dibujar_capas(mapa, capas)
 
 		$("select").on("change", function(){
-			marcar(mapa, opciones)
+			dibujar_capas(mapa, capas)
 		})
 	})
 </script>
