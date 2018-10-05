@@ -17,6 +17,14 @@
 
     	<!-- Contenedor principal -->
         <div id="contenedor_principal" class="margen">
+            <!-- Interfaz de espera de carga -->
+            <div id="cargando" class="uk-hidden" uk-grid>
+                <div class="uk-width-1-1">
+                    <img src="<?php echo base_url(); ?>img/cargando.gif" class="uk-align-center">
+                    <div class="uk-text-lead uk-text-center"></div>
+                </div>
+            </div>
+
             <!--Se carga el contenido principal -->
             <?php $this->load->view($contenido_principal); ?>
         </div>

@@ -43,6 +43,7 @@ function ajax(url, datos, tipo_respuesta, async = false){
     return exito;
 }
 
+
 function RGB2Color(r,g,b)
 {
   return `#${this.byte2Hex(r)}${this.byte2Hex(g)}${this.byte2Hex(b)}`;
@@ -297,6 +298,27 @@ function imprimir_notificacion(mensaje, tipo = null)
  */
 function limpiar_lista(elemento, mensaje){
     elemento.html('').append("<option value=''>" + mensaje + "</option>");
+}
+
+/**
+ * Muestra el mensaje de cargando
+ * 
+ * @param  {string} mensaje [Mensaje a mostrar]
+ * 
+ * @return
+ */
+function cargando(mensaje){
+    // Si está oculto
+    if($("#cargando").hasClass("uk-hidden")){
+        // Mensaje
+        $("#cargando>div>div").text(mensaje)
+        
+        // Muestra el contendedor
+        $("#cargando").removeClass("uk-hidden")
+    } else {
+        // Oculta el contendedor
+        $("#cargando").addClass("uk-hidden")
+    }
 }
 
 /**
