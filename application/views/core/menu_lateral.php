@@ -71,12 +71,10 @@
 
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <?php if(ENVIRONMENT == 'development'){ ?>
-                                <label class="enlace">
-                                    <input class="uk-checkbox" type="checkbox" id="eventos_diarios">&nbsp;&nbsp;&nbsp;
-                                    <a href="<?php echo site_url('operaciones/eventos_diarios/').date("Y")."/".date("m"); ?>" class="uk-link-text">Eventos diarios</a>
-                                </label>
-                            <?php } ?>
+                            <label class="enlace">
+                                <input class="uk-checkbox" type="checkbox" id="eventos_diarios">&nbsp;&nbsp;&nbsp;
+                                <a href="<?php echo site_url('operaciones/eventos_diarios/').date("Y")."/".date("m"); ?>" class="uk-link-text">Eventos diarios</a>
+                            </label>
 
                             <label class="enlace">
                                 <?php if(ENVIRONMENT == 'development'){ ?>
