@@ -38,7 +38,7 @@ function agregar_mapas_base(mapa, capa = "bing")
     // Cuando se selecciona otro mapa base
     $("input[name='mapas_base']").on("click", function(){
         // Se recorren los mapas base
-         $.each(mapas_base, function(key, mapa_base) {
+        $.each(mapas_base, function(key, mapa_base) {
             // Se quita el mapa base
             mapa.removeLayer(mapa_base)
         })

@@ -36,6 +36,36 @@ Class Operaciones_model extends CI_Model{
 	function obtener($tipo, $id = null, $adicional = null)
 	{
 		switch ($tipo) {
+			case 'accidentes_dia':
+				$sql =
+				"SELECT
+					'' id,
+					'Accidentes' nombre,
+					'red' color,
+					SUM(
+					(
+				SELECT
+					Count( i.tipo_atencion ) 
+				FROM
+					dvm_incidente AS i
+					INNER JOIN dvm_tipo_atencion ON i.tipo_atencion = dvm_tipo_atencion.id 
+				WHERE
+					i.fechaincidente = '{$id['anio']}-{$id['mes']}-{$id['dia']}' 
+					AND dvm_tipo_atencion.id_tipo_accidente > 0 
+					AND i.tipo_atencion = ta.id 
+					) 
+					) AS total 
+				FROM
+					dvm_tipo_atencion AS ta 
+				WHERE
+					ta.id_tipo_accidente > 0
+					AND ta.panel = 1
+				";
+                
+                // return $this->db_incidentes->get_compiled_select(); // string de la consulta
+                return $this->db_incidentes->query($sql)->result();
+			break;
+
 			case "anios_incidentes":
 				$this->db_incidentes
 		        	->select(array(
@@ -48,6 +78,20 @@ Class Operaciones_model extends CI_Model{
 		        
 		        // return $this->db_incidentes->get_compiled_select(); // string de la consulta
 		        return $this->db_incidentes->get()->result();
+			break;
+
+			case 'eventos_dia':
+				$this->db_incidentes
+                    ->select(array(
+                        "SUM( ( SELECT Count( i.id ) FROM dvm_incidente AS i WHERE i.fecha = '2018-09-{$id}' AND i.tipo_atencion = ta.id ) ) cantidad",
+                    ))
+                    ->from('dvm_tipo_atencion ta')
+                    ->where('ta.panel', 1)
+                    ->where('ta.id_tipo_accidente', '>0')
+                ;
+                
+                // return $this->db_incidentes->get_compiled_select(); // string de la consulta
+                return $this->db_incidentes->get()->result();
 			break;
 
 			case "incidente":
@@ -74,13 +118,17 @@ Class Operaciones_model extends CI_Model{
                 if ($id['id_sector'] || $id["id_via"]) $filtro = ($id["id_via"]) ? "AND v.id_via_configuracion = {$id['id_via']}" : "AND vc.Fk_Id_Sector = {$id['id_sector']}";
                 $filtro_tipo_atencion = ($id['id_tipo_atencion']) ? "AND i.tipo_atencion = {$id['id_tipo_atencion']}" : "" ;
 
+                // Filtro de día
+                $filtro_dia = (isset($id["dia"])) ? "AND DAY(i.fechaincidente ) = {$id['dia']}" : ""; 
+
 				$sql = 
 				"SELECT
 					i.id,
 					i.abscisa,
 					i.abscisa_real,
 					ta.nombre,
-					i.fecha,
+					i.fechaincidente,
+					i.horaincidente,
 					v.id_via_configuracion,
 					X ( i.coordenadas ) AS latitud,
 					Y ( i.coordenadas ) AS longitud 
@@ -90,12 +138,41 @@ Class Operaciones_model extends CI_Model{
 					LEFT JOIN dvm_tipo_atencion AS ta ON i.tipo_atencion = ta.id 
 				WHERE
 					i.coordenadas IS NOT NULL 
-					AND YEAR(i.fecha ) = {$id['anio']}
-					AND MONTH(i.fecha ) = {$id['mes']}
+					AND YEAR(i.fechaincidente ) = {$id['anio']}
+					AND MONTH(i.fechaincidente ) = {$id['mes']}
+					$filtro_dia
 					$filtro
 					$filtro_tipo_atencion";
 
 				// return $this->db_incidentes->get_compiled_select();
+                return $this->db_incidentes->query($sql)->result();
+			break;
+
+			case 'incidentes_dia':
+				$sql =
+				"SELECT
+					ta.id,
+					ta.nombre,
+					ta.color,
+					(
+				SELECT
+					Count( I.tipo_atencion ) 
+				FROM
+					dvm_incidente AS I
+					INNER JOIN dvm_tipo_atencion ON I.tipo_atencion = dvm_tipo_atencion.id 
+				WHERE
+					I.fechaincidente = '{$id['anio']}-{$id['mes']}-{$id['dia']}' 
+					AND dvm_tipo_atencion.id_tipo_accidente = 0 
+					AND I.tipo_atencion = ta.id 
+					) AS total 
+				FROM
+					dvm_tipo_atencion AS ta 
+				WHERE
+					ta.id_tipo_accidente = 0 
+					AND ta.panel = 1
+				";
+                
+                // return $this->db_incidentes->get_compiled_select(); // string de la consulta
                 return $this->db_incidentes->query($sql)->result();
 			break;
 

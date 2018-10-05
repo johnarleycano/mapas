@@ -58,14 +58,30 @@ class Operaciones extends CI_Controller {
             $tipo = $this->input->post("tipo");
 
             switch ($tipo) {
-                case "historico_accidentes":
-                	$this->load->view("operaciones/index");
+                case "dias_mes":
+                    $this->data["anio"] = $this->input->post("anio");
+                    $this->data["mes"] = $this->input->post("mes");
+                	$this->load->view("operaciones/eventos/dias_mes", $this->data);
                 break;
             }
         } else {
             // Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
             redirect('');
         }
+    }
+
+    /**
+     * Mapa de eventos diarios
+     * @return [type] [description]
+     */
+    function eventos_diarios()
+    {
+        $this->data['titulo'] = 'Eventos diarios';
+        $this->data['titulo_mapa'] = 'Operaciones | Control de eventos diarios';
+        $this->data['filtro_superior'] = true;
+        $this->data['menu'] = true;
+        $this->data['contenido_principal'] = 'operaciones/eventos/index';
+        $this->load->view('core/template', $this->data);
     }
 
     /**
@@ -110,11 +126,19 @@ class Operaciones extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
+                case "accidentes_dia":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+
                 case "anios_incidentes":
                     print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
                 
                 case "historico_accidentes":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+                
+                case "eventos_dia":
                     print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
 

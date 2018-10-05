@@ -85,14 +85,30 @@ function dibujar_capas(mapa, opciones)
      // Si tiene activa la carga de eventos diarios
     if(typeof opciones["Eventos_Diarios"] !== 'undefined' && opciones["Eventos_Diarios"][0]){
         // Se dibuja la capa
-        var capa_eventos_diarios = dibujar_eventos_diarios(mapa, opciones)
-        imprimir(opciones)
+        var capa_eventos_diarios = dibujar_incidentes(mapa, opciones)
 
-        // // Si tiene activa la opción de dibujar las abscisas
-        // if(opciones["Incidentes"][1]) capa_incidentes.addTo(mapa)
+        // Si tiene activa la opción de dibujar los eventos diarios
+        if(typeof opciones["Eventos_Diarios"] !== 'undefined' && opciones["Eventos_Diarios"][1]){
+            // Se adiciona la capa
+            mapa.addLayer(capa_eventos_diarios)
+
+            // Se Chequea la capa
+            $("#eventos_diarios").prop("checked", true)
+        }
+
+        // Cuando se selecciona otro mapa base
+        $("#eventos_diarios").on("click", function(){
+            if ($(this).prop('checked')){
+                mapa.addLayer(capa_eventos_diarios)
+                $(this).prop("checked", true)
+            } else {
+                mapa.removeLayer(capa_eventos_diarios)
+                $(this).prop("checked", false)
+            }
+        })
 
         // Si tiene activa la opción, centra el dibujo en la capa
-        // if(opciones["Incidentes"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
+        // if(opciones["Eventos_Diarios"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
     
     /***************************************************
@@ -104,7 +120,7 @@ function dibujar_capas(mapa, opciones)
         var capa_fotos_aereas = dibujar_fotos_aereas(mapa, opciones)
 
         // Si tiene activa la opción de dibujar
-        if(typeof opciones["Fotos_Aereas"] !== 'undefined' && opciones["Fotos_Aereas"][0]){
+        if(typeof opciones["Fotos_Aereas"] !== 'undefined' && opciones["Fotos_Aereas"][1]){
             // Se adiciona la capa
             mapa.addLayer(capa_fotos_aereas)
 
@@ -237,8 +253,10 @@ function dibujar_fotos_aereas(mapa, opciones)
 function dibujar_incidentes(mapa, filtros)
 {
     // Variables de filtros y selects
-    var anio = $("#select_anio_incidente_filtro").val()
-    var mes = $("#select_mes_incidente_filtro").val()
+    var anio = ($("#select_anio_incidente_filtro").val()) ? $("#select_anio_incidente_filtro").val() : filtros.anio 
+    var mes = ($("#select_mes_incidente_filtro").val()) ? $("#select_mes_incidente_filtro").val() : filtros.mes
+    var dia = (typeof filtros.dia) ? filtros.dia : null
+
     var tipo_atencion = $("#select_tipo_atencion_filtro").val()
     anio = (anio || anio > 0) ? anio : null
     mes = (mes || mes > 0) ? mes : null
@@ -250,20 +268,32 @@ function dibujar_incidentes(mapa, filtros)
         "id_via": null,
         "anio": anio,
         "mes": mes,
+        "dia": dia,
         "id_tipo_atencion": id_tipo_atencion,
     }
 
     // Información de la capa
     var capa_incidentes = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
+            var contenido =
+            `
+                <b>Motivo:</b> ${feature.properties["nombre"]}<br>
+                <b>Abscisa:</b> ${feature.properties["abscisa_real"]}<br>
+                <b>Fecha:</b> ${feature.properties["fechaincidente"]}<br>
+                <b>Hora:</b> ${feature.properties["horaincidente"]}<br>
+            `
+
             // Se retorna el marcador
-            return L.marker(latlng)
+            return L.marker(latlng).bindPopup(contenido)
         },
     })
 
+    
+        
     // Consulta de incidentes
     let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": datos}, 'JSON')
-    
+    imprimir(incidentes)
+
     // Se agregan los datos a la capa
     capa_incidentes.addData(incidentes)
 

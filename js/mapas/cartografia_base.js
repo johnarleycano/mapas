@@ -167,8 +167,8 @@ function dibujar_kilometros(mapa, filtros)
         .on("click", function(){
             // Alerta con información
             swal(
-                `Vía: ${abscisa.Via}
-                Abscisa: ${abscisa.Abscisa}`
+                `Vía: ${kilometro.Via}
+                Abscisa: ${kilometro.Abscisa}`
             )
         })
 
