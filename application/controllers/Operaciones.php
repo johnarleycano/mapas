@@ -61,7 +61,12 @@ class Operaciones extends CI_Controller {
                 case "dias_mes":
                     $this->data["anio"] = $this->input->post("anio");
                     $this->data["mes"] = $this->input->post("mes");
-                	$this->load->view("operaciones/eventos/dias_mes", $this->data);
+                    $this->load->view("operaciones/eventos/dias_mes", $this->data);
+                break;
+
+                case 'detalle_eventos':
+                    $this->data["fecha"] = $this->input->post("fecha");
+                    $this->load->view("operaciones/eventos/detalle", $this->data);
                 break;
             }
         } else {

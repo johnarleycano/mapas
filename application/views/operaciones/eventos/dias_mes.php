@@ -9,7 +9,7 @@ $dia = ($anio == date("y") || $mes == date("m")) ? date("d") : cal_days_in_month
 // Recorrido de los días
 for ($dia; $dia > 0; $dia--) {
 ?>
-	<li class="uk-parent <?php echo ($dia == date("d")) ? "uk-open": ""; ?>" onClick="javascript:cargar_eventos(<?php echo str_pad($dia, 2, "0", STR_PAD_LEFT); ?>)" >
+	<li class="uk-parent <?php echo ($dia == date("d")) ? "uk-open": ""; ?>" onClick="javascript:cargar_eventos(<?php echo $dia; ?>)" >
 	    <a href="#">
 			<!-- Día -->
 			<strong><?php echo str_pad($dia, 2, "0", STR_PAD_LEFT); ?></strong>
@@ -28,16 +28,9 @@ for ($dia; $dia > 0; $dia--) {
 				<?php } ?>
 			<?php } ?>
 	    </a>
-	    <!-- <ul class="uk-nav-sub">
-	        <li><a href="#">Sub item</a></li>
-	        <li>
-	            <a href="#">Sub item</a>
-	            <ul>
-	                <li><a href="#">Sub item</a></li>
-	                <li><a href="#">Sub item</a></li>
-	            </ul>
-	        </li>
-	    </ul> -->
+
+		<!-- Detalle de los incidentes -->
+		<div id="cont_detalle<?php echo intval($dia); ?>"></div>
 	</li>
 <?php } ?>
 
@@ -50,6 +43,7 @@ for ($dia; $dia > 0; $dia--) {
 		// Capas
 		"Mapa_Base": "open_street",
 		"Eventos_Diarios": [true, true],
+		"Kilometros": [true],
 		"Vias": [true, true, true],
         
         // Opciones
@@ -79,6 +73,9 @@ for ($dia; $dia > 0; $dia--) {
 
 		// Título del anel derecho
 		$("h3").text(`${nombre_mes(mes)} de ${anio}`)
+		imprimir(`#cont_detalle${dia}`)
+
+		$(`#cont_detalle${dia}`).load("<?php echo site_url('operaciones/cargar_interfaz'); ?>", {"tipo": "detalle_eventos", "fecha": `${anio}-${mes}-${dia}`})
         
 		// Dibujo del mapa
 		dibujar_capas(mapa, capas)

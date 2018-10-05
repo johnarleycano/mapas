@@ -277,8 +277,7 @@ function dibujar_incidentes(mapa, filtros)
         pointToLayer: function (feature, latlng) {
             var contenido =
             `
-                <b>Motivo:</b> ${feature.properties["nombre"]}<br>
-                <b>Abscisa:</b> ${feature.properties["abscisa_real"]}<br>
+                <h4><b>${feature.properties["nombre"]} en la abscisa ${feature.properties["abscisa_real"]}</b></h4>
                 <b>Fecha:</b> ${feature.properties["fechaincidente"]}<br>
                 <b>Hora:</b> ${feature.properties["horaincidente"]}<br>
             `
