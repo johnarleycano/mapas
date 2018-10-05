@@ -30,7 +30,9 @@ for ($dia; $dia > 0; $dia--) {
 	    </a>
 
 		<!-- Detalle de los incidentes -->
-		<div id="cont_detalle<?php echo intval($dia); ?>"></div>
+		<ul class="uk-nav-sub" id="cont_detalle<?php echo intval($dia); ?>">
+		    
+		</ul>
 	</li>
 <?php } ?>
 
