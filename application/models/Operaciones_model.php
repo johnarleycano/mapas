@@ -131,7 +131,8 @@ Class Operaciones_model extends CI_Model{
 					i.horaincidente,
 					v.id_via_configuracion,
 					X ( i.coordenadas ) AS latitud,
-					Y ( i.coordenadas ) AS longitud 
+					Y ( i.coordenadas ) AS longitud,
+					ta.color 
 				FROM
 					dvm_incidente AS i
 					LEFT JOIN dvm_via AS v ON i.via = v.id

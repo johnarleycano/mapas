@@ -275,6 +275,31 @@ function dibujar_incidentes(mapa, filtros)
     // Información de la capa
     var capa_incidentes = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
+            imprimir(feature)
+            const color = feature.properties["color"]
+
+            const estilo =
+            `
+                background-color: ${color};
+                width: 1.5rem;
+                height: 1.5rem;
+                display: block;
+                left: -0.75rem;
+                top: -0.25rem;
+                position: relative;
+                border-radius: 1.5rem 1.5rem 0;
+                transform: rotate(45deg);
+                border: 1px solid ${feature.properties["color"]}
+            `
+
+            const icon = L.divIcon({
+                className: "my-custom-pin",
+                iconAnchor: [0, 24],
+                labelAnchor: [-6, 0],
+                popupAnchor: [0, -36],
+                html: `<span style="${estilo}" /><i class="fas fa-home" style="transform: rotate(315deg); color: white; padding-top: 0.50rem; padding-left: 0.15rem;"></i></span>`
+            })
+
             var contenido =
             `
                 <h4><b>${feature.properties["nombre"]} en la abscisa ${feature.properties["abscisa_real"]}</b></h4>
@@ -283,7 +308,9 @@ function dibujar_incidentes(mapa, filtros)
             `
 
             // Se retorna el marcador
-            return L.marker(latlng).bindPopup(contenido)
+            return L.marker(latlng, {
+  icon: icon
+}).bindPopup(contenido)
         },
     })
 
