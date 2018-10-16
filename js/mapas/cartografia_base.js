@@ -171,6 +171,7 @@ function dibujar_kilometros(mapa, filtros)
                 Abscisa: ${kilometro.Abscisa}`
             )
         })
+        .bindTooltip("my tooltip")
 
         // El punto se agrega al arreglo
         puntos.push(punto)
@@ -190,8 +191,11 @@ function dibujar_kilometros(mapa, filtros)
 function dibujar_municipios(mapa, filtros){
     // Información de la capa de municipios
     var capas_municipios = new L.geoJson(null, {
-        style: function(feature){
-
+        style: {
+            "color": "#898989",
+            "weight": 4,
+            "opacity": 1,
+            "fillOpacity": 0,
         },
         onEachFeature: function(feature, layer) {
             // Polígono

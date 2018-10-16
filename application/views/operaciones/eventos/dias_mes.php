@@ -46,7 +46,7 @@ for ($dia; $dia > 0; $dia--) {
 		"Mapa_Base": "open_street",
 		"Eventos_Diarios": [true, true],
 		"Kilometros": [true],
-		"Municipios": [true],
+		"Municipios": [true, true],
 		"Vias": [true, true, true],
         
         // Opciones
