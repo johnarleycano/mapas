@@ -175,6 +175,21 @@ function dibujar_capas(mapa, opciones)
         // if(opciones["Fotos_Aereas"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
 
+    /***************************************************
+     **** Dibujo de mediciones de rocería y cunetas ****
+     **************************************************/
+    // Si tiene activa la carga de mediciones
+    if(typeof opciones["Mediciones"] !== 'undefined' && opciones["Mediciones"][0]){
+        // Se dibuja la capa
+        var capa_mediciones = dibujar_mediciones(mapa, filtros)
+
+        // Si tiene activa la opción de dibujar las abscisas
+        if(opciones["Mediciones"][1]) capa_mediciones.addTo(mapa)
+
+        // Si tiene activa la opción, centra el dibujo en la capa
+        if(opciones["Mediciones"][2]) mapa.fitBounds(capa_mediciones.getBounds())
+    }
+
     // Variable para mantener la ubicación del mapa
     var hash = new L.Hash(mapa)
 
@@ -275,7 +290,6 @@ function dibujar_incidentes(mapa, filtros)
     // Información de la capa
     var capa_incidentes = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
-            imprimir(feature)
             const color = feature.properties["color"]
 
             const estilo =
@@ -292,12 +306,14 @@ function dibujar_incidentes(mapa, filtros)
                 border: 1px solid ${feature.properties["color"]}
             `
 
-            const icon = L.divIcon({
-                className: "my-custom-pin",
+            const icono = L.divIcon({
+                // className: "my-custom-pin",
                 iconAnchor: [0, 24],
+                iconUrl: `${$("#url_base").val()}img/iconos/foto.svg`,
                 labelAnchor: [-6, 0],
                 popupAnchor: [0, -36],
-                html: `<span style="${estilo}" /><i class="fas fa-home" style="transform: rotate(315deg); color: white; padding-top: 0.50rem; padding-left: 0.15rem;"></i></span>`
+                // html: `<span style="${estilo}" /></span>`
+                html: `<span style="${estilo}" /><i class="fas fa-car" style="transform: rotate(315deg); color: white; padding-top: 0.50rem; padding-left: 0.15rem;"></i></span>`
             })
 
             var contenido =
@@ -309,22 +325,65 @@ function dibujar_incidentes(mapa, filtros)
 
             // Se retorna el marcador
             return L.marker(latlng, {
-  icon: icon
-}).bindPopup(contenido)
+              icon: icono
+            }).bindPopup(contenido)
         },
     })
-
-    
         
     // Consulta de incidentes
     let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": datos}, 'JSON')
-    imprimir(incidentes)
 
     // Se agregan los datos a la capa
     capa_incidentes.addData(incidentes)
 
     // Se retorna la capa
     return capa_incidentes
+}
+
+/**
+ * Dibujo de las mediciones de rocería y cunetas
+ * 
+ * @param  {map}    mapa        [Mapa]
+ * @param  {array}  filtros     [Arreglo de filtros y opciones]
+ * @return {layer}              [Capa de mediciones]
+ */
+function dibujar_mediciones(mapa, filtros)
+{
+    // Datos
+    var datos = filtros.opciones.datos
+
+    // Información de la capa
+    var capa_mediciones = new L.geoJson(null, {
+        style: function (feature){
+            return {
+                opacity: 1,
+                color: `rgba(${feature.properties.Color},1.0)`,
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6,
+                fillOpacity: 0,
+            }
+        },
+        onEachFeature: function (feature, layer) {
+            var contenido =
+            `
+            <b>Abscisa:</b> ${feature.properties["Abscisa"]}<br>
+            <b>Fecha de medición:</b> ${feature.properties["Fecha"]}<br>
+            <b>Hora de medición:</b> ${feature.properties["Hora"]}<br>
+            <b>Factor externo:</b> ${(feature.properties["Factor_Externo"] == 1) ? "Si" : "No"}<br>
+            `
+            return layer.bindPopup(contenido, {maxHeight: 400})
+        },
+    })
+        
+    // Consulta de la medición
+    let mediciones = ajax(`${$("#url").val()}/mantenimiento/obtener`, {"tipo": "mediciones", "id": datos}, 'JSON')
+
+    // Se agregan los datos a la capa
+    capa_mediciones.addData(mediciones)
+
+    // Se retorna la capa
+    return capa_mediciones
 }
 
 /**
