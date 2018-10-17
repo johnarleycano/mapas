@@ -121,6 +121,21 @@
                     </ul>
                 </li>
 
+                <li class="uk-parent">
+                    <a href="#">
+                        <i class="fas fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;PREDIOS
+                    </a>
+                    
+                    <ul class="uk-nav-sub">
+                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
+                            <label class="enlace">
+                                <input class="uk-checkbox" type="checkbox" id="predios">&nbsp;&nbsp;&nbsp;
+                                <a href="<?php echo site_url('predios'); ?>" class="uk-link-text">Listado</a>
+                            </label>
+                        </div>
+                    </ul>
+                </li>
+
                 <li class="uk-nav-divider"></li>
                 <li><a href="#<?php // echo site_url('configuracion'); ?>"><i class="fas fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Configuración</a></li>
                 <li><a href="<?php echo site_url('sesion/cerrar'); ?>"><i class="fas fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Salir</a></li>

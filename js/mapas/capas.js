@@ -190,6 +190,38 @@ function dibujar_capas(mapa, opciones)
         if(opciones["Mediciones"][2]) mapa.fitBounds(capa_mediciones.getBounds())
     }
 
+    /***************************************************
+     **************** Dibujo de predios ****************
+     **************************************************/
+     // Si tiene activa la carga de predios
+    if(typeof opciones["Predios"] !== 'undefined' && opciones["Predios"][0]){
+        // Se dibuja la capa
+        var capa_predios = dibujar_predios(mapa, opciones)
+
+        // Si tiene activa la opción de dibujar
+        if(typeof filtros["opciones"]["Predios"] !== 'undefined' && filtros["opciones"]["Predios"][1]){
+            // Se adiciona la capa
+            mapa.addLayer(capa_predios)
+
+            // Se Chequea la capa
+            $("#predios").prop("checked", true)
+        }
+
+        // Cuando se selecciona otro mapa base
+        $("#predios").on("click", function(){
+            if ($(this).prop('checked')){
+                mapa.addLayer(capa_predios)
+                $(this).prop("checked", true)
+            } else {
+                mapa.removeLayer(capa_predios)
+                $(this).prop("checked", false)
+            }
+        })
+
+        // Si tiene activa la opción, centra el dibujo en la capa
+        if(opciones["Predios"][2]) mapa.fitBounds(capa_predios.getBounds())
+    }
+
     // Variable para mantener la ubicación del mapa
     var hash = new L.Hash(mapa)
 
@@ -523,4 +555,96 @@ function dibujar_senales_verticales(mapa, filtros){
 
     // Se retorna la capa
     return capa_senales_verticales
+}
+
+/**
+ * Dibujo de la capa de predios
+ * 
+ * @param  {map}        mapa        [Mapa]
+ * @param  {array}      filtros     [Arreglo de filtros y opciones]
+ * @return {layer}                  [Capa de predios]
+ */
+function dibujar_predios(mapa, filtros){
+    imprimir("Dibujando predios")
+    // Información de los predios
+    var capa_predios = new L.geoJson(null, {
+        style: {
+            "color": "red",
+            "weight": 5,
+            "opacity": 1,
+            "fillOpacity": 0,
+        },
+        onEachFeature: function(feature, layer) {
+            
+
+                    // Contenido del popup
+            var contenido =
+            `
+                <center><h5><b>${feature.properties['ficha_predial']}</b></h5></center>
+                <b>Municipio:</b> <span class="uk-text-right">${feature.properties['municipio']}</span>
+                <b>Abscisa inicial:</b>
+                <b>Abscisa final:</b>
+                <b>Propietario:</b>
+                <b>Área requerida:</b>
+                <b>Cédula catastral:</b>
+                <b>Estado del proceso:</b>
+            `
+
+            // Se agrega el contenido al popup
+            layer.bindPopup(contenido, {"minWidth": 320})
+
+            // Polígono
+            var poligono = L.polygon(feature.geometry.coordinates).bindPopup(contenido)
+
+            var titulo = L.marker(layer.getBounds().getCenter(), {
+                icon: L.divIcon({
+                    className: 'uk-text-center',
+                    html: `<strong style="color: white;">${feature.properties['ficha_predial']}</strong>`,
+                    iconSize: [250, 40]
+                })
+            })
+            // .addTo(mapa)
+
+
+        },
+    //     pointToLayer: function (feature, latlng) {
+    //         // Ícono
+    //         var icono = new L.Icon({
+    //             "iconUrl": `${$("#url_base").val()}img/iconos/inventario/obras/icono.svg`,
+    //             "iconSize": [76, 76],
+    //             "iconAnchor": [38, 30],
+    //         })
+            
+    //         // Marcador
+    //         return L.marker(latlng, {icon: icono, rotationAngle: feature.properties.direccion})
+    //     },
+    //     onEachFeature: function(feature, layer) {
+    
+    //     },
+    })
+
+    // // Cuadro del perímetro del que va a cargar los datos
+    // var perimetro = mapa.getBounds().toBBoxString()
+
+    // Consulta de los predios
+    var predios = ajax(`${$("#url").val()}/predios/obtener`, {"tipo": "listado"}, 'JSON')
+    imprimir(predios)
+
+    // Se agregan los datos a la capa
+    capa_predios.addData(predios)
+
+    // // Cuando se mueva el mapa
+    // mapa.on('moveend', function(e) {
+    //     // Se limpian las señales
+    //     capa_predios.clearLayers()
+
+    //     // Se consultan las señales en el perímetro
+    //     obras = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "obras", "id": {"id_sector": null, "id_via": null, "perimetro": mapa.getBounds().toBBoxString()}}, 'JSON')
+
+    //     // Se agregan a la capa
+    //     capa_predios.addData(obras)
+    // })
+
+    // Se retorna la capa
+    return capa_predios
 }
