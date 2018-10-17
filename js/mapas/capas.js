@@ -581,13 +581,36 @@ function dibujar_predios(mapa, filtros){
             var contenido =
             `
                 <center><h5><b>${feature.properties['ficha_predial']}</b></h5></center>
-                <b>Municipio:</b> <span class="uk-text-right">${feature.properties['municipio']}</span>
-                <b>Abscisa inicial:</b>
-                <b>Abscisa final:</b>
-                <b>Propietario:</b>
-                <b>Área requerida:</b>
-                <b>Cédula catastral:</b>
-                <b>Estado del proceso:</b>
+                <table>
+                    <tr>
+                        <td><b>Municipio</b></td>
+                        <td>${feature.properties['municipio']}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Abscisa inicial</b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><b>Abscisa final</b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><b>Propietario</b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><b>Área requerida</b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><b>Cédula catastral</b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><b>Estado del proceso</b></td>
+                        <td></td>
+                    </tr>
+                </table>
             `
 
             // Se agrega el contenido al popup

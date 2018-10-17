@@ -22,11 +22,11 @@ Class Predios_model extends CI_Model{
 				$sql = 
 				"SELECT
 					p.ficha_predial,
-					AsWKB ( p.coordenadas ) AS Coordenadas,
-					-- i.municipio 
+					AsWKB ( p.coordenadas ) AS wkb,
+					i.municipio 
 				FROM
 					tbl_predio AS p
-					-- INNER JOIN tbl_identificacion AS i ON i.ficha_predial = p.ficha_predial 
+					LEFT JOIN tbl_identificacion AS i ON i.ficha_predial = p.ficha_predial 
 				WHERE
 					AsWKB ( p.coordenadas ) IS NOT NULL";
 
