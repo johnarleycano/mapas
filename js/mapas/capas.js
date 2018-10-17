@@ -261,7 +261,7 @@ function dibujar_fotos_aereas(mapa, opciones)
             })
 
             // Se retorna el marcador
-            return L.marker(latlng, {"icon": icono}).bindPopup(contenido, { 'minWidth': '640', 'height': '480' }).bindPopup(contenido) 
+            return L.marker(latlng, {"icon": icono}).bindPopup(contenido, { 'minWidth': '640', 'height': '480' }) 
         },
     })
 
