@@ -75,6 +75,27 @@ function botones(parametros)
     }
 }
 
+/**
+ * Muestra el mensaje de cargando
+ * 
+ * @param  {string} mensaje [Mensaje a mostrar]
+ * 
+ * @return
+ */
+function cargando(mensaje){
+    // Si está oculto
+    if($("#cargando").hasClass("uk-hidden")){
+        // Mensaje
+        $("#cargando>div>div").text(mensaje)
+        
+        // Muestra el contendedor
+        $("#cargando").removeClass("uk-hidden")
+    } else {
+        // Oculta el contendedor
+        $("#cargando").addClass("uk-hidden")
+    }
+}
+
 function cargar_interfaz(contenedor, url, datos)
 {
     // Carga de la interfaz
@@ -326,27 +347,6 @@ function nombre_mes(numero){
 
     // Se retorna el nombre del mes
     return mes[numero];
-}
-
-/**
- * Muestra el mensaje de cargando
- * 
- * @param  {string} mensaje [Mensaje a mostrar]
- * 
- * @return
- */
-function cargando(mensaje){
-    // Si está oculto
-    if($("#cargando").hasClass("uk-hidden")){
-        // Mensaje
-        $("#cargando>div>div").text(mensaje)
-        
-        // Muestra el contendedor
-        $("#cargando").removeClass("uk-hidden")
-    } else {
-        // Oculta el contendedor
-        $("#cargando").addClass("uk-hidden")
-    }
 }
 
 /**

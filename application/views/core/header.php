@@ -39,7 +39,7 @@
 
 <!-- Scripts -->
 <script src="<?php echo base_url(); ?>js/jquery-3.2.1.min.js"></script> <!-- jQuery -->
-<script src="<?php echo base_url(); ?>js/funcion.js?<?php echo date('YmdHis'); ?>"></script>
+<script src="<?php echo base_url(); ?>js/funciones.js?<?php echo date('YmdHis'); ?>"></script>
 
 <!-- Scripts Leaflet -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
@@ -57,3 +57,4 @@
 <script src="<?php echo base_url(); ?>js/mapas/cartografia_base.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/mapas/controles.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/mapas/mapas_base.js?<?php echo date('YmdHis'); ?>"></script>
+<script src="<?php echo base_url(); ?>js/svg-icon.js"></script>
