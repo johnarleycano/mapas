@@ -201,6 +201,47 @@ function filtro_superior()
     $(`#filtro_superior`).removeClass("uk-hidden")
 }
 
+function generar_coordenadas(mapa, id_via, abscisa, id)
+{
+    // Si tienen una vía y abscisa configurada
+    if(id_via >= 0 && abscisa >= 0){
+        var coordenadas = []
+        var kilometro = (abscisa == 0) ? 0 : Math.trunc(abscisa / 1000) * 1000
+        var residuo_abscisa = (abscisa == 0) ? 0 : (abscisa % 1000) / 1000
+
+        // Consulta de puntos del kilómetro
+        var puntos_kilometro = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id":  {"id_sector": null, "id_via": id_via, "kilometro": kilometro}}, 'JSON')
+
+        // Si trae resultados
+        if(puntos_kilometro.features.length > 0){
+            // Se almacena las coordenadas
+            let coordenadas_kilometro = puntos_kilometro.features[0].geometry.coordinates
+
+            // Se recorren las coordenadas
+            for (var i = 0; i < coordenadas_kilometro.length; i++){
+                // Se invierten para poder ser ubicadas geoespacialmente
+                coordenadas.push(coordenadas_kilometro[i].reverse())
+            }
+
+            // Se crea una polilínea y se obtienen las coordenadas
+            var polilinea = new L.polyline(coordenadas)
+
+            // Se obtienen las coordenadas de la polilínea
+            var coordenadas_polilinea = polilinea.getLatLngs()
+
+            // Se calcula el punto exacto
+            var coordenada = L.GeometryUtil.interpolateOnLine(mapa, coordenadas_polilinea, residuo_abscisa)
+
+            // Se retornan las coordenadas
+            return coordenada.latLng
+        } else {
+            return false
+        }
+    } else {
+        return false
+    }
+}
+
 /**
  * Guarda los filtros del usuario en base de datos
  * 

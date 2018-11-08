@@ -93,7 +93,7 @@ class Operaciones extends CI_Controller {
      * Mapa de incidentes
      * @return [type] [description]
      */
-    function incidente()
+    function dibujar_punto()
     {
         $this->data['titulo'] = 'Punto';
         $this->data['filtro_superior'] = false;
@@ -115,6 +115,31 @@ class Operaciones extends CI_Controller {
         $this->data['filtros'] = array("tipos_atencion" => true, "anios_incidentes" => true, "meses_incidentes" => true);
         $this->data['contenido_principal'] = 'operaciones/incidentes/index';
         $this->load->view('core/template', $this->data);
+    }
+
+    /**
+     * Crea registros en base de datos
+     * 
+     * @return [vois]
+     */
+    function crear()
+    {
+        //Se valida que la peticion venga mediante ajax y no mediante el navegador
+        if($this->input->is_ajax_request()){
+            // Se reciben los datos por POST
+            $datos = $this->input->post('datos');
+            $tipo = $this->input->post('tipo');
+
+            // Dependiendo del tipo
+            switch ($tipo) {
+                case 'coordenada_temporal':
+                    echo $this->operaciones_model->crear($tipo, $datos);
+                break;                
+            }
+        }else{
+            //Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
+            redirect('');
+        }
     }
 
     /**
@@ -148,6 +173,11 @@ class Operaciones extends CI_Controller {
                 break;
 
                 case "incidente":
+                    print json_encode($this->operaciones_model->obtener($tipo, $id));
+                break;
+
+
+                case "incidentes2":
                     print json_encode($this->operaciones_model->obtener($tipo, $id));
                 break;
 
