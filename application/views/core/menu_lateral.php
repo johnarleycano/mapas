@@ -17,7 +17,7 @@
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="bing"> Bing (Satelital)
+                                <input class="uk-radio" type="radio" name="mapas_base" id="bing_satelital"> Bing (Satelital)
                             </label>
                             
                             <label class="enlace">
