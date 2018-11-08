@@ -43,7 +43,7 @@ for ($dia; $dia > 0; $dia--) {
 	// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
 	var capas = {
 		// Capas
-		"Mapa_Base": "open_street",
+		"Mapa_Base": "google_streets",
 		"Eventos_Diarios": [true, true],
 		"Kilometros": [true],
 		"Municipios": [true, true],

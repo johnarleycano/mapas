@@ -8,6 +8,7 @@
 			"Vias": [true],
 			"Kilometros": [true, true],
 			"Abscisas": [true],
+            "Mapa_Base": "google_hibrido",
 			"Municipios": [true],
 			
 			// Capas
