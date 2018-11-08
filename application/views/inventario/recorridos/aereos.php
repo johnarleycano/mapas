@@ -6,6 +6,7 @@
 		var capas = {
 			"Vias": [true, true],
 			"Fotos_Aereas": [true, true],
+			"Mapa_Base": "google_hibrido",
 		}
 
 		var mapa = crear("cont_mapa")

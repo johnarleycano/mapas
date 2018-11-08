@@ -57,4 +57,3 @@
 <script src="<?php echo base_url(); ?>js/mapas/cartografia_base.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/mapas/controles.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/mapas/mapas_base.js?<?php echo date('YmdHis'); ?>"></script>
-<script src="<?php echo base_url(); ?>js/svg-icon.js"></script>
