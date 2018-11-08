@@ -61,6 +61,7 @@
             "Vias": [true, true, true],
             "Abscisas": [true],
             "Incidentes": [true, true, true],
+            "Municipios": [true, true],
             "Mapa_Base": "open_street",
         }
         

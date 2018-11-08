@@ -5,10 +5,10 @@
 		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
 		var capas = {
 			// Cartografía base
-			"Municipios": [true],
-			"Vias": [true, true],
-			"Kilometros": [true],
+			"Vias": [true],
+			"Kilometros": [true, true],
 			"Abscisas": [true],
+			"Municipios": [true],
 			
 			// Capas
 			"Senales_Verticales": [true, true, true],
