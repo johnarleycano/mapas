@@ -5,12 +5,29 @@
  * @param  {string}     capa    [capa que se activa por defecto]
  * @return {map}                [Mapas base]
  */
-function agregar_mapas_base(mapa, capa = "bing")
+function agregar_mapas_base(mapa, capa = "google_satelite")
 {
     // Mapa de Bing
-    var bing = new L.BingLayer("Pl2wXFOEKQ0lIT6FDWrM~7S7lA5j_F2sDUhSdCeQVzw~AvN-ATn5N1EQzxbEEBkYWNUYY1AyXIzXPwXex81xLAN1RyJYJaML4e2gD9QTzsIU", {
+    var bing_satelital = new L.BingLayer("Pl2wXFOEKQ0lIT6FDWrM~7S7lA5j_F2sDUhSdCeQVzw~AvN-ATn5N1EQzxbEEBkYWNUYY1AyXIzXPwXex81xLAN1RyJYJaML4e2gD9QTzsIU", {
         type: "Aerial",
         maxZoom: 19
+    })
+
+    // Google Híbrido
+    var google_hibrido = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
+    })
+
+    var google_satelite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
+    })
+
+    // Google Streets
+    var google_streets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
     })
 
     // Mapa de Open Street
@@ -27,7 +44,10 @@ function agregar_mapas_base(mapa, capa = "bing")
 
     // Arreglo de los mapas base
     var mapas_base = {
-        "bing": bing,
+        "bing_satelital": bing_satelital,
+        "google_hibrido": google_hibrido,
+        "google_satelite": google_satelite,
+        "google_streets": google_streets,
         "open_street": open_street,
         "open_street_dark": open_street_dark,
     }

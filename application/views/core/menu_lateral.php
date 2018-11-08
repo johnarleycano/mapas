@@ -17,15 +17,27 @@
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="bing"> Bing
+                                <input class="uk-radio" type="radio" name="mapas_base" id="bing"> Bing (Satelital)
                             </label>
                             
                             <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street
+                                <input class="uk-radio" type="radio" name="mapas_base" id="google_satelite"> Google (Satelital)
                             </label>
                             
                             <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street_dark"> Open Street Dark
+                                <input class="uk-radio" type="radio" name="mapas_base" id="google_streets"> Google (Calles)
+                            </label>
+                            
+                            <label class="enlace">
+                                <input class="uk-radio" type="radio" name="mapas_base" id="google_hibrido"> Google (Híbrido)
+                            </label>
+                            
+                            <label class="enlace">
+                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street (Color)
+                            </label>
+                            
+                            <label class="enlace">
+                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street_dark"> Open Street (Gris)
                             </label>
                         </div>
                     </ul>
