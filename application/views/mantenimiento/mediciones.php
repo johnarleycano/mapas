@@ -14,6 +14,7 @@
 
 			// Capas
 			"Mediciones": [true, true, true],
+			"Mapa_Base": "google_hibrido",
 
 			// Opciones
 			"datos": {

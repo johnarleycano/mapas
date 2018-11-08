@@ -62,7 +62,7 @@
             "Abscisas": [true],
             "Incidentes": [true, true, true],
             "Municipios": [true, true],
-            "Mapa_Base": "open_street",
+            "Mapa_Base": "google_streets",
         }
         
         var mapa = crear("cont_mapa", {minZoom: 11, maxZoom: 18})
