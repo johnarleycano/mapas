@@ -7,6 +7,7 @@
 			// Cartografía base
 			"Municipios": [true],
 			"Vias": [true],
+			"Mapa_Base": "google_hibrido",
 
 			// Capas
 			"Predios": [true, true, true],

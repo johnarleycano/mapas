@@ -10,7 +10,9 @@
 		$("#contenedor_principal").removeClass("margen")
 
 		// capas: [0]: incluir; [1]: dibujar; [2]: centrar
-		var capas = {}
+		var capas = {
+			"Mapa_Base": "google_hibrido"
+		}
 
 		var opciones = {
 			"zoom": 18, 
