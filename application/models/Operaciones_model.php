@@ -27,7 +27,8 @@ Class Operaciones_model extends CI_Model{
 	function crear($tipo, $datos){
 		switch ($tipo) {
 			case 'coordenada_temporal':
-					$this->db_incidentes->set("id",$datos["id"]);
+					$this->db_incidentes->set("id_via",$datos["id_via"]);
+					$this->db_incidentes->set("abscisa",$datos["abscisa"]);
 					$this->db_incidentes->set("coordenadas", "geomfromtext('POINT({$datos['longitud']} {$datos['latitud']})')",false);
 					return $this->db_incidentes->insert("tmp_coordenadas");
 				;

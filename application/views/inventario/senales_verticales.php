@@ -6,7 +6,6 @@
 		var capas = {
 			"Vias": [true, true],
 			"Kilometros": [true],
-			"Mapa_Base": "google_hibrido",
 			"Municipios": [true],
 			"Abscisas": [true],
 			"Senales_Verticales": [true, true, true],

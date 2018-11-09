@@ -44,8 +44,15 @@
 
 			// Si el punto se crea desde el registro inicial
 			if(tipo_punto == "inicial"){
+				var datos = {
+					"id_via": id_via, 
+					"abscisa": abscisa, 
+					"longitud": coordenadas.lng, 
+					"latitud": coordenadas.lat
+				}
+
 				// Se guarda temporalmente las coordenadas en la base de datos para que pueda ser tomada posteriormente
-				ajax(`${$("#url").val()}/operaciones/crear`, {"tipo": "coordenada_temporal", "datos": {"id": id, "longitud": coordenadas.lng, "latitud": coordenadas.lat}}, 'HTML')
+				ajax(`${$("#url").val()}/operaciones/crear`, {"tipo": "coordenada_temporal", "datos": datos}, 'HTML')
 			}
 
 			// Si el punto se crea desde el registro SOS
