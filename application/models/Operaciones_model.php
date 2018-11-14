@@ -53,7 +53,7 @@ Class Operaciones_model extends CI_Model{
 				"SELECT
 					'' id,
 					'Accidentes' nombre,
-					'red' color,
+					'#D73E28' color,
 					SUM(
 					(
 				SELECT
@@ -139,12 +139,15 @@ Class Operaciones_model extends CI_Model{
 					i.abscisa,
 					i.abscisa_real,
 					ta.nombre,
+					ta.color_marcador,
+					ta.forma_marcador,
+					ta.icono_svg,
 					i.fechaincidente,
 					i.horaincidente,
 					v.id_via_configuracion,
 					X ( i.coordenadas ) AS latitud,
 					Y ( i.coordenadas ) AS longitud,
-					ta.color 
+					ta.color
 				FROM
 					dvm_incidente AS i
 					LEFT JOIN dvm_via AS v ON i.via = v.id
@@ -153,6 +156,7 @@ Class Operaciones_model extends CI_Model{
 					i.coordenadas IS NOT NULL 
 					AND YEAR(i.fechaincidente ) = {$id['anio']}
 					AND MONTH(i.fechaincidente ) = {$id['mes']}
+					AND ta.id <> 27
 					$filtro_dia
 					$filtro
 					$filtro_tipo_atencion";

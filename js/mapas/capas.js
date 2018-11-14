@@ -227,6 +227,8 @@ function dibujar_capas(mapa, opciones)
 
     // Se agregan los mapas base
     var mapas_base = agregar_mapas_base(mapa, opciones.Mapa_Base)
+
+    cerrar_notificaciones()
 }
 
 /**
@@ -326,26 +328,43 @@ function dibujar_incidentes(mapa, filtros)
 
             const estilo =
             `
-                background-color: ${color};
-                width: 1.5rem;
-                height: 1.5rem;
-                display: block;
-                left: -0.75rem;
-                top: -0.25rem;
-                position: relative;
-                border-radius: 1.5rem 1.5rem 0;
+                width: 100px; 
+                height: 150px; 
+                border: 3px solid #555; 
+                // background: #428bca;
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
                 transform: rotate(45deg);
-                border: 1px solid ${feature.properties["color"]}
             `
+            var icono = new L.Icon({
+                "iconUrl": `${$("#url_base").val()}img/iconos/operaciones/${feature.properties["icono"]}.svg`,
+                "iconSize": [25, 25],
+            })
 
-            const icono = L.divIcon({
-                // className: "my-custom-pin",
-                iconAnchor: [0, 24],
-                iconUrl: `${$("#url_base").val()}img/iconos/foto.svg`,
-                labelAnchor: [-6, 0],
-                popupAnchor: [0, -36],
-                // html: `<span style="${estilo}" /></span>`
-                html: `<span style="${estilo}" /><i class="fas fa-car" style="transform: rotate(315deg); color: white; padding-top: 0.50rem; padding-left: 0.15rem;"></i></span>`
+            const myCustomColour = '#583470'
+
+            const markerHtmlStyles = `
+              background-color: ${myCustomColour};
+              width: 3rem;
+              height: 3rem;
+              display: block;
+              left: -1.5rem;
+              top: -1.5rem;
+              position: relative;
+              border-radius: 3rem 3rem 0;
+              transform: rotate(45deg);
+              border: 1px solid #FFFFFF`
+
+            const icon = L.divIcon({
+              // className: "my-custom-pin",
+                "iconSize": [25, 25],
+              // iconAnchor: [0, 24],
+              // labelAnchor: [-6, 0],
+              // popupAnchor: [0, -36],
+                // iconUrl: `${$("#url_base").val()}img/iconos/operaciones/accidente.svg`,
+              html: `<span style="${markerHtmlStyles}" />`
             })
 
             var contenido =
@@ -357,8 +376,25 @@ function dibujar_incidentes(mapa, filtros)
 
             // Se retorna el marcador
             return L.marker(latlng, {
-              icon: icono
+                icon: L.ExtraMarkers.icon({
+                    // icon: 'plus sign',
+                    innerHTML: feature.properties["icono_svg"],
+                    // innerHTML: `
+                        // <svg aria-hidden="true" viewBox="-300 -250 1100 1100" data-prefix="fas" fill="#FFFFFF" role="img" xmlns="http://www.w3.org/2000/svg">
+                          // 
+                        // </svg>
+                    // `,
+                    // circle, square, star, penta
+                    shape: feature.properties["forma_marcador"],
+                    // 'red', 'orange-dark', 'orange', 'yellow', 'blue-dark', 'cyan', 'purple', 'violet', 'pink', 'green-dark', 'green', 'green-light', 'black', or 'white'
+                    markerColor: feature.properties["color_marcador"],
+                    prefix: 'icon',
+                    // iconColor: '#B3B1EB'
+                })
             }).bindPopup(contenido)
+            // return L.marker(latlng, {
+            //   icon: icon
+            // }).bindPopup(contenido)
         },
     })
         

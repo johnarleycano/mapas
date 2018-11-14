@@ -3,8 +3,8 @@
 	<a href="#"><h3 class="uk-heading-divider uk-margin-small"></h3></a>
 </li>
 <?php
-// Si el año o mes no son los actuales, carga todo los dias del mes, sino, carga los días transcurridos del mes actual
-$dia = ($anio == date("y") || $mes == date("m")) ? date("d") : cal_days_in_month(CAL_GREGORIAN, $mes, $anio);
+// Si el año y mes son los actuales, carga los días transcurridos del mes actual, sino, carga todos los días del mes
+$dia = ($anio == date("Y") && $mes == date("m")) ? date("d") : cal_days_in_month(CAL_GREGORIAN, $mes, $anio) ;
 
 // Recorrido de los días
 for ($dia; $dia > 0; $dia--) {
@@ -17,26 +17,26 @@ for ($dia; $dia > 0; $dia--) {
 			<!-- Recorrido de los accidentes -->
         	<?php foreach ($this->operaciones_model->obtener("accidentes_dia", array("anio" => $anio, "mes" => $mes, "dia" => $dia)) as $evento) { ?>
         		<?php if($evento->total > 0){ ?>
-        			<span class="uk-badge green" style="background-color: <?php echo $evento->color; ?>;" title="<?php echo $evento->nombre; ?>"><?php echo $evento->total; ?></span>
+        			<span class="uk-badge" style="background-color: <?php echo $evento->color; ?>;" title="<?php echo $evento->nombre; ?>"><?php echo $evento->total; ?></span>
 				<?php } ?>
 			<?php } ?>
 
 			<!-- Recorrido de los incidentes -->
         	<?php foreach ($this->operaciones_model->obtener("incidentes_dia", array("anio" => $anio, "mes" => $mes, "dia" => $dia)) as $evento) { ?>
         		<?php if($evento->total > 0){ ?>
-        			<span class="uk-badge green" style="background-color: <?php echo $evento->color; ?>;" title="<?php echo $evento->nombre; ?>"><?php echo $evento->total; ?></span>
+        			<span class="uk-badge" style="background-color: <?php echo $evento->color; ?>;" title="<?php echo $evento->nombre; ?>"><?php echo $evento->total; ?></span>
 				<?php } ?>
 			<?php } ?>
 	    </a>
 
 		<!-- Detalle de los incidentes -->
-		<ul class="uk-nav-sub" id="cont_detalle<?php echo intval($dia); ?>">
-		    
-		</ul>
+		<ul class="uk-nav-sub" id="cont_detalle<?php echo intval($dia); ?>"></ul>
 	</li>
 <?php } ?>
 
 <script type="text/javascript">
+	imprimir_notificacion("<div uk-spinner></div> Iniciando sesión...");
+	
 	// Día
 	var dia = parseInt("<?php echo date("d"); ?>")
 
@@ -76,7 +76,6 @@ for ($dia; $dia > 0; $dia--) {
 
 		// Título del anel derecho
 		$("h3").text(`${nombre_mes(mes)} de ${anio}`)
-		imprimir(`#cont_detalle${dia}`)
 
 		$(`#cont_detalle${dia}`).load("<?php echo site_url('operaciones/cargar_interfaz'); ?>", {"tipo": "detalle_eventos", "fecha": `${anio}-${mes}-${dia}`})
         
