@@ -81,10 +81,17 @@ class Operaciones extends CI_Controller {
      */
     function eventos_diarios()
     {
+        // Títulos
         $this->data['titulo'] = 'Eventos diarios';
         $this->data['titulo_mapa'] = 'Operaciones | Control de eventos diarios';
-        $this->data['filtro_superior'] = true;
-        $this->data['menu'] = true;
+
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array("menu_superior", "menu_lateral");
+        // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+        $this->data['filtros'] = array("");
+
+        // Vistas
         $this->data['contenido_principal'] = 'operaciones/eventos/index';
         $this->load->view('core/template', $this->data);
     }
@@ -95,9 +102,17 @@ class Operaciones extends CI_Controller {
      */
     function dibujar_punto()
     {
+        // Títulos
         $this->data['titulo'] = 'Punto';
-        $this->data['filtro_superior'] = false;
-        $this->data['menu'] = false;
+        $this->data['titulo_mapa'] = 'Sistema de información geográfica - Devimed S.A.';
+
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array();
+        // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+        $this->data['filtros'] = array("");
+
+        // Vistas
         $this->data['contenido_principal'] = 'operaciones/incidentes/punto';
         $this->load->view('core/template', $this->data);
     }
@@ -108,11 +123,16 @@ class Operaciones extends CI_Controller {
      */
     function incidentes()
     {
+        // Títulos
         $this->data['titulo'] = 'Incidentes';
         $this->data['titulo_mapa'] = 'Operaciones | Incidentes ocurridos este mes';
-        $this->data['filtro_superior'] = true;
-        $this->data['menu'] = true;
-        $this->data['filtros'] = array("tipos_atencion" => true, "anios_incidentes" => true, "meses_incidentes" => true);
+
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array("menu_superior", "menu_lateral", "filtro_superior");
+        $this->data['filtros'] = array("anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+
+        // Vistas
         $this->data['contenido_principal'] = 'operaciones/incidentes/index';
         $this->load->view('core/template', $this->data);
     }

@@ -7,8 +7,6 @@
 		var abscisa = parseInt("<?php echo $this->uri->segment(5); ?>")
 		var id = parseInt("<?php echo $this->uri->segment(6); ?>")
 
-		$("#contenedor_principal").removeClass("margen")
-
 		// capas: [0]: incluir; [1]: dibujar; [2]: centrar
 		var capas = {
 			"Mapa_Base": "google_hibrido"

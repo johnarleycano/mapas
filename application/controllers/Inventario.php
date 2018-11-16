@@ -168,11 +168,17 @@ class Inventario extends CI_Controller {
      */
     function fotos_aereas()
     {
+        // Títulos
         $this->data['titulo'] = 'Fotos aéreas';
         $this->data['titulo_mapa'] = 'Registro fotográfico aéreo';
-        $this->data['filtros'] = array();
-        $this->data['filtro_superior'] = true;
-        $this->data['menu'] = true;
+
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array("menu_superior");
+        // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+        $this->data['filtros'] = array("");
+
+        // Vistas
         $this->data['contenido_principal'] = 'inventario/recorridos/aereos';
         $this->load->view('core/template', $this->data);
     }
@@ -183,10 +189,17 @@ class Inventario extends CI_Controller {
      */
     function obras()
     {
+        // Títulos
         $this->data['titulo'] = 'Obras de arte';
         $this->data['titulo_mapa'] = 'Mantenimiento | Obras de arte';
-        $this->data['filtro_superior'] = true;
-        $this->data['menu'] = true;
+
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array("menu_superior", "menu_lateral");
+        // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+        $this->data['filtros'] = array("");
+
+        // Vistas
         $this->data['contenido_principal'] = 'inventario/obras';
         $this->load->view('core/template', $this->data);
     }
@@ -197,10 +210,17 @@ class Inventario extends CI_Controller {
      */
     function senales_verticales()
     {
+        // Títulos
         $this->data['titulo'] = 'Señalización vertical';
         $this->data['titulo_mapa'] = 'Mantenimiento | Señalización vertical';
-        $this->data['filtro_superior'] = true;
-        $this->data['menu'] = true;
+        
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array("menu_superior", "menu_lateral");
+        // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+        $this->data['filtros'] = array("");
+
+        // Vistas
         $this->data['contenido_principal'] = 'inventario/senales_verticales';
         $this->load->view('core/template', $this->data);
     }

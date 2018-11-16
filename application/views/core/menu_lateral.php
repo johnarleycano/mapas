@@ -134,8 +134,16 @@
                     <ul class="uk-nav-sub">
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <label class="enlace">
-                                <input class="uk-checkbox" type="checkbox" id="eventos_diarios">&nbsp;&nbsp;&nbsp;
+                                <input class="uk-checkbox" type="checkbox" id="roceria_cuneta">&nbsp;&nbsp;&nbsp;
                                 <a href="<?php echo site_url('mediciones/roceria_cuneta/'); ?>" class="uk-link-text" target="_blank">Rocería y cunetas</a>
+                            </label>
+
+                            <label class="enlace">
+                                <?php if(ENVIRONMENT == 'development'){ ?>
+                                    <input class="uk-checkbox" type="checkbox" id="senales_horizontales">&nbsp;&nbsp;&nbsp;
+                                <?php } ?>
+                                
+                                <a href="<?php echo site_url('mediciones/senales_horizontales'); ?>" target="_blank">Señal. horizontal</a>
                             </label>
                         </div>
                     </ul>

@@ -32,11 +32,17 @@ class Inicio extends CI_Controller {
      */
 	function index()
 	{
+        // Títulos
         $this->data['titulo'] = 'Inicio';
         $this->data['titulo_mapa'] = 'Sistema de información geográfica - Devimed S.A.';
-        $this->data['menu'] = true;
-        $this->data['filtro_superior'] = true;
-        $this->data['filtros'] = array();
+
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array("menu_superior", "menu_lateral");
+        // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+        $this->data['filtros'] = array("");
+
+        // Vistas
         $this->data['contenido_principal'] = 'inicio/index';
         $this->load->view('core/template', $this->data);
 	}
