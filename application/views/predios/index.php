@@ -10,7 +10,7 @@
 			"Mapa_Base": "google_hibrido",
 
 			// Capas
-			"Predios": [true, true, true],
+			"Predios": [true, true],
 		}
 
 		var mapa = crear("cont_mapa", {minZoom: 12})

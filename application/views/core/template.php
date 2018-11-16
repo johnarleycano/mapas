@@ -5,18 +5,17 @@
         <?php $this->load->view('core/header'); ?>
 	</head>
 	<body>
-        <?php
-        // Si ha iniciado sesión
-        // if ($this->session->userdata("Pk_Id_Usuario")) {
-        if ($menu) {
-            // Menús de la aplicación
-            $this->load->view('core/menu_superior');
-            $this->load->view('core/menu_lateral');
-        }
-        ?>
+        <!-- 1. Menú superior -->
+        <?php if(in_array("menu_superior", $opciones)) $this->load->view('core/menu_superior'); ?>
+
+        <!-- 2. Menú inferior -->
+        <?php if(in_array("menu_interno", $opciones)) $this->load->view('core/menu_interno'); ?>
+
+        <!-- 3. Menú lateral -->
+        <?php if(in_array("menu_lateral", $opciones)) $this->load->view('core/menu_lateral'); ?>
 
     	<!-- Contenedor principal -->
-        <div id="contenedor_principal" class="margen">
+        <div id="contenedor_principal">
             <!-- Interfaz de espera de carga -->
             <div id="cargando" class="uk-hidden" uk-grid>
                 <div class="uk-width-1-1">
@@ -29,11 +28,23 @@
             <?php $this->load->view($contenido_principal); ?>
         </div>
 
-       <!-- Pié de página -->
-        <?php $this->load->view('core/footer'); ?>
+        
 
         <!-- Input que entrega url base para archivos en JS -->
         <input type="hidden" id="url" value="<?php echo site_url(''); ?>">
         <input type="hidden" id="url_base" value="<?php echo base_url(''); ?>">
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                if("<?php echo in_array('menu_superior', $opciones) ?>"){
+                    $("#contenedor_principal").addClass("margen")
+                    $("#cont_mapa").addClass("margen_mapa")
+                }
+
+                if("<?php echo in_array('menu_interno', $opciones) ?>"){
+                    $("#contenedor_principal").addClass("margen_interna")
+                }
+            })
+        </script>
 	</body>
 </html>

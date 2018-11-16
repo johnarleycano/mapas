@@ -36,9 +36,17 @@ class Mediciones extends CI_Controller {
      */
     function roceria_cuneta()
     {
+        // Títulos
         $this->data['titulo'] = 'Rocería y cunetas';
-        $this->data['filtro_superior'] = false;
-        $this->data['menu'] = false;
+        $this->data['titulo_mapa'] = 'Medición';
+
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array();
+        // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+        $this->data['filtros'] = array("");
+
+        // Vistas
         $this->data['contenido_principal'] = 'mediciones/roceria_cuneta';
         $this->load->view('core/template', $this->data);
     }

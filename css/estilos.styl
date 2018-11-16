@@ -20,11 +20,18 @@ tamanio_menu = 50px
 	padding 0
 	min-height 100%
 
+#menu_interno
+	height tamanio_menu
+	left 0
+	position fixed
+	width 100%
+	z-index 2500 !important
+
 #menu_lateral
 	margin-top tamanio_menu
 	padding 15px
 	width 200px
-
+		
 #menu_superior
 	position fixed
 	right 0
@@ -50,6 +57,9 @@ tamanio_menu = 50px
 		
 .margen
 	margin-top tamanio_menu
+
+.margen_interna
+	top tamanio_menu - 20
 
 .margen_mapa
 	height 94vh !important
