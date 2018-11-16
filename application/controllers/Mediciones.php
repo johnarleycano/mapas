@@ -5,12 +5,14 @@ defined('BASEPATH') OR exit('El acceso directo a este archivo no está permitido
 
 /**
  * @author: 	John Arley Cano Salinas
- * Fecha: 		16 de octubre de 2018
- * Programa:  	Mapas | Módulo de mantenimiento
- *            	Información relacionada al mantenimiento
+ * Fecha: 		16 de noviembre de 2018
+ * Programa:  	Mapas | Módulo de Mediciones
+ *            	Gestión de mapas relacionados a
+ *            	las mediciones realizadas por las
+ *            	diferentes áreas
  * Email: 		johnarleycano@hotmail.com
  */
-class Mantenimiento extends CI_Controller {
+class Mediciones extends CI_Controller {
 	/**
      * Función constructora de la clase. Se hereda el mismo constructor 
      * de la clase para evitar sobreescribirlo y de esa manera 
@@ -23,19 +25,21 @@ class Mantenimiento extends CI_Controller {
         include_once('system/libraries/geoPHP.inc');
 
         // Carga de modelos
-        $this->load->model(array('mantenimiento_model'));
+        $this->load->model(array('mediciones_model'));
     }
 
-	/**
-     * Mapa de mediciones
+    /**
+     * Mapa de mediciones de rocería
+     * y cunetas
+     * 
      * @return [type] [description]
      */
-    function mediciones()
+    function roceria_cuneta()
     {
-        $this->data['titulo'] = 'Mediciones';
+        $this->data['titulo'] = 'Rocería y cunetas';
         $this->data['filtro_superior'] = false;
         $this->data['menu'] = false;
-        $this->data['contenido_principal'] = 'mantenimiento/mediciones';
+        $this->data['contenido_principal'] = 'mediciones/roceria_cuneta';
         $this->load->view('core/template', $this->data);
     }
 
@@ -53,9 +57,9 @@ class Mantenimiento extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
-                case 'mediciones':
+                case 'roceria_cuneta':
                     // Se consulta los registros
-                    $resultado = $this->mantenimiento_model->obtener($tipo, $id);
+                    $resultado = $this->mediciones_model->obtener($tipo, $id);
                     
                     $geojson = array(
                        'type'      => 'FeatureCollection',
@@ -86,5 +90,5 @@ class Mantenimiento extends CI_Controller {
         }
     }
 }
-/* Fin del archivo Mantenimiento.php */
-/* Ubicación: ./application/controllers/Mantenimiento.php */
+/* Fin del archivo Mediciones.php */
+/* Ubicación: ./application/controllers/Mediciones.php */

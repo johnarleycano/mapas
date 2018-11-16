@@ -1,5 +1,5 @@
 <?php 
-Class Mantenimiento_model extends CI_Model{
+Class Mediciones_model extends CI_Model{
 	function __construct() {
         parent::__construct();
 
@@ -18,7 +18,7 @@ Class Mantenimiento_model extends CI_Model{
 	function obtener($tipo, $id = null, $adicional = null)
 	{
 		switch ($tipo) {
-			case 'mediciones':
+			case 'roceria_cuneta':
 				$sql = 
 				"SELECT
 					DATE(d.Fecha) Fecha,
@@ -65,5 +65,5 @@ Class Mantenimiento_model extends CI_Model{
 		}
 	}
 }
-/* Fin del archivo Mantenimiento_model.php */
-/* Ubicación: ./application/models/Mantenimiento_model.php */
+/* Fin del archivo Mediciones_model.php */
+/* Ubicación: ./application/models/Mediciones_model.php */

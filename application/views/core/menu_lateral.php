@@ -135,7 +135,7 @@
                         <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
                             <label class="enlace">
                                 <input class="uk-checkbox" type="checkbox" id="eventos_diarios">&nbsp;&nbsp;&nbsp;
-                                <a href="<?php echo site_url('mantenimiento/mediciones/'); ?>" class="uk-link-text" target="_blank">Rocería y cuneta</a>
+                                <a href="<?php echo site_url('mediciones/roceria_cuneta/'); ?>" class="uk-link-text" target="_blank">Rocería y cunetas</a>
                             </label>
                         </div>
                     </ul>

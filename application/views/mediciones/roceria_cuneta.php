@@ -2,18 +2,20 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		// Valores
+		const medicion = "<?php echo $this->uri->segment(3); ?>"
+		const tipo_medicion = "<?php echo $this->uri->segment(4); ?>"
+		const costado = "<?php echo $this->uri->segment(5); ?>"
+
 		// Datos por URL
-		var id_medicion = "<?php echo $this->uri->segment(3); ?>"
-		var id_tipo_medicion = "<?php echo $this->uri->segment(4); ?>"
-		var id_costado = "<?php echo $this->uri->segment(5); ?>"
+		let id_medicion = (medicion) ? medicion : 471
+		let id_tipo_medicion = (tipo_medicion) ? tipo_medicion : 1
+		let id_costado = (costado) ? costado : 20
 
 		// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
 		var capas = {
-			// Cartografía base
-			"Municipios": [false],
-
 			// Capas
-			"Mediciones": [true, true, true],
+			"Roceria_Cuneta": [true, true, true],
 			"Mapa_Base": "google_hibrido",
 
 			// Opciones
