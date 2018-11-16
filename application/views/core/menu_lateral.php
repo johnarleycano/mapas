@@ -95,13 +95,21 @@
                                 
                                 <a href="<?php echo site_url('operaciones/incidentes'); ?>">Incidentes</a>
                             </label>
+
+                            <label class="enlace">
+                                <?php if(ENVIRONMENT == 'development'){ ?>
+                                    <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
+                                <?php } ?>
+                                
+                                <a href="<?php echo site_url('operaciones/dibujar_punto/inicial/3/12200'); ?>" target="_blank">Punto</a>
+                            </label>
                         </div>
                     </ul>
                 </li>
 
                 <li class="uk-parent">
                     <a href="#">
-                        <i class="fas fa-map fa-lg"></i>&nbsp;&nbsp;&nbsp;INVENTARIO
+                        <i class="fas fa-tasks fa-lg"></i>&nbsp;&nbsp;&nbsp;INVENTARIO
                     </a>
                     
                     <ul class="uk-nav-sub">
@@ -120,7 +128,22 @@
 
                 <li class="uk-parent">
                     <a href="#">
-                        <i class="fas fa-paper-plane fa-lg"></i>&nbsp;&nbsp;&nbsp;RECORRIDOS
+                        <i class="fas fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;MEDICIONES
+                    </a>
+
+                    <ul class="uk-nav-sub">
+                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
+                            <label class="enlace">
+                                <input class="uk-checkbox" type="checkbox" id="eventos_diarios">&nbsp;&nbsp;&nbsp;
+                                <a href="<?php echo site_url('mediciones/roceria_cuneta/'); ?>" class="uk-link-text" target="_blank">Rocería y cunetas</a>
+                            </label>
+                        </div>
+                    </ul>
+                </li>
+
+                <li class="uk-parent">
+                    <a href="#">
+                        <i class="fas fa-exchange-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;RECORRIDOS
                     </a>
                     
                     <ul class="uk-nav-sub">

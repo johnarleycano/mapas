@@ -179,15 +179,15 @@ function dibujar_capas(mapa, opciones)
      **** Dibujo de mediciones de rocería y cunetas ****
      **************************************************/
     // Si tiene activa la carga de mediciones
-    if(typeof opciones["Mediciones"] !== 'undefined' && opciones["Mediciones"][0]){
+    if(typeof opciones["Roceria_Cuneta"] !== 'undefined' && opciones["Roceria_Cuneta"][0]){
         // Se dibuja la capa
-        var capa_mediciones = dibujar_mediciones(mapa, filtros)
+        var capa_roceria_cuneta = dibujar_roceria_cuneta(mapa, filtros)
 
         // Si tiene activa la opción de dibujar las abscisas
-        if(opciones["Mediciones"][1]) capa_mediciones.addTo(mapa)
+        if(opciones["Roceria_Cuneta"][1]) capa_roceria_cuneta.addTo(mapa)
 
         // Si tiene activa la opción, centra el dibujo en la capa
-        if(opciones["Mediciones"][2]) mapa.fitBounds(capa_mediciones.getBounds())
+        if(opciones["Roceria_Cuneta"][2]) mapa.fitBounds(capa_roceria_cuneta.getBounds())
     }
 
     /***************************************************
@@ -415,13 +415,13 @@ function dibujar_incidentes(mapa, filtros)
  * @param  {array}  filtros     [Arreglo de filtros y opciones]
  * @return {layer}              [Capa de mediciones]
  */
-function dibujar_mediciones(mapa, filtros)
+function dibujar_roceria_cuneta(mapa, filtros)
 {
     // Datos
     var datos = filtros.opciones.datos
 
     // Información de la capa
-    var capa_mediciones = new L.geoJson(null, {
+    var capa_roceria_cuneta = new L.geoJson(null, {
         style: function (feature){
             return {
                 opacity: 1,
@@ -445,13 +445,13 @@ function dibujar_mediciones(mapa, filtros)
     })
         
     // Consulta de la medición
-    let mediciones = ajax(`${$("#url").val()}/mantenimiento/obtener`, {"tipo": "mediciones", "id": datos}, 'JSON')
+    let roceria_cuneta = ajax(`${$("#url").val()}/mediciones/obtener`, {"tipo": "roceria_cuneta", "id": datos}, 'JSON')
 
     // Se agregan los datos a la capa
-    capa_mediciones.addData(mediciones)
+    capa_roceria_cuneta.addData(roceria_cuneta)
 
     // Se retorna la capa
-    return capa_mediciones
+    return capa_roceria_cuneta
 }
 
 /**
