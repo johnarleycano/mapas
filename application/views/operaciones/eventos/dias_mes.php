@@ -35,8 +35,6 @@ for ($dia; $dia > 0; $dia--) {
 <?php } ?>
 
 <script type="text/javascript">
-	imprimir_notificacion("<div uk-spinner></div> Iniciando sesión...");
-	
 	// Día
 	var dia = parseInt("<?php echo date("d"); ?>")
 
@@ -67,6 +65,7 @@ for ($dia; $dia > 0; $dia--) {
 	 */
 	function cargar_eventos(dia)
 	{
+		
 		// Variables
 		var anio = "<?php echo $anio; ?>"
 		var mes = "<?php echo $mes; ?>"
@@ -81,11 +80,25 @@ for ($dia; $dia > 0; $dia--) {
         
 		// Dibujo del mapa
 		dibujar_capas(mapa, capas)
+
+		// cerrar_notificaciones()
+
+	}
+
+	function obtener_nuevos_eventos(){
+		imprimir(`Consultando nuevos eventos del día ${dia}`)
+
+		// Se consultan los eventos del día
+		
+		$(`#cont_detalle${dia}`).load("<?php echo site_url('operaciones/cargar_interfaz'); ?>", {"tipo": "detalle_eventos", "fecha": `${anio}-${mes}-${dia}`})
+
 	}
 
 	$(document).ready(function(){
    		// Se quita el mensaje de carga
    		cargando()
+		
+		// setInterval(obtener_nuevos_eventos,1000);
 
 		// Carga de eventos del día
 		cargar_eventos(dia)
