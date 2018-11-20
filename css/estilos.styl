@@ -9,36 +9,49 @@ tamanio_menu = 50px
 	#titulo_mapa
 		display none
 
-#cont_dias
-	padding-left: 0px
+#cargando
+	// border 1px solid green
+	position fixed
+	width 100%
+	z-index 4500
+
+#cont_eventos_diarios_dias
+	padding-left 0px
+	width 22%
+		
+#cont_eventos_diarios_mapa
+	width 75%
 	
 #cont_mapa
+	// border 1px solid green
 	height 100vh
 
 #contenedor_principal
-	height 100vh -100px
-	padding 0
-	min-height 100%
+	// border 1px solid black
+	// height 100vh -100px
+	// padding 0
+	// min-height 100%
 
 #menu_interno
 	height tamanio_menu
-	left 0
+	top 30px
+	padding-bottom 35px
 	position fixed
 	width 100%
 	z-index 2500 !important
 
 #menu_lateral
-	margin-top tamanio_menu
+	// margin-top tamanio_menu
 	padding 15px
 	width 200px
 		
 #menu_superior
-	position fixed
+	// border 1px solid red
 	right 0
 	left 0
 	top 0
 	height tamanio_menu
-	z-index 1030
+	// z-index 1030
 	
 	a
 		height 50px
@@ -56,10 +69,10 @@ tamanio_menu = 50px
 	cursor pointer
 		
 .margen
-	margin-top tamanio_menu
-
-.margen_interna
-	top tamanio_menu - 20
+	// margin-top tamanio_menu
 
 .margen_mapa
-	height 94vh !important
+	height 100vh - 5.1px !important
+	
+.rango
+	padding 60px

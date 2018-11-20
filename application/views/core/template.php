@@ -6,29 +6,27 @@
 	</head>
 	<body>
         <!-- 1. Menú superior -->
-        <?php if(in_array("menu_superior", $opciones)) $this->load->view('core/menu_superior'); ?>
+        <?php if(in_array("menu_superior", $opciones)) $this->load->view('core/menu_superior/index'); ?>
 
         <!-- 2. Menú inferior -->
-        <?php if(in_array("menu_interno", $opciones)) $this->load->view('core/menu_interno'); ?>
+        <?php if(in_array("menu_interno", $opciones)) $this->load->view('core/menu_interno/index'); ?>
 
         <!-- 3. Menú lateral -->
-        <?php if(in_array("menu_lateral", $opciones)) $this->load->view('core/menu_lateral'); ?>
+        <?php if(in_array("menu_lateral", $opciones)) $this->load->view('core/menu_lateral/index'); ?>
+
+        <!-- Interfaz de espera de carga -->
+        <div id="cargando" class="uk-hidden" uk-grid>
+            <div class="uk-width-1-1">
+                <img src="<?php echo base_url(); ?>img/cargando.gif" class="uk-align-center">
+                <div class="uk-text-lead uk-text-center"></div>
+            </div>
+        </div>
 
     	<!-- Contenedor principal -->
         <div id="contenedor_principal">
-            <!-- Interfaz de espera de carga -->
-            <div id="cargando" class="uk-hidden" uk-grid>
-                <div class="uk-width-1-1">
-                    <img src="<?php echo base_url(); ?>img/cargando.gif" class="uk-align-center">
-                    <div class="uk-text-lead uk-text-center"></div>
-                </div>
-            </div>
-
             <!--Se carga el contenido principal -->
             <?php $this->load->view($contenido_principal); ?>
         </div>
-
-        
 
         <!-- Input que entrega url base para archivos en JS -->
         <input type="hidden" id="url" value="<?php echo site_url(''); ?>">
@@ -36,13 +34,10 @@
 
         <script type="text/javascript">
             $(document).ready(function(){
+                // Si el menú superior está activado
                 if("<?php echo in_array('menu_superior', $opciones) ?>"){
-                    $("#contenedor_principal").addClass("margen")
+                    // Se agregan clases
                     $("#cont_mapa").addClass("margen_mapa")
-                }
-
-                if("<?php echo in_array('menu_interno', $opciones) ?>"){
-                    $("#contenedor_principal").addClass("margen_interna")
                 }
             })
         </script>

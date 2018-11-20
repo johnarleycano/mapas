@@ -1,4 +1,4 @@
-<nav id="menu_superior" class="uk-navbar uk-navbar-container uk-margin" uk-navbar>
+<nav id="menu_superior" class="uk-navbar uk-navbar-container" uk-navbar>
     <?php if(in_array("menu_lateral", $opciones)){ ?>
         <!-- Ícono que activa el menú lateral -->
         <a class="uk-navbar-toggle" href="#" uk-toggle="target: #offcanvas-nav" title="Visualice el menú principal">
@@ -15,6 +15,6 @@
 
     <div class="uk-navbar-right" id="filtro_superior">
         <!-- Filtro superior -->
-        <?php if(in_array("filtro_superior", $opciones)) $this->load->view("core/menu_superior_filtros"); ?>
+        <?php if(in_array("filtro_superior", $opciones)) $this->load->view("core/menu_superior/filtros"); ?>
     </div>
 </nav>

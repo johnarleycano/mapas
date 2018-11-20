@@ -42,7 +42,7 @@ class Mediciones extends CI_Controller {
 
         // Opciones
         // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
-        $this->data['opciones'] = array();
+        $this->data['opciones'] = array("");
         // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
         $this->data['filtros'] = array("");
 
