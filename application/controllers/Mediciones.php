@@ -52,6 +52,50 @@ class Mediciones extends CI_Controller {
     }
 
     /**
+     * Mapa de señalización horizontal
+     * y cunetas
+     * 
+     * @return [type] [description]
+     */
+    function senales_horizontales()
+    {
+        // Títulos
+        $this->data['titulo'] = 'Señalización horizontal promedio';
+        $this->data['titulo_mapa'] = 'Señalización horizontal promedio';
+
+        // Opciones
+        // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
+        // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
+        $this->data['filtros'] = array("sectores", "vias");
+
+        // Vistas
+        $this->data['contenido_principal'] = 'mediciones/senales_horizontales/index';
+        $this->load->view('core/template', $this->data);
+    }
+
+    /**
+     * Carga la interfaz según sea el caso
+     * 
+     * @return [view] 
+     */
+    function cargar_interfaz(){
+        //Se valida que la peticion venga mediante ajax y no mediante el navegador
+        if($this->input->is_ajax_request()){
+            // Dependiendo del tipo
+            switch ($this->input->post('tipo')) {
+                case 'rango_fechas_senales_horizontales':
+                    $this->data["datos"] = $this->input->post("datos");
+                    $this->load->view("mediciones/senales_horizontales/rango_fechas", $this->data);
+                break;
+            }
+        }else{
+            //Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
+            redirect('');
+        }
+    }
+
+    /**
      * Obtiene registros de base de datos
      * y los retorna a las vistas
      * 
@@ -90,6 +134,32 @@ class Mediciones extends CI_Controller {
 			        }
 
                     print json_encode($geojson, JSON_NUMERIC_CHECK);
+                break;
+
+                case 'senales_horizontales':
+                    $resultado = $this->mediciones_model->obtener($tipo, $id);
+                    
+                    $geojson = array(
+                       'type'      => 'FeatureCollection',
+                       'features'  => array()
+                    );
+
+                    foreach ($resultado as $registro) {
+                        $properties = $registro;
+                        $feature = array(
+                             'type' => 'Feature',
+                             'geometry' => json_decode($registro->geojson, true),
+                             'properties' => $registro
+                        );
+
+                        array_push($geojson['features'], $feature);
+                    }
+
+                    print json_encode($geojson, JSON_NUMERIC_CHECK);
+            	break;
+
+                case 'senales_horizontales_fechas':
+                    print json_encode($this->mediciones_model->obtener($tipo, $id));
                 break;
             }
         } else {

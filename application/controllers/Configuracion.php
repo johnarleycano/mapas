@@ -31,6 +31,31 @@ class Configuracion extends CI_Controller {
         return $geom->out('json');
     }
 
+    /**
+     * Carga la interfaz según sea el caso
+     * 
+     * @return [view] 
+     */
+    function cargar_interfaz(){
+        //Se valida que la peticion venga mediante ajax y no mediante el navegador
+        if($this->input->is_ajax_request()){
+            // Dependiendo del tipo
+            switch ($this->input->post('tipo')) {
+                case 'rango_calzadas':
+                    $this->data["id_via"] = $this->input->post("id_via");
+                    $this->load->view("core/menu_interno/rango_calzadas", $this->data);
+                break;
+
+                case 'rango_costados':
+                    $this->load->view("core/menu_interno/rango_costados");
+                break;
+            }
+        }else{
+            //Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
+            redirect('');
+        }
+    }
+
 	/**
      * Obtiene registros de base de datos
      * y los retorna a las vistas
@@ -45,7 +70,19 @@ class Configuracion extends CI_Controller {
             $id = $this->input->post("id");
 
             switch ($tipo) {
+                case "calzadas":
+                    print json_encode($this->configuracion_model->obtener($tipo, $id));
+                break;
+
                 case "puntos_kilometros":
+                    print json_encode($this->configuracion_model->obtener($tipo, $id));
+                break;
+
+                case "tipos_costados":
+                    print json_encode($this->configuracion_model->obtener($tipo, $id));
+                break;
+
+                case "vias":
                     print json_encode($this->configuracion_model->obtener($tipo, $id));
                 break;
             }
