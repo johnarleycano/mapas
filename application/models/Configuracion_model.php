@@ -1,5 +1,17 @@
 <?php 
 Class Configuracion_model extends CI_Model{
+	function __construct() {
+        parent::__construct();
+
+        /*
+         * db_configuracion es la conexion a los datos de configuración de la aplicación, como lo son los sectores, vías,
+         * tramos, entre otros.
+         * Esta se llama porque en el archivo database.php la variable ['configuracion']['pconnect] esta marcada como false,
+         * lo que quiere decir que no se conecta persistentemente sino cuando se le invoca, como en esta ocasión.
+         */
+        $this->db_configuracion = $this->load->database('configuracion', TRUE);
+    }
+
 	/**
 	 * Obtiene registros de base de datos
 	 * y los retorna a las vistas
@@ -12,6 +24,22 @@ Class Configuracion_model extends CI_Model{
 	function obtener($tipo, $id = null, $adicional = null)
 	{
 		switch ($tipo) {
+			case "aplicacion":
+                return $this->db->where("Pk_Id", $id)->get("aplicaciones")->row();
+            break;
+
+            case "calzadas":
+				// if ($id) $this->db_configuracion->where("Fk_Id_Sector", $id);
+				return $this->db_configuracion
+					->select(array(
+						"Tipo Pk_Id",
+						"Tipo Nombre",
+					))
+					->where("Fk_Id_Via", $id)
+					->get("calzadas")
+					->result();
+			break;
+
 			case "puntos_kilometros":
 				$filtro = "";
                 if ($id['id_sector'] || $id["id_via"]) $filtro = ($id["id_via"]) ? "WHERE g.Fk_Id_Via = {$id['id_via']}" : "WHERE v.Fk_Id_Sector = {$id['id_sector']}";
@@ -32,9 +60,22 @@ Class Configuracion_model extends CI_Model{
 				return $this->db->query($sql)->result();
 			break;
 
-			case "aplicacion":
-                return $this->db->where("Pk_Id", $id)->get("aplicaciones")->row();
-            break;
+			case "tipos_costados":
+				return $this->db_configuracion
+					->select(array(
+						"Nombre Pk_Id",
+						"Nombre",
+					))
+					->order_by("Orden")
+					->get("tipos_costados")->result();
+			break;
+
+            case "vias":
+				return $this->db_configuracion
+					->where("Fk_Id_Sector", $id)
+					->get("vias")
+					->result();
+			break;
 		}
 	}
 }

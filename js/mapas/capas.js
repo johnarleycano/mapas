@@ -222,6 +222,39 @@ function dibujar_capas(mapa, opciones)
         if(opciones["Predios"][2]) mapa.fitBounds(capa_predios.getBounds())
     }
 
+    /***************************************************
+     *** Dibujo de medición de señales horizontales ****
+     **************************************************/
+    if(typeof opciones["Senales_Horizontales"] !== 'undefined' && opciones["Senales_Horizontales"][0]){
+        // Se dibuja la capa
+        var capa_senales_horizontales = dibujar_senales_horizontales(mapa, filtros)
+
+        // Si tiene activa la opción de dibujar
+        if(typeof filtros["opciones"]["Senales_Horizontales"] !== 'undefined' && filtros["opciones"]["Senales_Horizontales"][1]){
+            // Se adiciona la capa
+            mapa.addLayer(capa_senales_horizontales)
+
+            // Se Chequea la capa
+            $("#senales_horizontales").prop("checked", true)
+        }
+
+        // Cuando se selecciona otro mapa base
+        $("#senales_horizontales").on("click", function(){
+            capa = $(this).attr("id")
+
+            if ($(this).prop('checked')){
+                mapa.addLayer(capa_senales_horizontales)
+                $(this).prop("checked", true)
+            } else {
+                mapa.removeLayer(capa_senales_horizontales)
+                $(this).prop("checked", false)
+            }
+        })
+
+        // Si tiene activa la opción, centra el dibujo en la capa
+        if(opciones["Senales_Horizontales"][2]) mapa.fitBounds(capa_senales_horizontales.getBounds())
+    }
+
     // Variable para mantener la ubicación del mapa
     var hash = new L.Hash(mapa)
 
@@ -706,4 +739,58 @@ function dibujar_predios(mapa, filtros){
 
     // Se retorna la capa
     return capa_predios
+}
+
+/**
+ * Dibujo de la capa de mediciones de señales horizontales
+ * 
+ * @param  {map}        mapa        [Mapa]
+ * @param  {array}      filtros     [Arreglo de filtros y opciones]
+ * @return {layer}                  [Capa de medición de señales horizontales]
+ */
+function dibujar_senales_horizontales(mapa, filtros){
+    // Datos
+    var datos = filtros.opciones.datos
+
+    // Información de las señales verticales
+    var capa_senales_horizontales = new L.geoJson(null, {
+        style: function (feature){
+            var color_rgb
+            var color = feature.properties.color
+            var promedio = feature.properties.promedio
+
+            // Color de la vía
+            if(color == "Blanco" && promedio < 140) color_rgb = "rgba(255,0,0,1.0)"
+            if(color == "Blanco" && promedio >= 140) color_rgb = "rgba(21,116,36,1.0)"
+            if(color == "Amarillo" && promedio < 120) color_rgb = "rgba(255,0,0,1.0)"
+            if(color == "Amarillo" && promedio >= 120) color_rgb = "rgba(21,116,36,1.0)"
+
+            return {
+                opacity: 1,
+                color: color_rgb,
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6,
+                fillOpacity: 0,
+            }
+        },
+        onEachFeature: function (feature, layer) {
+            var contenido =
+            `
+            <b>Kilómetro:</b> ${parseInt(feature.properties["entero"])/1000}<br>
+            <b>Fecha de medición:</b> ${$("#fecha_activa").val()}<br>
+            <b>Promedio:</b> ${feature.properties["promedio"]}<br>
+            `
+            return layer.bindPopup(contenido, {maxHeight: 400})
+        },
+    })
+
+    // Consulta de las señales horizontales
+    let senales_horizontales = ajax(`${$("#url").val()}/mediciones/obtener`, {"tipo": "senales_horizontales", "id": datos}, 'JSON')
+
+    // Se agregan los datos a la capa
+    capa_senales_horizontales.addData(senales_horizontales)
+
+    // Se retorna la capa
+    return capa_senales_horizontales
 }

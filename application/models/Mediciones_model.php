@@ -3,6 +3,7 @@ Class Mediciones_model extends CI_Model{
 	function __construct() {
         parent::__construct();
 
+        $this->db_inventario = $this->load->database('inventario', TRUE);
         $this->db_mantenimiento = $this->load->database('mantenimiento', TRUE);
     }
 
@@ -61,6 +62,47 @@ Class Mediciones_model extends CI_Model{
 
 				// return $this->db_incidentes->get_compiled_select();
                 return $this->db_mantenimiento->query($sql)->result();
+			break;
+
+			case "senales_horizontales":
+				$this->db_inventario
+					->select(array(
+						'AVG(sh.medición) promedio',
+						'sh.entero',
+						'sh.color',
+						'ST_AsGeoJSON (public.ST_Transform(((SELECT v.geom FROM "public"."VIAS" AS v WHERE v.id_via = sh.id_via AND v.desde = sh.entero)), 4326), 6) geojson',
+					))
+                    ->from("SeñalesHorizontales sh")
+                    ->join('"public"."VIAS"', 'sh.via = "public"."VIAS"."id"')
+                    ->where(array(
+                    	"sh.via" => $id["via"],
+                    	"sh.calzada" => $id["calzada"],
+                    	"sh.costado" => $id["costado"],
+						"sh.fechainspe" => $id["fechainspe"],
+                    ))
+                    ->order_by("sh.entero")
+                    ->group_by(array(
+                    	"sh.entero",
+                    	"geojson",
+                    	"sh.color",
+                    ))
+                ;
+
+                return $this->db_inventario->get()->result();
+				// return $this->db_inventario->get_compiled_select();
+			break;
+
+			case 'senales_horizontales_fechas':
+				$this->db_inventario
+                    ->select("sh.fechainspe")
+                    ->where($id)
+                    ->group_by("sh.fechainspe")
+                    ->order_by("sh.fechainspe")
+                    ->from("SeñalesHorizontales sh")
+                    ->limit(6)
+                ;
+
+                return $this->db_inventario->get()->result();
 			break;
 		}
 	}

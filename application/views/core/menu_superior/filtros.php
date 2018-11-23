@@ -66,10 +66,7 @@
         select_por_defecto("sector", 1)
         cargar_vias(1)
         select_por_defecto("via", 3)
-        
 
         $("#sector").on("change", cargar_vias)
-        $("#via").on("change", cargar_calzadas)
-        // $("#calzada").on("change", cargar_costados)
     })
 </script>
