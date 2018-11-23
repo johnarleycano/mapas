@@ -59,3 +59,6 @@
 <script src="<?php echo base_url(); ?>js/mapas/cartografia_base.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/mapas/controles.js?<?php echo date('YmdHis'); ?>"></script>
 <script src="<?php echo base_url(); ?>js/mapas/mapas_base.js?<?php echo date('YmdHis'); ?>"></script>
+
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery.range.css?<?php echo date('Ymdhis') ?>">
+<script src="<?php echo base_url(); ?>js/jquery.range-min.js"></script>
