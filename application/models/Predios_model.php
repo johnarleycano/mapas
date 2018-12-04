@@ -23,10 +23,30 @@ Class Predios_model extends CI_Model{
 				"SELECT
 					p.ficha_predial,
 					AsWKB ( p.coordenadas ) AS wkb,
-					i.municipio 
+					i.municipio,
+					d.abscisa_inicial,
+					d.abscisa_final,
+					(
+					SELECT
+						pro.nombre 
+					FROM
+						tbl_relacion AS r
+						INNER JOIN tbl_propietario AS pro ON r.id_propietario = pro.id_propietario 
+					WHERE
+						r.ficha_predial = p.ficha_predial 
+						LIMIT 0,
+						1 
+					) propietario,
+					d.area_requerida,
+					i.no_catastral,
+					i.no_catastral,
+					e.estado,
+					e.color
 				FROM
 					tbl_predio AS p
-					LEFT JOIN tbl_identificacion AS i ON i.ficha_predial = p.ficha_predial 
+					LEFT JOIN tbl_identificacion AS i ON i.ficha_predial = p.ficha_predial
+					INNER JOIN tbl_descripcion AS d ON d.ficha_predial = p.ficha_predial 
+					INNER JOIN tbl_estados_proceso AS e ON i.estado_pro = e.estado
 				WHERE
 					AsWKB ( p.coordenadas ) IS NOT NULL";
 
