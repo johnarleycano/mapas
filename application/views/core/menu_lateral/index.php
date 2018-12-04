@@ -139,9 +139,7 @@
                             </label>
 
                             <label class="enlace">
-                                <?php if(ENVIRONMENT == 'development'){ ?>
-                                    <input class="uk-checkbox" type="checkbox" id="senales_horizontales">&nbsp;&nbsp;&nbsp;
-                                <?php } ?>
+                                <input class="uk-checkbox" type="checkbox" id="senales_horizontales">&nbsp;&nbsp;&nbsp;
                                 
                                 <a href="<?php echo site_url('mediciones/senales_horizontales'); ?>" target="_blank">Señal. horizontal</a>
                             </label>

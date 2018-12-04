@@ -634,19 +634,18 @@ function dibujar_senales_verticales(mapa, filtros){
  * @return {layer}                  [Capa de predios]
  */
 function dibujar_predios(mapa, filtros){
-    imprimir("Dibujando predios")
     // Información de los predios
     var capa_predios = new L.geoJson(null, {
-        style: {
-            "color": "red",
-            "weight": 5,
-            "opacity": 1,
-            "fillOpacity": 0,
+        style: function(feature) {
+            return {
+                "color": `#${feature.properties['color']}` ,
+                "weight": 4,
+                "opacity": 1,
+                "fillOpacity": 0.5,
+            }
         },
         onEachFeature: function(feature, layer) {
-            
-
-                    // Contenido del popup
+            // Contenido del popup
             var contenido =
             `
                 <center><h5><b>${feature.properties['ficha_predial']}</b></h5></center>
@@ -657,27 +656,27 @@ function dibujar_predios(mapa, filtros){
                     </tr>
                     <tr>
                         <td><b>Abscisa inicial</b></td>
-                        <td></td>
+                        <td>${feature.properties['abscisa_inicial']}</td>
                     </tr>
                     <tr>
                         <td><b>Abscisa final</b></td>
-                        <td></td>
+                        <td>${feature.properties['abscisa_final']}</td>
                     </tr>
                     <tr>
                         <td><b>Propietario</b></td>
-                        <td></td>
+                        <td>${feature.properties['propietario']}</td>
                     </tr>
                     <tr>
                         <td><b>Área requerida</b></td>
-                        <td></td>
+                        <td>${feature.properties['area_requerida']}</td>
                     </tr>
                     <tr>
                         <td><b>Cédula catastral</b></td>
-                        <td></td>
+                        <td>${feature.properties['no_catastral'].toString()}</td>
                     </tr>
                     <tr>
-                        <td><b>Estado del proceso</b></td>
-                        <td></td>
+                        <td><b>Estado</b></td>
+                        <td>${feature.properties['estado'].toString()}</td>
                     </tr>
                 </table>
             `
@@ -688,31 +687,14 @@ function dibujar_predios(mapa, filtros){
             // Polígono
             var poligono = L.polygon(feature.geometry.coordinates).bindPopup(contenido)
 
-            var titulo = L.marker(layer.getBounds().getCenter(), {
-                icon: L.divIcon({
-                    className: 'uk-text-center',
-                    html: `<strong style="color: white;">${feature.properties['ficha_predial']}</strong>`,
-                    iconSize: [250, 40]
-                })
-            })
-            // .addTo(mapa)
-
-
+            // var titulo = L.marker(layer.getBounds().getCenter(), {
+            //     icon: L.divIcon({
+            //         className: 'uk-text-center',
+            //         html: `<strong style="color: white;">${feature.properties['ficha_predial']}</strong>`,
+            //         iconSize: [250, 40]
+            //     })
+            // }).addTo(mapa)
         },
-    //     pointToLayer: function (feature, latlng) {
-    //         // Ícono
-    //         var icono = new L.Icon({
-    //             "iconUrl": `${$("#url_base").val()}img/iconos/inventario/obras/icono.svg`,
-    //             "iconSize": [76, 76],
-    //             "iconAnchor": [38, 30],
-    //         })
-            
-    //         // Marcador
-    //         return L.marker(latlng, {icon: icono, rotationAngle: feature.properties.direccion})
-    //     },
-    //     onEachFeature: function(feature, layer) {
-    
-    //     },
     })
 
     // // Cuadro del perímetro del que va a cargar los datos
@@ -720,7 +702,6 @@ function dibujar_predios(mapa, filtros){
 
     // Consulta de los predios
     var predios = ajax(`${$("#url").val()}/predios/obtener`, {"tipo": "listado"}, 'JSON')
-    imprimir(predios)
 
     // Se agregan los datos a la capa
     capa_predios.addData(predios)
