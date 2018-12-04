@@ -156,11 +156,14 @@ function dibujar_kilometros(mapa, filtros)
     // Recorrido de los kilometros
     $.each(kilometros, function(key, kilometro) {
         // Creación del punto
-        let punto = L.circleMarker(
+        let punto = L.marker(
             [kilometro.Latitud, kilometro.Longitud],
             {
-                radius: 5,
-                color: "#438E32",
+                icon: L.divIcon({
+                    className: 'uk-text-center',
+                    html: `<strong style="color: white;">KM ${kilometro.Abscisa/1000} + 000</strong>`,
+                    iconSize: [250, 40]
+                }),
             }
         )
         // Evento clic
@@ -171,7 +174,7 @@ function dibujar_kilometros(mapa, filtros)
                 Abscisa: ${kilometro.Abscisa}`
             )
         })
-        .bindTooltip("my tooltip")
+        .bindTooltip("<b>Vía: </b>" + kilometro.Via)
 
         // El punto se agrega al arreglo
         puntos.push(punto)
