@@ -178,7 +178,7 @@
                 </li>
 
                 <li class="uk-nav-divider"></li>
-                <li><a href="#<?php // echo site_url('configuracion'); ?>"><i class="fas fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Configuración</a></li>
+                <li><a href="<?php echo base_url().'archivos/Manual 1.27.03.pdf'; ?>" download><i class="fas fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Manual</a></li>
                 <li><a href="<?php echo site_url('sesion/cerrar'); ?>"><i class="fas fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Salir</a></li>
             </ul>
         </div>
