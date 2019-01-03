@@ -52,6 +52,7 @@
 <script src="<?php echo base_url(); ?>js/leaflet/L.Control.Locate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/rotatedMarker.js"></script>
 <script src="<?php echo base_url() ?>js/leaflet/leaflet.extra-markers.min.js"></script>
+<script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js" integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="crossorigin=""></script>
 
 <!-- Scripts de mapas -->
 <script src="<?php echo base_url(); ?>js/funciones_mapas.js?<?php echo date('YmdHis'); ?>"></script>

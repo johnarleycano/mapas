@@ -13,12 +13,18 @@ function agregar_mapas_base(mapa, capa = "google_satelite")
         maxZoom: 19
     })
 
+    // Gobernación de Antioquia
+    var gobernacion_antioquia = L.esri.tiledMapLayer({
+        url: "http://190.109.167.188:81/arcgis/rest/services/imagenes/Ant_10000_Orto_WebMercator/ImageServer",
+    })
+
     // Google Híbrido
     var google_hibrido = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
         maxZoom: 20,
         subdomains:['mt0','mt1','mt2','mt3']
     })
 
+    // Google satelital
     var google_satelite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
         maxZoom: 20,
         subdomains:['mt0','mt1','mt2','mt3']
@@ -28,6 +34,11 @@ function agregar_mapas_base(mapa, capa = "google_satelite")
     var google_streets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
         maxZoom: 20,
         subdomains:['mt0','mt1','mt2','mt3']
+    })
+
+    // IGAC
+    var igac = L.esri.tiledMapLayer({
+        url: "http://190.109.167.188:81/arcgis/rest/services/DAP_GisAntioquia/Mapa_Referencia/MapServer",
     })
 
     // Mapa de Open Street
@@ -45,9 +56,11 @@ function agregar_mapas_base(mapa, capa = "google_satelite")
     // Arreglo de los mapas base
     var mapas_base = {
         "bing_satelital": bing_satelital,
+        "gobernacion_antioquia": gobernacion_antioquia,
         "google_hibrido": google_hibrido,
         "google_satelite": google_satelite,
         "google_streets": google_streets,
+        "igac": igac,
         "open_street": open_street,
         "open_street_dark": open_street_dark,
     }
