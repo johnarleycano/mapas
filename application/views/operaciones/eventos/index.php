@@ -23,8 +23,8 @@
 </div>
 
 <script type="text/javascript">
-	var anio = "<?php echo $this->uri->segment(3); ?>"
-	var mes = "<?php echo $this->uri->segment(4); ?>"
+	var anio = parseInt("<?php echo $this->uri->segment(3); ?>")
+	var mes = parseInt("<?php echo $this->uri->segment(4); ?>")
 
 	cargando(`Cargando el consolidado de eventos del mes y dibujando los eventos del día en el mapa para el mes de ${nombre_mes(mes)}...`)
 	
