@@ -21,6 +21,10 @@
                             </label>
                             
                             <label class="enlace">
+                                <input class="uk-radio" type="radio" name="mapas_base" id="gobernacion_antioquia"> Gob. Antioquia
+                            </label>
+                            
+                            <label class="enlace">
                                 <input class="uk-radio" type="radio" name="mapas_base" id="google_satelite"> Google (Satelital)
                             </label>
                             
@@ -30,6 +34,10 @@
                             
                             <label class="enlace">
                                 <input class="uk-radio" type="radio" name="mapas_base" id="google_hibrido"> Google (Híbrido)
+                            </label>
+                            
+                            <label class="enlace">
+                                <input class="uk-radio" type="radio" name="mapas_base" id="igac"> IGAC
                             </label>
                             
                             <label class="enlace">
