@@ -61,7 +61,7 @@ class Operaciones extends CI_Controller {
                 case "dias_mes":
                     $this->data["anio"] = $this->input->post("anio");
                     $this->data["mes"] = $this->input->post("mes");
-                    $this->load->view("operaciones/eventos/dias_mes", $this->data);
+                    $this->load->view("operaciones/eventos/dias", $this->data);
                 break;
 
                 case 'detalle_eventos':
@@ -202,7 +202,7 @@ class Operaciones extends CI_Controller {
                 break;
 
                 case "incidentes":
-                      // Se consulta los registros
+                    // Se consulta los registros
                     $resultado = $this->operaciones_model->obtener($tipo, $id);
 
                     $geojson = array(

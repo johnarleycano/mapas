@@ -1,16 +1,5 @@
 tamanio_menu = 50px
 
-@media (max-width: 450px)
-	#menu_interno
-		height tamanio_menu * 3 !important
-		
-	#sector, #via
-		width 100px
-		font-size 0.7em
-	
-	#slider_fechas
-		width 50px
-	
 @media (max-width: 970px)
 	#menu_interno
 		height tamanio_menu * 3 !important
@@ -23,6 +12,29 @@ tamanio_menu = 50px
 	
 	#slider_fechas
 		width 50px
+		
+@media (max-width: 640px)
+	#eventos_diarios_dias
+		height 200px
+		overflow-y auto
+		
+	#eventos_diarios_mapa
+		margin 0
+		padding 0
+	
+	.margen_mapa
+		max-height 100%
+			
+@media (max-width: 450px)
+	#menu_interno
+		height tamanio_menu * 3 !important
+		
+	#sector, #via
+		width 100px
+		font-size 0.7em
+	
+	#slider_fechas
+		width 50px
 
 #cargando
 	// border 1px solid green
@@ -30,22 +42,21 @@ tamanio_menu = 50px
 	width 100%
 	z-index 4500
 
-#cont_eventos_diarios_dias
-	padding-left 0px
-	width 22%
+#eventos_diarios_dias
+	ul
+		margin-left 10px
+		margin-right 10px
+		overflow-y auto
 		
-#cont_eventos_diarios_mapa
-	width 75%
+		li
+			h3
+				text-align center
+#eventos_diarios_mapa
+	padding 0
 	
 #cont_mapa
 	// border 1px solid green
 	height 100vh
-
-#contenedor_principal
-	// border 1px solid black
-	// height 100vh -100px
-	// padding 0
-	// min-height 100%
 
 #menu_interno
 	// border 1px solid green
@@ -87,9 +98,6 @@ tamanio_menu = 50px
 
 .enlace
 	cursor pointer
-		
-.margen
-	// margin-top tamanio_menu
 
 .margen_mapa
 	height 100vh - 5.9px !important

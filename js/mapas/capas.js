@@ -357,77 +357,56 @@ function dibujar_incidentes(mapa, filtros)
     // Información de la capa
     var capa_incidentes = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
-            const color = feature.properties["color"]
-
-            const estilo =
-            `
-                width: 100px; 
-                height: 150px; 
-                border: 3px solid #555; 
-                // background: #428bca;
-                -webkit-transform: rotate(45deg);
-                -moz-transform: rotate(45deg);
-                -ms-transform: rotate(45deg);
-                -o-transform: rotate(45deg);
-                transform: rotate(45deg);
-            `
-            var icono = new L.Icon({
-                "iconUrl": `${$("#url_base").val()}img/iconos/operaciones/${feature.properties["icono"]}.svg`,
-                "iconSize": [25, 25],
-            })
-
-            const myCustomColour = '#583470'
-
-            const markerHtmlStyles = `
-              background-color: ${myCustomColour};
-              width: 3rem;
-              height: 3rem;
-              display: block;
-              left: -1.5rem;
-              top: -1.5rem;
-              position: relative;
-              border-radius: 3rem 3rem 0;
-              transform: rotate(45deg);
-              border: 1px solid #FFFFFF`
-
-            const icon = L.divIcon({
-              // className: "my-custom-pin",
-                "iconSize": [25, 25],
-              // iconAnchor: [0, 24],
-              // labelAnchor: [-6, 0],
-              // popupAnchor: [0, -36],
-                // iconUrl: `${$("#url_base").val()}img/iconos/operaciones/accidente.svg`,
-              html: `<span style="${markerHtmlStyles}" />`
-            })
+            var incidente = feature.properties
 
             var contenido =
             `
-                <h4><b>${feature.properties["nombre"]} en la abscisa ${feature.properties["abscisa_real"]}</b></h4>
-                <b>Fecha:</b> ${feature.properties["fechaincidente"]}<br>
-                <b>Hora:</b> ${feature.properties["horaincidente"]}<br>
+            <table width='100%'>
+                <thead>
+                    <caption><h4>Evento ${incidente["codigo"]}</h4></caption>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Tipo</b></td>
+                        <td>${incidente["tipo_atencion"]}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Abscisa</b></td>
+                        <td>${incidente["abscisa_real"]}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Fecha</b></td>
+                        <td>${incidente["fechaincidente"]}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Hora</b></td>
+                        <td>${incidente["horaincidente"]}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Lesionados</b></td>
+                        <td>${incidente["heridos"]}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Víctimas fatales</b></td>
+                        <td>${incidente["muertos"]}</td>
+                    </tr>
+                </tbody>
+            </table>
             `
 
             // Se retorna el marcador
             return L.marker(latlng, {
                 icon: L.ExtraMarkers.icon({
                     // icon: 'plus sign',
+                    // prefix: 'icon',
+                    // iconColor: '#B3B1EB'
                     innerHTML: feature.properties["icono_svg"],
-                    // innerHTML: `
-                        // <svg aria-hidden="true" viewBox="-300 -250 1100 1100" data-prefix="fas" fill="#FFFFFF" role="img" xmlns="http://www.w3.org/2000/svg">
-                          // 
-                        // </svg>
-                    // `,
                     // circle, square, star, penta
                     shape: feature.properties["forma_marcador"],
                     // 'red', 'orange-dark', 'orange', 'yellow', 'blue-dark', 'cyan', 'purple', 'violet', 'pink', 'green-dark', 'green', 'green-light', 'black', or 'white'
                     markerColor: feature.properties["color_marcador"],
-                    prefix: 'icon',
-                    // iconColor: '#B3B1EB'
                 })
             }).bindPopup(contenido)
-            // return L.marker(latlng, {
-            //   icon: icon
-            // }).bindPopup(contenido)
         },
     })
         
