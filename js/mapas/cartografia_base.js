@@ -9,7 +9,7 @@
 function agregar_cartografia_base(mapa, filtros)
 {
     // Almacenamiento de la capa
-   var capa
+    var capa
 
     // Almacenamiento de los mapas
     var cartografia_base = {}
@@ -54,7 +54,55 @@ function agregar_cartografia_base(mapa, filtros)
             }
         })
     }
-        
+
+    // Si tiene activa la opción de incluir el mapa del IGAC
+    if(typeof filtros["opciones"]["IGAC"] !== 'undefined' && filtros["opciones"]["IGAC"][0]){
+        /***************************************************
+         **************** Dibujo de mapas ******************
+         **************************************************/
+        $("#gobernacion_antioquia_cartografia").removeClass("uk-hidden")
+
+        // Z-Index
+        mapa.createPane('100').style.zIndex = 100
+
+        // Mapa IGAC
+        let igac = L.esri.tiledMapLayer({
+            url: "http://190.109.167.188:81/arcgis/rest/services/DAP_GisAntioquia/Mapa_Referencia/MapServer",
+            maxZoom: 21,
+            pane: '100',
+        })
+
+        // Se agrega la capa
+        cartografia_base["igac"] = igac
+
+        // Si tiene activa la opción de dibujar las vías
+        if(typeof filtros["opciones"]["IGAC"] !== 'undefined' && filtros["opciones"]["IGAC"][1]){
+            // Se adiciona la capa
+            mapa.addLayer(igac)
+
+            // Se Chequea la capa
+            $("#gobernacion_antioquia_cartografia>input").prop("checked", true)
+        }
+
+        // Cuando se selecciona otro mapa base
+        $("#gobernacion_antioquia_cartografia>input").on("click", function(){
+            // Si está chequeado
+            if ($(this).prop('checked')){
+                // Agrega la capa
+                mapa.addLayer(igac)
+                
+                // Chequea
+                $(this).prop("checked", true)
+            } else {
+                // Quita la capa
+                mapa.removeLayer(igac)
+                
+                // Quita el check
+                $(this).prop("checked", false)
+            }
+        })
+    }
+
     // Si tiene activa la opción de incluir los kilómetros
     if(typeof filtros["opciones"]["Kilometros"] !== 'undefined' && filtros["opciones"]["Kilometros"][0]){
         /***************************************************
@@ -225,6 +273,10 @@ function dibujar_municipios(mapa, filtros){
  */
 function dibujar_vias(mapa, filtros)
 {
+
+    // Z-Index
+    mapa.createPane('150').style.zIndex = 150
+
     // Se consultan las vías  
     var vias = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id": {"id_sector": filtros.id_sector, "id_via": filtros.id_via}}, 'JSON')
 
@@ -234,7 +286,8 @@ function dibujar_vias(mapa, filtros)
             "color": "#FACD00",
             "weight": 5,
             "opacity": 1
-        }
+        },
+        pane: '150',
     })
 
     // Se retorna la capa

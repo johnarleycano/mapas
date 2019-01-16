@@ -8,6 +8,7 @@
 			"Municipios": [true],
 			"Predios": [true, true],
 			"Kilometros": [true, true],
+			"IGAC": [true],
 		}
 
 		var mapa = crear("cont_mapa", {minZoom: 12})

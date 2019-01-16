@@ -6,6 +6,7 @@
 		var capas = {
 			"Vias": [true, true],
 			"Obras": [true, true],
+			"IGAC": [true],
 		}
 
 		var mapa = crear("cont_mapa")

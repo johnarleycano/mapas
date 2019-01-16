@@ -17,6 +17,7 @@
 			// Capas
 			"Roceria_Cuneta": [true, true, true],
 			"Mapa_Base": "google_hibrido",
+			"IGAC": [true],
 
 			// Opciones
 			"datos": {

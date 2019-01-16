@@ -5,13 +5,17 @@
 	$(document).ready(function(){
 		// Variables
 		var escala_fechas = new Array()
+		
 		var cont = 1
+		
 		var opciones = {
             // Capas
             "Senales_Horizontales": [true, true, true],
             "Vias": [true],
             "Kilometros": [true],
+            "IGAC": [true, true],
         }
+
 		let datos = {
 			"id_via": "<?php echo $datos['id_via']; ?>",
 			"calzada": "<?php echo $datos['calzada']; ?>",

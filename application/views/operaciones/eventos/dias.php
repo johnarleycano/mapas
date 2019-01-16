@@ -48,6 +48,7 @@ for ($dia; $dia > 0; $dia--) {
 		"Kilometros": [true],
 		"Municipios": [true, true],
 		"Vias": [true, true, true],
+		"IGAC": [true],
         
         // Opciones
         "id_tipo_atencion": null,

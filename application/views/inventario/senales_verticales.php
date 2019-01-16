@@ -9,6 +9,7 @@
 			"Municipios": [true],
 			"Abscisas": [true],
 			"Senales_Verticales": [true, true, true],
+			"IGAC": [true],
 		}
 
 		var mapa = crear("cont_mapa")

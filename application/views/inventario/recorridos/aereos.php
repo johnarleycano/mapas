@@ -7,6 +7,7 @@
 			"Vias": [true, true],
 			"Fotos_Aereas": [true, true],
 			"Mapa_Base": "google_hibrido",
+			"IGAC": [true],
 		}
 
 		var mapa = crear("cont_mapa")

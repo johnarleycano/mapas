@@ -9,6 +9,7 @@
 			"Kilometros": [true],
 			"Abscisas": [true],
 			"Municipios": [true, true],
+			"IGAC": [true],
 			
 			// Capas
 			"Senales_Verticales": [true, true, true],
