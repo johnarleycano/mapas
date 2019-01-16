@@ -15,39 +15,37 @@
                     </a>
 
                     <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="bing_satelital"> Bing (Satelital)
-                            </label>
-                            
-                            <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="gobernacion_antioquia"> Gob. Antioquia
-                            </label>
-                            
-                            <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="google_satelite"> Google (Satelital)
-                            </label>
-                            
-                            <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="google_streets"> Google (Calles)
-                            </label>
-                            
-                            <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="google_hibrido"> Google (Híbrido)
-                            </label>
-                            
-                            <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="igac"> IGAC
-                            </label>
-                            
-                            <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street (Color)
-                            </label>
-                            
-                            <label class="enlace">
-                                <input class="uk-radio" type="radio" name="mapas_base" id="open_street_dark"> Open Street (Gris)
-                            </label>
-                        </div>
+                        <label class="enlace">
+                            <input class="uk-radio" type="radio" name="mapas_base" id="bing_satelital"> Bing (Satelital)
+                        </label><br>
+                        
+                        <label class="enlace">
+                            <input class="uk-radio" type="radio" name="mapas_base" id="gobernacion_antioquia"> Gob. Antioquia
+                        </label><br>
+                        
+                        <label class="enlace">
+                            <input class="uk-radio" type="radio" name="mapas_base" id="google_satelite"> Google (Satelital)
+                        </label><br>
+                        
+                        <label class="enlace">
+                            <input class="uk-radio" type="radio" name="mapas_base" id="google_streets"> Google (Calles)
+                        </label><br>
+                        
+                        <label class="enlace">
+                            <input class="uk-radio" type="radio" name="mapas_base" id="google_hibrido"> Google (Híbrido)
+                        </label><br>
+                        
+                        <label class="enlace">
+                            <input class="uk-radio" type="radio" name="mapas_base" id="igac"> IGAC
+                        </label><br>
+                        
+                        <label class="enlace">
+                            <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street (Color)
+                        </label><br>
+                        
+                        <label class="enlace">
+                            <input class="uk-radio" type="radio" name="mapas_base" id="open_street_dark"> Open Street (Gris)
+                        </label><br>
                     </ul>
                 </li>
 
@@ -57,29 +55,27 @@
                     </a>
 
                     <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label class="enlace uk-hidden" id="vias">
-                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                                Vías
-                            </label>
+                        <label class="enlace uk-hidden" id="vias">
+                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            Vías
+                        </label><br>
 
-                            <label class="enlace uk-hidden" id="municipios">
-                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                                Municipios
-                            </label>
+                        <label class="enlace uk-hidden" id="municipios">
+                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            Municipios
+                        </label><br>
 
-                            <label class="enlace uk-hidden" id="kilometros">
-                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                                Kilómetros
-                            </label>
+                        <label class="enlace uk-hidden" id="kilometros">
+                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            Kilómetros
+                        </label><br>
 
-                            <?php if(ENVIRONMENT == 'development'){ ?>
-                                <label class="enlace" id="abscisas">
-                                    <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                                    Abscisas
-                                </label>
-                            <?php } ?>
-                        </div>
+                        <?php if(ENVIRONMENT == 'development'){ ?>
+                            <label class="enlace" id="abscisas">
+                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                                Abscisas
+                            </label><br>
+                        <?php } ?>
                     </ul>
                 </li>
                 
@@ -90,28 +86,26 @@
                     </a>
 
                     <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label class="enlace">
-                                <input class="uk-checkbox" type="checkbox" id="eventos_diarios">&nbsp;&nbsp;&nbsp;
-                                <a href="<?php echo site_url('operaciones/eventos_diarios/').date("Y")."/".date("m"); ?>" class="uk-link-text">Eventos diarios</a>
-                            </label>
+                        <label class="enlace">
+                            <input class="uk-checkbox" type="checkbox" id="eventos_diarios">&nbsp;&nbsp;&nbsp;
+                            <a href="<?php echo site_url('operaciones/eventos_diarios/').date("Y")."/".date("m"); ?>" class="uk-link-text">Eventos diarios</a>
+                        </label><br>
 
-                            <label class="enlace">
-                                <?php if(ENVIRONMENT == 'development'){ ?>
-                                    <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
-                                <?php } ?>
-                                
-                                <a href="<?php echo site_url('operaciones/incidentes'); ?>">Incidentes</a>
-                            </label>
+                        <label class="enlace">
+                            <?php if(ENVIRONMENT == 'development'){ ?>
+                                <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            <?php } ?>
+                            
+                            <a href="<?php echo site_url('operaciones/incidentes'); ?>">Incidentes</a>
+                        </label><br>
 
-                            <label class="enlace">
-                                <?php if(ENVIRONMENT == 'development'){ ?>
-                                    <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
-                                <?php } ?>
-                                
-                                <a href="<?php echo site_url('operaciones/dibujar_punto/inicial/3/12200'); ?>" target="_blank">Punto</a>
-                            </label>
-                        </div>
+                        <label class="enlace">
+                            <?php if(ENVIRONMENT == 'development'){ ?>
+                                <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            <?php } ?>
+                            
+                            <a href="<?php echo site_url('operaciones/dibujar_punto/inicial/3/12200'); ?>" target="_blank">Punto</a>
+                        </label><br>
                     </ul>
                 </li>
 
@@ -121,16 +115,16 @@
                     </a>
                     
                     <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label class="enlace">
-                                <input class="uk-checkbox" type="checkbox" id="senales_verticales">&nbsp;&nbsp;&nbsp;
-                                <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Señales verticales</a>
-                                <br>
-                                
-                                <input class="uk-checkbox" type="checkbox" id="obras">&nbsp;&nbsp;&nbsp;
-                                <a href="<?php echo site_url('inventario/obras'); ?>" class="uk-link-text">Obras de arte</a>
-                            </label>
-                        </div>
+                        <label class="enlace">
+                            <input class="uk-checkbox" type="checkbox" id="senales_verticales">&nbsp;&nbsp;&nbsp;
+                            <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Señales verticales</a>
+                        </label><br>
+                            
+                            
+                        <label class="enlace">
+                            <input class="uk-checkbox" type="checkbox" id="obras">&nbsp;&nbsp;&nbsp;
+                            <a href="<?php echo site_url('inventario/obras'); ?>" class="uk-link-text">Obras de arte</a>
+                        </label><br>
                     </ul>
                 </li>
 
@@ -140,18 +134,16 @@
                     </a>
 
                     <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label class="enlace">
-                                <input class="uk-checkbox" type="checkbox" id="roceria_cuneta">&nbsp;&nbsp;&nbsp;
-                                <a href="<?php echo site_url('mediciones/roceria_cuneta/'); ?>" class="uk-link-text" target="_blank">Rocería y cunetas</a>
-                            </label>
+                        <label class="enlace">
+                            <input class="uk-checkbox" type="checkbox" id="roceria_cuneta">&nbsp;&nbsp;&nbsp;
+                            <a href="<?php echo site_url('mediciones/roceria_cuneta/'); ?>" class="uk-link-text" target="_blank">Rocería y cunetas</a>
+                        </label><br>
 
-                            <label class="enlace">
-                                <input class="uk-checkbox" type="checkbox" id="senales_horizontales">&nbsp;&nbsp;&nbsp;
-                                
-                                <a href="<?php echo site_url('mediciones/senales_horizontales'); ?>" target="_blank">Señal. horizontal</a>
-                            </label>
-                        </div>
+                        <label class="enlace">
+                            <input class="uk-checkbox" type="checkbox" id="senales_horizontales">&nbsp;&nbsp;&nbsp;
+                            
+                            <a href="<?php echo site_url('mediciones/senales_horizontales'); ?>" target="_blank">Señal. horizontal</a>
+                        </label><br>
                     </ul>
                 </li>
 
@@ -161,12 +153,10 @@
                     </a>
                     
                     <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label class="enlace">
-                                <input class="uk-checkbox" type="checkbox" id="fotos_aereas">&nbsp;&nbsp;&nbsp;
-                                <a href="<?php echo site_url('inventario/fotos_aereas'); ?>" class="uk-link-text">Aéreos</a>
-                            </label>
-                        </div>
+                        <label class="enlace">
+                            <input class="uk-checkbox" type="checkbox" id="fotos_aereas">&nbsp;&nbsp;&nbsp;
+                            <a href="<?php echo site_url('inventario/fotos_aereas'); ?>" class="uk-link-text">Aéreos</a>
+                        </label><br>
                     </ul>
                 </li>
 
@@ -176,12 +166,10 @@
                     </a>
                     
                     <ul class="uk-nav-sub">
-                        <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
-                            <label class="enlace">
-                                <input class="uk-checkbox" type="checkbox" id="predios">&nbsp;&nbsp;&nbsp;
-                                <a href="<?php echo site_url('predios'); ?>" class="uk-link-text">Listado</a>
-                            </label>
-                        </div>
+                        <label class="enlace">
+                            <input class="uk-checkbox" type="checkbox" id="predios">&nbsp;&nbsp;&nbsp;
+                            <a href="<?php echo site_url('predios'); ?>" class="uk-link-text">Listado</a>
+                        </label><br>
                     </ul>
                 </li>
 
