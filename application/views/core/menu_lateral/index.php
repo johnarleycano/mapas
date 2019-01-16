@@ -20,7 +20,7 @@
                         </label><br>
                         
                         <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="gobernacion_antioquia"> Gob. Antioquia
+                            <input class="uk-radio" type="radio" name="mapas_base" id="gobernacion_antioquia"> Gob. Antioquia (2011)
                         </label><br>
                         
                         <label class="enlace">
@@ -33,10 +33,6 @@
                         
                         <label class="enlace">
                             <input class="uk-radio" type="radio" name="mapas_base" id="google_hibrido"> Google (Híbrido)
-                        </label><br>
-                        
-                        <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="igac"> IGAC
                         </label><br>
                         
                         <label class="enlace">
@@ -55,6 +51,11 @@
                     </a>
 
                     <ul class="uk-nav-sub">
+                        <label class="enlace uk-hidden" id="gobernacion_antioquia_cartografia">
+                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            Gob. Antioquia (2011)
+                        </label><br>
+
                         <label class="enlace uk-hidden" id="vias">
                             <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                             Vías
