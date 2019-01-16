@@ -8,7 +8,7 @@
 			"Obras": [true, true],
 		}
 
-		var mapa = crear("cont_mapa", {minZoom: 14, maxZoom: 16})
+		var mapa = crear("cont_mapa")
 		dibujar_capas(mapa, capas)
 	})
 </script>

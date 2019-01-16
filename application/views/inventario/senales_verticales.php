@@ -11,7 +11,7 @@
 			"Senales_Verticales": [true, true, true],
 		}
 
-		var mapa = crear("cont_mapa", {zoom: 17, minZoom: 17})
+		var mapa = crear("cont_mapa")
 		dibujar_capas(mapa, capas)
 
 		$("select").on("change", function(){

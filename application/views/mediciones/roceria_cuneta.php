@@ -27,7 +27,7 @@
 		}
 
 		// Creación del mapa
-		var mapa = crear("cont_mapa", {minZoom: 11, maxZoom: 18, zoom: 11})
+		var mapa = crear("cont_mapa")
 		
 		// Dibujo de las capas
 		dibujar_capas(mapa, capas)

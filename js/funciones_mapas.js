@@ -8,8 +8,7 @@ function crear(contenedor, opciones = null)
 {
     // Variables por defecto
     var zoom = 16
-    var zoom_minimo = 16
-    var zoom_maximo = 19
+    var zoom_minimo = 10
     var control_zoom = true
     var ubicacion_actual = true
 
@@ -18,7 +17,6 @@ function crear(contenedor, opciones = null)
         // Se cambia la opción de acuerdo a lo parametrizado
         if (typeof opciones.zoom !== 'undefined' || opciones.zoom) zoom = opciones.zoom
         if (typeof opciones.minZoom !== 'undefined' || opciones.minZoom) zoom_minimo = opciones.minZoom
-        if (typeof opciones.maxZoom !== 'undefined' || opciones.maxZoom) zoom_maximo = opciones.maxZoom
         if (typeof opciones.zoomControl !== 'undefined' || opciones.zoomControl) control_zoom = opciones.zoomControl
     }
 
@@ -27,7 +25,7 @@ function crear(contenedor, opciones = null)
         "center": [6.176188, -75.354868],
         "zoomControl": control_zoom,
         "zoom": zoom,
-        "maxZoom": zoom_maximo,
+        // "maxZoom": zoom_maximo,
         "minZoom": zoom_minimo,
     })
 

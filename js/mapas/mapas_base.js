@@ -16,41 +16,43 @@ function agregar_mapas_base(mapa, capa = "google_satelite")
     // Gobernación de Antioquia
     var gobernacion_antioquia = L.esri.tiledMapLayer({
         url: "http://190.109.167.188:81/arcgis/rest/services/imagenes/Ant_10000_Orto_WebMercator/ImageServer",
+        maxZoom: 21,
     })
 
     // Google Híbrido
     var google_hibrido = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
-        maxZoom: 20,
+        maxZoom: 21,
         subdomains:['mt0','mt1','mt2','mt3']
     })
 
     // Google satelital
     var google_satelite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
-        maxZoom: 20,
+        maxZoom: 21,
         subdomains:['mt0','mt1','mt2','mt3']
     })
 
     // Google Streets
     var google_streets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
-        maxZoom: 20,
+        maxZoom: 21,
         subdomains:['mt0','mt1','mt2','mt3']
     })
 
     // IGAC
     var igac = L.esri.tiledMapLayer({
         url: "http://190.109.167.188:81/arcgis/rest/services/DAP_GisAntioquia/Mapa_Referencia/MapServer",
+        maxZoom: 21,
     })
 
     // Mapa de Open Street
     var open_street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 19
+        maxZoom: 21
     })
 
     // Mapa de Open Street en gris
     var open_street_dark = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-        maxZoom: 18
+        maxZoom: 21
     })
 
     // Arreglo de los mapas base

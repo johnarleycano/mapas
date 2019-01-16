@@ -308,8 +308,16 @@ function dibujar_fotos_aereas(mapa, opciones)
 
     // Cuando se mueva el mapa
     mapa.on('moveend', function(e) {
+        cerrar_notificaciones()
+        
         // Se limpian las señales
         capa_fotos_aereas.clearLayers()
+
+        // Si el zoom es menor o igual a 15, muestra mensaje
+        if(mapa.getZoom() <= 15){
+            imprimir_notificacion(`<span uk-icon='icon: info'></span> Acerque más el mapa`, "info")
+            return false
+        }
 
         // Se consultan las señales en el perímetro
         fotos_aereas = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "fotos_aereas", "id": {"perimetro": mapa.getBounds().toBBoxString()}}, 'JSON')
@@ -409,7 +417,7 @@ function dibujar_incidentes(mapa, filtros)
             }).bindPopup(contenido)
         },
     })
-        
+
     // Consulta de incidentes
     let incidentes = ajax(`${$("#url").val()}/operaciones/obtener`, {"tipo": "incidentes", "id": datos}, 'JSON')
 
@@ -514,15 +522,23 @@ function dibujar_obras(mapa, filtros){
     var perimetro = mapa.getBounds().toBBoxString()
 
     // Consulta de las obras de arte
-    obras = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "obras", "id": {"id_sector": null, "id_via": null, "perimetro": perimetro}}, 'JSON')
+    let obras = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "obras", "id": {"id_sector": null, "id_via": null, "perimetro": perimetro}}, 'JSON')
 
     // Se agregan los datos a la capa
     capas_obras.addData(obras)
 
     // Cuando se mueva el mapa
     mapa.on('moveend', function(e) {
+        cerrar_notificaciones()
+        
         // Se limpian las señales
         capas_obras.clearLayers()
+
+        // Si el zoom es menor o igual a 15, muestra mensaje
+        if(mapa.getZoom() <= 15){
+            imprimir_notificacion(`<span uk-icon='icon: info'></span> Acerque más el mapa`, "info")
+            return false
+        }
 
         // Se consultan las señales en el perímetro
         obras = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "obras", "id": {"id_sector": null, "id_via": null, "perimetro": mapa.getBounds().toBBoxString()}}, 'JSON')
@@ -569,7 +585,6 @@ function dibujar_senales_verticales(mapa, filtros){
                 <b>Fecha:</b> ${(feature.properties['fechainspe']) ? feature.properties['fechainspe'] : ''}<br>
                 <b>Medición:</b> ${(feature.properties['medición']) ? feature.properties['medición'] : ''}<br>
                 <b>Observación:</b> ${(feature.properties['observ']) ? feature.properties['observ'] : ''}<br>
-                <b>Antigraf:</b> ${(feature.properties['antigraf']) ? feature.properties['antigraf'] : ''}<br>
                 <center>
                     <img src="${$("#url_base").val()}archivos/inventario/senales_verticales/${feature.properties['archivo']}" />
                 </center>
@@ -584,15 +599,23 @@ function dibujar_senales_verticales(mapa, filtros){
     var perimetro = mapa.getBounds().toBBoxString()
 
     // Consulta de las señales verticales
-    senales_verticales = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "senales_verticales", "id": {"id_sector": null, "id_via": filtros.id_via, "perimetro": perimetro}}, 'JSON')
+    let senales_verticales = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "senales_verticales", "id": {"id_sector": null, "id_via": filtros.id_via, "perimetro": perimetro}}, 'JSON')
 
     // Se agregan los datos a la capa
     capa_senales_verticales.addData(senales_verticales)
 
     // Cuando se mueva la capa
     mapa.on('moveend', function(e) {
+        cerrar_notificaciones()
+
         // Se limpian las señales
         capa_senales_verticales.clearLayers()
+
+        // Si el zoom es menor o igual a 15, muestra mensaje
+        if(mapa.getZoom() <= 15){
+            imprimir_notificacion(`<span uk-icon='icon: info'></span> Acerque más el mapa`, "info")
+            return false
+        }
 
         // Se consultan las señales en el perímetro
         senales_verticales = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "senales_verticales", "id": {"id_sector": filtros.id_sector, "id_via": filtros.id_via, "perimetro": mapa.getBounds().toBBoxString()}}, 'JSON')

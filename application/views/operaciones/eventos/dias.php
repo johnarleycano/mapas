@@ -57,7 +57,7 @@ for ($dia; $dia > 0; $dia--) {
 	}
 
 	// Creación del mapa
-	var mapa = crear("cont_mapa", {zoom: 10, minZoom: 11, maxZoom: 18})
+	var mapa = crear("cont_mapa", {zoom: 11})
 
 	/**
 	 * Carga de eventos del día

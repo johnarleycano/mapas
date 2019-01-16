@@ -65,7 +65,7 @@
             "Mapa_Base": "google_streets",
         }
         
-        var mapa = crear("cont_mapa", {minZoom: 11, maxZoom: 18})
+        var mapa = crear("cont_mapa")
         dibujar_capas(mapa, opciones)
 
         $("#select_anio_incidente_filtro").on("change", function(){
