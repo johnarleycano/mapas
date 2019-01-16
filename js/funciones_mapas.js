@@ -25,7 +25,6 @@ function crear(contenedor, opciones = null)
         "center": [6.176188, -75.354868],
         "zoomControl": control_zoom,
         "zoom": zoom,
-        // "maxZoom": zoom_maximo,
         "minZoom": zoom_minimo,
     })
 

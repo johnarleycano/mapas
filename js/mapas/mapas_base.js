@@ -70,11 +70,11 @@ function agregar_mapas_base(mapa, capa = "google_satelite")
         "open_street_dark": open_street_dark,
     }
 
-    // Se checkea el radio del mapa base
-    $(`#${capa}`).prop("checked", true)
+    // Se marca por defecto el mapa base
+    select_por_defecto("select_mapa_base", capa)
     
     // Cuando se selecciona otro mapa base
-    $("input[name='mapas_base']").on("click", function(){
+    $("#select_mapa_base").on("change", function(){
         // Se recorren los mapas base
         $.each(mapas_base, function(key, mapa_base) {
             // Se quita el mapa base
@@ -82,7 +82,7 @@ function agregar_mapas_base(mapa, capa = "google_satelite")
         })
 
         // Se activa el mapa base
-        mapas_base[$(this).attr("id")].addTo(mapa)
+        mapas_base[$(this).val()].addTo(mapa)
     })
 
     // Se activa el mapa seleccionado

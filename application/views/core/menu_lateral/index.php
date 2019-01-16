@@ -15,33 +15,15 @@
                     </a>
 
                     <ul class="uk-nav-sub">
-                        <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="bing_satelital"> Bing (Satelital)
-                        </label><br>
-                        
-                        <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="gobernacion_antioquia"> Gob. Antioquia (2011)
-                        </label><br>
-                        
-                        <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="google_satelite"> Google (Satelital)
-                        </label><br>
-                        
-                        <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="google_streets"> Google (Calles)
-                        </label><br>
-                        
-                        <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="google_hibrido"> Google (Híbrido)
-                        </label><br>
-                        
-                        <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="open_street"> Open Street (Color)
-                        </label><br>
-                        
-                        <label class="enlace">
-                            <input class="uk-radio" type="radio" name="mapas_base" id="open_street_dark"> Open Street (Gris)
-                        </label><br>
+                        <select class="uk-select" id="select_mapa_base">
+                            <option value="bing_satelital">Bing (Satelital)</option>
+                            <option value="gobernacion_antioquia">Gobernación de Antioquia (2011)</option>
+                            <option value="google_satelite">Google (Satelital)</option>
+                            <option value="google_streets">Google (Calles)</option>
+                            <option value="google_hibrido">Google (Híbrido)</option>
+                            <option value="open_street">Open Street (Color)</option>
+                            <option value="open_street_dark">Open Street (Gris)</option>
+                        </select>
                     </ul>
                 </li>
 
