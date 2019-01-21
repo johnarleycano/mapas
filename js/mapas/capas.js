@@ -575,23 +575,32 @@ function dibujar_senales_verticales(mapa, filtros){
             return L.marker(latlng, {icon: smallIcon});
         },
         onEachFeature: function(feature, layer) {
+            let senal = feature.properties
+
             // Contenido del popup
             var contenido =
                 `
-                <b>Kilómetro:</b> ${(feature.properties['kilómetro']) ? feature.properties['kilómetro'] : ''}<br>
-                <b>Margen:</b> ${(feature.properties['costado']) ? feature.properties['costado'] : ''}<br>
-                <b>Código de señal:</b> ${(feature.properties['codseñal']) ? feature.properties['codseñal'] : ''}<br>
-                <b>Color:</b> ${(feature.properties['color']) ? feature.properties['color'] : ''}<br>
-                <b>Fecha:</b> ${(feature.properties['fechainspe']) ? feature.properties['fechainspe'] : ''}<br>
-                <b>Medición:</b> ${(feature.properties['medición']) ? feature.properties['medición'] : ''}<br>
-                <b>Observación:</b> ${(feature.properties['observ']) ? feature.properties['observ'] : ''}<br>
-                <center>
+                <center><h4>Señal ${(senal['codseñal']) ? senal['codseñal'] : ''}</h4></center>
+                <div style="display: inline-block; width: 55%; vertical-align: middle;">
+                    <b>Vía:</b> ${(senal['via']) ? senal['via'] : ''}<br/>
+                    <b>Abscisa:</b> ${(senal['kilómetro']) ? senal['kilómetro'] : ''}<br/>
+                    <b>Margen:</b> ${(senal['costado']) ? senal['costado'] : ''}<br/>
+                    <b>Color:</b> ${(senal['color']) ? senal['color'] : ''}<br/>
+                    <b>Medición:</b> ${(senal['medición']) ? senal['medición'] : ''}<br/>
+                    <b>Observación:</b> ${(senal['observ']) ? senal['observ'] : ''}<br/>
+                    <b>Tipo de papel:</b> ${(senal['papel']) ? senal['papel'] : ''}<br/>
+                    <b>Fecha instalación:</b> ${(senal['fechainsta']) ? senal['fechainsta'] : ''}<br/>
+                </div>
+                
+                <div style="display: inline-block; width: 40%;">
                     <img src="${$("#url_base").val()}archivos/inventario/senales_verticales/${feature.properties['archivo']}" />
-                </center>
+                </div>
+
+                <!--<b>Fecha</b> ${(senal['fechainspe']) ? senal['fechainspe'] : ''}<br>-->
                 `
 
             // Carga de información al popup
-            layer.bindPopup(contenido, {maxHeight: 400})
+            layer.bindPopup(contenido, {maxHeight: 420, minWidth: 320})
         },
     })
 
