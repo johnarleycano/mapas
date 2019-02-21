@@ -499,18 +499,16 @@ function dibujar_obras(mapa, filtros){
             // Contenido del popup
             var contenido =
             `
-                <h4><b>Obra de arte número ${feature.properties['numero']}</b></h4>
+                <h4><b>Obra de arte ${feature.properties['numero']}</b></h4>
                 <b>Abscisa:</b> ${(feature.properties['abscisa']) ? feature.properties['abscisa'] : ""}<br>
-                <b>Tipo:</b> ${(feature.properties['tipo']) ? feature.properties['tipo'] : ""}<br>
-                <b>Obra:</b> ${(feature.properties['obra']) ? feature.properties['obra'] : ""}<br>
-                <b>Ancho:</b> ${(feature.properties['ancho']) ? feature.properties['ancho'] : ""}<br>
                 <b>Altura:</b> ${(feature.properties['altura']) ? feature.properties['altura'] : ""}<br>
+                <b>Anchura:</b> ${(feature.properties['ancho']) ? feature.properties['ancho'] : ""}<br>
                 <b>Encole (I/D):</b> ${(feature.properties['encole_i_d']) ? feature.properties['encole_i_d'] : ""}<br>
                 <b>Descole (I/D):</b> ${(feature.properties['descole_i_d']) ? feature.properties['descole_i_d'] : ""}<br>
                 <b>Longitud:</b> ${(feature.properties['longitud']) ? feature.properties['longitud'] : ""}<br>
-                <b>Entrada:</b> ${(feature.properties['entrada']) ? feature.properties['entrada'] : ""}<br>
-                <b>Salida:</b> ${(feature.properties['salida']) ? feature.properties['salida'] : ""}<br><br>
-                <b>Observación:</b> ${(feature.properties['observacion']) ? feature.properties['observacion'] : ""}<br>
+                <b>Material:</b> ${(feature.properties['material']) ? feature.properties['material'] : ""}<br>
+                <b>Colmatación:</b> ${(feature.properties['colmatacion']) ? feature.properties['colmatacion'] : ""}<br>
+                <b>Comentario:</b> ${(feature.properties['comentario']) ? feature.properties['comentario'] : ""}<br>
             `
 
             // Se agrega el contenido al popup
