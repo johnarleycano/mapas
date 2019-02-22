@@ -493,7 +493,11 @@ function dibujar_obras(mapa, filtros){
             })
             
             // Marcador
-            return L.marker(latlng, {icon: icono, rotationAngle: feature.properties.direccion})
+            return L.marker(latlng, {
+                "tags": [(feature.properties['colmatacion'] > 25) ? "No cumple" : "Cumple"],
+                "icon": icono,
+                "rotationAngle": feature.properties.direccion
+            })
         },
         onEachFeature: function(feature, layer) {
             // Contenido del popup
@@ -516,6 +520,13 @@ function dibujar_obras(mapa, filtros){
         },
     })
 
+    var control = L.control.tagFilterButton({
+        data: ['No cumple'],
+        icon: `<img src="${$("#url_base").val()}img/iconos/filtro.png">`,
+        filterOnEveryClick: true,
+    })
+    control.setPosition('topright').addTo( mapa )
+
     // Cuadro del perímetro del que va a cargar los datos
     var perimetro = mapa.getBounds().toBBoxString()
 
@@ -533,7 +544,7 @@ function dibujar_obras(mapa, filtros){
         capas_obras.clearLayers()
 
         // Si el zoom es menor o igual a 15, muestra mensaje
-        if(mapa.getZoom() <= 15){
+        if(mapa.getZoom() <= 13){
             imprimir_notificacion(`<span uk-icon='icon: info'></span> Acerque más el mapa`, "info")
             return false
         }

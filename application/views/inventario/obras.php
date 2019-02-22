@@ -1,3 +1,13 @@
+ <style>
+.easy-button-button {
+  display: block !important;
+}
+
+.tag-filter-tags-container {
+  left: 30px;
+}
+</style>
+
 <div id="cont_mapa" clas="margen_mapa"></div>
 
 <script type="text/javascript">
