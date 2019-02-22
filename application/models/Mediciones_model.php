@@ -70,7 +70,7 @@ Class Mediciones_model extends CI_Model{
 						'AVG(sh.medición) promedio',
 						'sh.entero',
 						'sh.color',
-						'ST_AsGeoJSON (public.ST_Transform(((SELECT v.geom FROM "public"."VIAS" AS v WHERE v.id_via = sh.id_via AND v.desde = sh.entero)), 4326), 6) geojson',
+						'ST_AsGeoJSON (public.ST_Transform(((SELECT v.geom FROM "public"."VIAS" AS v WHERE v.id_via = sh.via AND v.desde = sh.entero)), 4326), 6) geojson',
 					))
                     ->from("SeñalesHorizontales sh")
                     ->join('"public"."VIAS"', 'sh.via = "public"."VIAS"."id"')
@@ -102,6 +102,7 @@ Class Mediciones_model extends CI_Model{
                     ->limit(6)
                 ;
 
+				// return $this->db_inventario->get_compiled_select();
                 return $this->db_inventario->get()->result();
 			break;
 		}

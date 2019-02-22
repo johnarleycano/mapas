@@ -13,15 +13,15 @@
             "Senales_Horizontales": [true, true, true],
             "Vias": [true],
             "Kilometros": [true],
-            "IGAC": [true, true],
+            "IGAC": [true],
         }
 
 		let datos = {
-			"id_via": "<?php echo $datos['id_via']; ?>",
-			"calzada": "<?php echo $datos['calzada']; ?>",
+			"via": "<?php echo $datos['id_via']; ?>",
+			"calzada": `Calzada ${"<?php echo strtolower($datos['calzada']); ?>"}`,
 			"costado": "<?php echo $datos['costado']; ?>",
 		}
-		// imprimir(datos)
+		imprimir(datos)
 
 		// Se consultan las fechas disponibles
 		let fechas = ajax("<?php echo site_url('mediciones/obtener') ?>", {"tipo": "senales_horizontales_fechas", "id": datos}, "JSON")
