@@ -37,6 +37,8 @@
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/L.Control.Locate.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/leaflet.extra-markers.min.css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/leaflet-easy-button.css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/leaflet-tag-filter-button.css" />
 
 <!-- Scripts -->
 <script src="<?php echo base_url(); ?>js/jquery-3.2.1.min.js"></script> <!-- jQuery -->
@@ -51,8 +53,10 @@
 <script src="<?php echo base_url(); ?>js/leaflet/geometryutil.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/L.Control.Locate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/leaflet/rotatedMarker.js"></script>
-<script src="<?php echo base_url() ?>js/leaflet/leaflet.extra-markers.min.js"></script>
+<script src="<?php echo base_url(); ?>js/leaflet/leaflet.extra-markers.min.js"></script>
 <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js" integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="crossorigin=""></script>
+<script src="<?php echo base_url(); ?>js/leaflet/leaflet-easy-button.js"></script>
+<script src="<?php echo base_url(); ?>js/leaflet/leaflet-tag-filter-button.js"></script>
 
 <!-- Scripts de mapas -->
 <script src="<?php echo base_url(); ?>js/funciones_mapas.js?<?php echo date('YmdHis'); ?>"></script>
