@@ -15,6 +15,12 @@ function agregar_controles(mapa, opciones)
     mapa.addControl(escala)
 
     // Control de ubicación actual
-    var ubicacion_actual = L.control.locate({ position: 'topright'})
+    var ubicacion_actual = L.control.locate({
+    	position: 'topright',
+    	strings: {
+    		title: 'Mostrar mi ubicación actual',
+    	},
+    	icon: 'fa fa-location-arrow',
+    })
     ubicacion_actual.addTo(mapa)
 }
