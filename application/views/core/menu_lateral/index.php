@@ -36,26 +36,26 @@
                         <label class="enlace uk-hidden" id="gobernacion_antioquia_cartografia">
                             <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                             Gob. Antioquia (2011)
-                        </label><br>
+                        </label>
 
                         <label class="enlace uk-hidden" id="vias">
-                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            <br><input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                             Vías
-                        </label><br>
+                        </label>
 
                         <label class="enlace uk-hidden" id="municipios">
-                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            <br><input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                             Municipios
-                        </label><br>
+                        </label>
 
                         <label class="enlace uk-hidden" id="kilometros">
-                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            <br><input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                             Kilómetros
-                        </label><br>
+                        </label>
 
                         <?php if(ENVIRONMENT == 'development'){ ?>
                             <label class="enlace" id="abscisas">
-                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                                <br><input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
                                 Abscisas
                             </label><br>
                         <?php } ?>
@@ -72,23 +72,17 @@
                         <label class="enlace">
                             <input class="uk-checkbox" type="checkbox" id="eventos_diarios">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('operaciones/eventos_diarios/').date("Y")."/".date("m"); ?>" class="uk-link-text">Eventos diarios</a>
-                        </label><br>
+                        </label>
 
                         <label class="enlace">
-                            <?php if(ENVIRONMENT == 'development'){ ?>
-                                <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
-                            <?php } ?>
-                            
+                            <br><input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('operaciones/incidentes'); ?>">Incidentes</a>
-                        </label><br>
+                        </label>
 
                         <label class="enlace">
-                            <?php if(ENVIRONMENT == 'development'){ ?>
-                                <input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
-                            <?php } ?>
-                            
+                            <br><input class="uk-checkbox" type="checkbox">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('operaciones/dibujar_punto/inicial/3/12200'); ?>" target="_blank">Punto</a>
-                        </label><br>
+                        </label>
                     </ul>
                 </li>
 
@@ -101,13 +95,12 @@
                         <label class="enlace">
                             <input class="uk-checkbox" type="checkbox" id="senales_verticales">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('inventario/senales_verticales'); ?>" class="uk-link-text">Señales verticales</a>
-                        </label><br>
-                            
+                        </label>
                             
                         <label class="enlace">
-                            <input class="uk-checkbox" type="checkbox" id="obras">&nbsp;&nbsp;&nbsp;
+                            <br><input class="uk-checkbox" type="checkbox" id="obras">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('inventario/obras'); ?>" class="uk-link-text">Obras de arte</a>
-                        </label><br>
+                        </label>
                     </ul>
                 </li>
 
@@ -120,13 +113,12 @@
                         <label class="enlace">
                             <input class="uk-checkbox" type="checkbox" id="roceria_cuneta">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('mediciones/roceria_cuneta/'); ?>" class="uk-link-text" target="_blank">Rocería y cunetas</a>
-                        </label><br>
+                        </label>
 
                         <label class="enlace">
-                            <input class="uk-checkbox" type="checkbox" id="senales_horizontales">&nbsp;&nbsp;&nbsp;
-                            
+                            <br><input class="uk-checkbox" type="checkbox" id="senales_horizontales">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('mediciones/senales_horizontales'); ?>" target="_blank">Señal. horizontal</a>
-                        </label><br>
+                        </label>
                     </ul>
                 </li>
 
@@ -137,9 +129,9 @@
                     
                     <ul class="uk-nav-sub">
                         <label class="enlace">
-                            <input class="uk-checkbox" type="checkbox" id="fotos_aereas">&nbsp;&nbsp;&nbsp;
+                            <br><input class="uk-checkbox" type="checkbox" id="fotos_aereas">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('inventario/fotos_aereas'); ?>" class="uk-link-text">Aéreos</a>
-                        </label><br>
+                        </label>
                     </ul>
                 </li>
 
@@ -152,7 +144,7 @@
                         <label class="enlace">
                             <input class="uk-checkbox" type="checkbox" id="predios">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('predios'); ?>" class="uk-link-text">Listado</a>
-                        </label><br>
+                        </label>
                     </ul>
                 </li>
 
@@ -162,4 +154,4 @@
             </ul>
         </div>
     </div>
-</div>    
+</div>
