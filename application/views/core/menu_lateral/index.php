@@ -129,7 +129,7 @@
                     
                     <ul class="uk-nav-sub">
                         <label class="enlace">
-                            <br><input class="uk-checkbox" type="checkbox" id="fotos_aereas">&nbsp;&nbsp;&nbsp;
+                            <input class="uk-checkbox" type="checkbox" id="fotos_aereas">&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo site_url('inventario/fotos_aereas'); ?>" class="uk-link-text">Aéreos</a>
                         </label>
                     </ul>

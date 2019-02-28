@@ -485,6 +485,8 @@ function dibujar_obras(mapa, filtros){
     // Información de las obras
     var capas_obras = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
+            let obra = feature.properties
+
             // Ícono
             var icono = new L.Icon({
                 "iconUrl": `${$("#url_base").val()}img/iconos/inventario/obras/icono.svg`,
@@ -494,25 +496,27 @@ function dibujar_obras(mapa, filtros){
             
             // Marcador
             return L.marker(latlng, {
-                "tags": [(feature.properties['colmatacion'] > 25) ? "No cumple" : "Cumple"],
+                "tags": [(obra.colmatacion > 25) ? "No cumple" : "Cumple"],
                 "icon": icono,
-                "rotationAngle": feature.properties.direccion
+                "rotationAngle": obra.direccion
             })
         },
         onEachFeature: function(feature, layer) {
+            let obra = feature.properties
+
             // Contenido del popup
             var contenido =
             `
-                <h4><b>Obra de arte ${feature.properties['numero']}</b></h4>
-                <b>Abscisa:</b> ${(feature.properties['abscisa']) ? feature.properties['abscisa'] : ""}<br>
-                <b>Altura:</b> ${(feature.properties['altura']) ? feature.properties['altura'] : ""}<br>
-                <b>Anchura:</b> ${(feature.properties['ancho']) ? feature.properties['ancho'] : ""}<br>
-                <b>Encole (I/D):</b> ${(feature.properties['encole_i_d']) ? feature.properties['encole_i_d'] : ""}<br>
-                <b>Descole (I/D):</b> ${(feature.properties['descole_i_d']) ? feature.properties['descole_i_d'] : ""}<br>
-                <b>Longitud:</b> ${(feature.properties['longitud']) ? feature.properties['longitud'] : ""}<br>
-                <b>Material:</b> ${(feature.properties['material']) ? feature.properties['material'] : ""}<br>
-                <b>Colmatación:</b> ${(feature.properties['colmatacion']) ? feature.properties['colmatacion'] : ""}<br>
-                <b>Comentario:</b> ${(feature.properties['comentario']) ? feature.properties['comentario'] : ""}<br>
+                <h4><b>Obra de arte ${(obra.numero) ? obra.numero : ""}</b></h4>
+                <b>Abscisa:</b> ${(obra.abscisa) ? obra.abscisa : ""}<br>
+                <b>Altura:</b> ${(obra.altura) ? obra.altura : ""}<br>
+                <b>Anchura:</b> ${(obra.ancho) ? obra.ancho : ""}<br>
+                <b>Encole (I/D):</b> ${(obra.encole_i_d) ? obra.encole_i_d : ""}<br>
+                <b>Descole (I/D):</b> ${(obra.descole_i_d) ? obra.descole_i_d : ""}<br>
+                <b>Longitud:</b> ${(obra.longitud) ? obra.longitud : ""}<br>
+                <b>Material:</b> ${(obra.material) ? feature.properties.material : ""}<br>
+                <b>Colmatación:</b> ${(obra.colmatacion) ? obra.colmatacion : ""}<br>
+                <b>Comentario:</b> ${(obra.comentario) ? obra.comentario : ""}<br>
             `
 
             // Se agrega el contenido al popup
@@ -525,7 +529,7 @@ function dibujar_obras(mapa, filtros){
         icon: `<img src="${$("#url_base").val()}img/iconos/filtro.png">`,
         filterOnEveryClick: true,
     })
-    control.setPosition('topright').addTo( mapa )
+    control.setPosition('topright').addTo(mapa)
 
     // Cuadro del perímetro del que va a cargar los datos
     var perimetro = mapa.getBounds().toBBoxString()
