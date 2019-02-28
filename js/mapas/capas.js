@@ -529,7 +529,7 @@ function dibujar_obras(mapa, filtros){
         icon: `<img src="${$("#url_base").val()}img/iconos/filtro.png">`,
         filterOnEveryClick: true,
     })
-    control.setPosition('topright').addTo(mapa)
+    control.addTo(mapa)
 
     // Cuadro del perímetro del que va a cargar los datos
     var perimetro = mapa.getBounds().toBBoxString()
@@ -575,8 +575,10 @@ function dibujar_senales_verticales(mapa, filtros){
     // Información de las señales verticales
     var capa_senales_verticales = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
+            let senal = feature.properties
+            
             // Código del ícono
-            var codigo = String(feature.properties["codsen"]).toUpperCase()
+            var codigo = String(senal.codsen).toUpperCase()
 
             // Ícono
             var smallIcon = new L.Icon({
@@ -606,7 +608,7 @@ function dibujar_senales_verticales(mapa, filtros){
                 </div>
                 
                 <div style="display: inline-block; width: 40%;">
-                    <img src="${$("#url_base").val()}archivos/inventario/senales_verticales/${feature.properties['archivo']}" />
+                    <img src="${$("#url_base").val()}archivos/inventario/senales_verticales/${senal.archivo}" />
                 </div>
 
                 <!--<b>Fecha</b> ${(senal['fechainspe']) ? senal['fechainspe'] : ''}<br>-->
@@ -754,6 +756,9 @@ function dibujar_predios(mapa, filtros){
  * @return {layer}                  [Capa de medición de señales horizontales]
  */
 function dibujar_senales_horizontales(mapa, filtros){
+    // Se oculta el filtro
+    $(`.leaflet-bar.easy-button-container.leaflet-control`).hide()
+    
     // Datos
     var datos = filtros.opciones.datos
 
@@ -761,19 +766,21 @@ function dibujar_senales_horizontales(mapa, filtros){
     var capa_senales_horizontales = new L.geoJson(null, {
         style: function (feature){
             let senal = feature.properties
-            var color_rgb
-            var color = senal.color
+            var color
+            var color_verde = "rgba(21,116,36,1.0)"
+            var color_rojo = "rgba(255,0,0,1.0)"
             var promedio = senal.promedio
 
             // Color de la vía
-            if(color == "Blanco" && promedio < 140) color_rgb = "rgba(255,0,0,1.0)"
-            if(color == "Blanco" && promedio >= 140) color_rgb = "rgba(21,116,36,1.0)"
-            if(color == "Amarillo" && promedio < 120) color_rgb = "rgba(255,0,0,1.0)"
-            if(color == "Amarillo" && promedio >= 120) color_rgb = "rgba(21,116,36,1.0)"
+            if(senal.color == "Blanco" && promedio < 140) color = color_rojo, tag = "No cumple"
+            if(senal.color == "Blanco" && promedio >= 140) color = color_verde, tag = "Cumple"
+            if(senal.color == "Amarillo" && promedio < 120) color = color_rojo, tag = "No cumple"
+            if(senal.color == "Amarillo" && promedio >= 120) color = color_verde, tag = "Cumple"
 
             return {
+                tags: [tag],
                 opacity: 1,
-                color: color_rgb,
+                color: color,
                 lineCap: 'square',
                 lineJoin: 'bevel',
                 weight: 6,
@@ -792,6 +799,16 @@ function dibujar_senales_horizontales(mapa, filtros){
             return layer.bindPopup(contenido, {maxHeight: 400})
         },
     })
+
+    // Control de filtro
+    var control = L.control.tagFilterButton({
+        data: ['No cumple'],
+        icon: `<img src="${$("#url_base").val()}img/iconos/filtro.png">`,
+        filterOnEveryClick: true,
+    }).addTo(mapa)
+
+    // Se muestra el control
+    $('.leaflet-top.leaflet-left').show()
 
     // Consulta de las señales horizontales
     let senales_horizontales = ajax(`${$("#url").val()}/mediciones/obtener`, {"tipo": "senales_horizontales", "id": datos}, 'JSON')
