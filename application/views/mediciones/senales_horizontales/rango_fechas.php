@@ -9,11 +9,9 @@
 		var cont = 1
 		
 		var opciones = {
-            // Capas
+            "Mapa_Base": "google_streets",
             "Senales_Horizontales": [true, true, true],
-            "Vias": [true],
             "Kilometros": [true],
-            "IGAC": [true],
         }
 
 		let datos = {
@@ -21,32 +19,41 @@
 			"calzada": `Calzada ${"<?php echo strtolower($datos['calzada']); ?>"}`,
 			"costado": "<?php echo $datos['costado']; ?>",
 		}
-		imprimir(datos)
+		// imprimir(datos)
 
-		// Se consultan las fechas disponibles
-		let fechas = ajax("<?php echo site_url('mediciones/obtener') ?>", {"tipo": "senales_horizontales_fechas", "id": datos}, "JSON")
+		// Se consultan las secuencias disponibles
+		let secuencias = ajax("<?php echo site_url('mediciones/obtener') ?>", {"tipo": "senales_horizontales_secuencias", "id": datos}, "JSON")
 
 		// Si no se encuentran fechas
-		if(fechas.length == 0){
+		if(secuencias.length == 0){
 			// Mensaje de notificación
 			swal("No se encontraron mediciones para esta vía.")
 
 			return false
 		}
+
+		// Se recorren las secuencias
+		$.each(secuencias, function(clave, valor) {
+			// Se agrega la secuencia a la consulta
+			datos.secuencia = valor.secuencia
+
+			// Se consulta la fecha que más se repita para poner en el rango
+			let fecha = ajax("<?php echo site_url('mediciones/obtener') ?>", {"tipo": "senales_horizontales_fecha_comun", "id": datos}, "JSON")
+			// imprimir("Fecha común: "+ fecha.fechainspe)
+			
+			// Se agrega la fecha al slider
+			escala_fechas.push(fecha.fechainspe)
+
+			$("#fecha_activa").val(fecha.fechainspe)
+
+			// Se crea un campo para luego leerlo
+	        $("#slider_fechas").append(`<input type="hidden" id="fecha${cont++}" value="${fecha.fechainspe}" data-secuencia="${valor.secuencia}">`)
+		})
 		
-		// Se recorren los registros obtenidos
-		$.each(fechas, function(clave, valor) {
-	        escala_fechas.push(valor.fechainspe)
-
-	        // Se crea un campo para luego leerlo
-	        $("#slider_fechas").append(`<input type="hidden" id="fecha${cont++}" value="${valor.fechainspe}">`)
-	    })
-		// imprimir(escala_fechas)
-
 		// Slider
 		$('#slider_fechas').jRange({
 			from: 1.0,
-			to: fechas.length,
+			to: secuencias.length,
 			step: 1.0,
 			disable: false,
 			isRange: false,
@@ -57,15 +64,12 @@
 			showLabels: false,
 			snap: true,
 			onstatechange: function(val){
-		        // Valor de la fecha activa
-				$("#fecha_activa").val($(`#fecha${val}`).val())
-
 				// Opciones: [0]: incluir; [1]: dibujar; [2]: centrar
 	            opciones.datos = {
 	                "via": $("#via").val(),
 	                "calzada": datos.calzada,
 	                "costado": datos.costado,
-	                "fechainspe": $("#fecha_activa").val(),
+	                "secuencia": $(`#fecha${val}`).attr("data-secuencia"),
 	            }
 
 	            // Dibujo de la capa

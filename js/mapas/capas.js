@@ -760,9 +760,10 @@ function dibujar_senales_horizontales(mapa, filtros){
     // Información de las señales verticales
     var capa_senales_horizontales = new L.geoJson(null, {
         style: function (feature){
+            let senal = feature.properties
             var color_rgb
-            var color = feature.properties.color
-            var promedio = feature.properties.promedio
+            var color = senal.color
+            var promedio = senal.promedio
 
             // Color de la vía
             if(color == "Blanco" && promedio < 140) color_rgb = "rgba(255,0,0,1.0)"
@@ -780,11 +781,13 @@ function dibujar_senales_horizontales(mapa, filtros){
             }
         },
         onEachFeature: function (feature, layer) {
+            let senal = feature.properties
+            
             var contenido =
             `
-            <b>Kilómetro:</b> ${parseInt(feature.properties["entero"])/1000}<br>
+            <b>Kilómetro:</b> ${parseInt(senal.entero)/1000}<br>
             <b>Fecha de medición:</b> ${$("#fecha_activa").val()}<br>
-            <b>Promedio:</b> ${feature.properties["promedio"]}<br>
+            <b>Promedio:</b> ${senal.promedio}<br>
             `
             return layer.bindPopup(contenido, {maxHeight: 400})
         },

@@ -55,7 +55,7 @@
 
 	$(document).ready(function(){
 		// Creación del mapa
-		window.mapa = crear("cont_mapa", {minZoom: 11, maxZoom: 18})
+		window.mapa = crear("cont_mapa", {minZoom: 10, maxZoom: 18})
 		
 		// Carga de las calzadas
 		cargar_calzadas()

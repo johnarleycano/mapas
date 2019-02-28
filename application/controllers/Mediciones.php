@@ -158,7 +158,11 @@ class Mediciones extends CI_Controller {
                     print json_encode($geojson, JSON_NUMERIC_CHECK);
             	break;
 
-                case 'senales_horizontales_fechas':
+                case 'senales_horizontales_fecha_comun':
+                    print json_encode($this->mediciones_model->obtener($tipo, $id));
+                break;
+
+                case 'senales_horizontales_secuencias':
                     print json_encode($this->mediciones_model->obtener($tipo, $id));
                 break;
             }

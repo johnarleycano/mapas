@@ -78,7 +78,7 @@ Class Mediciones_model extends CI_Model{
                     	"sh.via" => $id["via"],
                     	"sh.calzada" => $id["calzada"],
                     	"sh.costado" => $id["costado"],
-						"sh.fechainspe" => $id["fechainspe"],
+						"sh.secuencia" => $id["secuencia"],
                     ))
                     ->order_by("sh.entero")
                     ->group_by(array(
@@ -92,14 +92,31 @@ Class Mediciones_model extends CI_Model{
 				// return $this->db_inventario->get_compiled_select();
 			break;
 
-			case 'senales_horizontales_fechas':
+			case 'senales_horizontales_fecha_comun':
 				$this->db_inventario
-                    ->select("sh.fechainspe")
+                    ->select(array(
+                    	"count(sh.id) total_mediciones",
+                    	"sh.fechainspe",
+                    ))
                     ->where($id)
                     ->group_by("sh.fechainspe")
-                    ->order_by("sh.fechainspe")
+                    ->order_by("total_mediciones", "DESC")
                     ->from("SeñalesHorizontales sh")
-                    ->limit(6)
+                    ->limit(1)
+                ;
+
+				// return $this->db_inventario->get_compiled_select();
+                return $this->db_inventario->get()->row();
+			break;
+
+			case 'senales_horizontales_secuencias':
+				$this->db_inventario
+                    ->select("sh.secuencia")
+                    ->from("SeñalesHorizontales sh")
+                    ->where($id)
+                    ->order_by("sh.secuencia")
+                    ->group_by("sh.secuencia")
+                    ->limit(4)
                 ;
 
 				// return $this->db_inventario->get_compiled_select();
