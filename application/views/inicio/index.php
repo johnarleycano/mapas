@@ -13,7 +13,6 @@
 			
 			// Capas
 			"Senales_Verticales": [true, true, true],
-			"Fotos_Aereas": [true, true],
 			"Obras": [true, true],
 		}
 
