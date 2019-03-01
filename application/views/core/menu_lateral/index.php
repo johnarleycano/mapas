@@ -35,29 +35,29 @@
                     <ul class="uk-nav-sub">
                         <label class="enlace uk-hidden" id="gobernacion_antioquia_cartografia">
                             <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                            Gob. Antioquia (2011)
+                            Gob. Antioquia (2011)<br>
                         </label>
 
                         <label class="enlace uk-hidden" id="vias">
-                            <br><input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                            Vías
+                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            Vías<br>
                         </label>
 
                         <label class="enlace uk-hidden" id="municipios">
-                            <br><input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                            Municipios
+                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            Municipios<br>
                         </label>
 
                         <label class="enlace uk-hidden" id="kilometros">
-                            <br><input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                            Kilómetros
+                            <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                            Kilómetros<br>
                         </label>
 
                         <?php if(ENVIRONMENT == 'development'){ ?>
                             <label class="enlace" id="abscisas">
-                                <br><input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
-                                Abscisas
-                            </label><br>
+                                <input class="uk-checkbox" name="cartografia_base" type="checkbox">&nbsp;&nbsp;&nbsp;
+                                Abscisas<br>
+                            </label>
                         <?php } ?>
                     </ul>
                 </li>

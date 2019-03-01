@@ -60,9 +60,7 @@
 		// Carga de las calzadas
 		cargar_calzadas()
         
-        $("#via").on("change", function(){
-			// Carga de las calzadas
-        	cargar_calzadas()
-        })
+		// Al seleccionar una vía, carga las calzadas
+        $("#via").on("change", cargar_calzadas)
 	})
 </script>
