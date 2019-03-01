@@ -138,9 +138,6 @@ function dibujar_capas(mapa, opciones)
                 $(this).prop("checked", false)
             }
         })
-
-        // Si tiene activa la opción, centra el dibujo en la capa
-        // if(opciones["Fotos_Aereas"][2]) mapa.setView(new L.LatLng(6.17458,-75.34900), 17)
     }
     
     /***************************************************
@@ -273,19 +270,25 @@ function dibujar_capas(mapa, opciones)
  */
 function dibujar_fotos_aereas(mapa, opciones)
 {
+    let datos = opciones.datos
+
     // Información de la capa
     var capa_fotos_aereas = new L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
+            let foto = feature.properties
+
             // Url de la foto
-            var url = `${$("#url_base").val()}/archivos/inventario/fotos_aereas/${feature.properties['Date']}/${feature.properties['Name']}`
+            var url = `${$("#url_base").val()}/archivos/inventario/fotos_aereas/${foto.Date}/${foto.Name}`
 
             // Contenido del popup
             var contenido = `
-                <b>Fecha de captura de la foto:</b> ${feature.properties['Date']}<br><br>
+                <b>Fecha de captura de la foto:</b> ${foto.Date}<br><br>
                 <img src='${url}' width='auto'/>
-                <a href="${url}" download>
-                    <input type='submit' class='uk-button uk-button-secondary uk-button-large uk-width-1-1' value='Descargar'>
-                </a>
+                <p>
+                    <a href="${url}" download>
+                        <input type='submit' class='uk-button uk-button-secondary uk-button-large uk-width-1-1' value='Descargar'>
+                    </a>
+                </p>
             `
 
             // Parámetros del ícono
@@ -296,15 +299,32 @@ function dibujar_fotos_aereas(mapa, opciones)
             })
 
             // Se retorna el marcador
-            return L.marker(latlng, {"icon": icono}).bindPopup(contenido, { 'minWidth': '640', 'height': '480' }) 
+            return L.marker(latlng, {"icon": icono}).bindPopup(contenido, { 'minWidth': '320', 'height': '480' }) 
         },
     })
 
     // Cuadro del perímetro del que va a cargar los datos
-    var perimetro = mapa.getBounds().toBBoxString()
+    datos.perimetro = mapa.getBounds().toBBoxString()
+    // imprimir(datos)
 
     // Consulta de las fotos aéreas
-    var fotos_aereas = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "fotos_aereas", "id": {"perimetro": perimetro}}, 'JSON')
+    var fotos_aereas = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "fotos_aereas", "id": datos}, 'JSON')
+
+    // Se consulta las vía, para buscar el área de zoom  
+    let via = ajax(`${$("#url").val()}/filtros/obtener`, {"tipo": "vias_geometria", "id": {"id_sector": null, "id_via": datos.via}}, 'JSON')
+
+    // Se agrega la capa de la vía
+    var capa_via = new L.geoJson(via, {
+        style: {
+            "color": "#FACD00",
+            "weight": 5,
+            "opacity": 1
+        },
+        pane: '150',
+    })
+
+    // Se adiciona la capa
+    mapa.addLayer(capa_via)
 
     // Cuando se mueva el mapa
     mapa.on('moveend', function(e) {
@@ -313,14 +333,17 @@ function dibujar_fotos_aereas(mapa, opciones)
         // Se limpian las señales
         capa_fotos_aereas.clearLayers()
 
-        // Si el zoom es menor o igual a 15, muestra mensaje
-        if(mapa.getZoom() <= 15){
-            imprimir_notificacion(`<span uk-icon='icon: info'></span> Acerque más el mapa`, "info")
-            return false
-        }
+        // // Si el zoom llega el límite
+        // if(mapa.getZoom() <= 14){
+        //     imprimir_notificacion(`<span uk-icon='icon: info'></span> Acerque más el mapa`, "info")
+        //     return false
+        // }
+
+        // Se agrega el perímetro nuevo
+        datos.perimetro = mapa.getBounds().toBBoxString()
 
         // Se consultan las señales en el perímetro
-        fotos_aereas = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "fotos_aereas", "id": {"perimetro": mapa.getBounds().toBBoxString()}}, 'JSON')
+        fotos_aereas = ajax(`${$("#url").val()}/inventario/obtener`, {"tipo": "fotos_aereas", "id": datos}, 'JSON')
 
         // Se agregan a la capa
         capa_fotos_aereas.addData(fotos_aereas)
@@ -328,6 +351,9 @@ function dibujar_fotos_aereas(mapa, opciones)
 
     // Se agregan los datos a la capa
     capa_fotos_aereas.addData(fotos_aereas)
+    
+    // Si tiene activa la opción, centra el dibujo en la capa
+    if(opciones["Fotos_Aereas"][2]) mapa.fitBounds(capa_via.getBounds())
 
     // Se retorna la capa
     return capa_fotos_aereas

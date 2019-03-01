@@ -26,6 +26,27 @@ class Inventario extends CI_Controller {
     }
 
     /**
+     * Carga la interfaz según sea el caso
+     * 
+     * @return [view] 
+     */
+    function cargar_interfaz(){
+        //Se valida que la peticion venga mediante ajax y no mediante el navegador
+        if($this->input->is_ajax_request()){
+            // Dependiendo del tipo
+            switch ($this->input->post('tipo')) {
+                case 'rango_fechas_fotos_aereas':
+                    $this->data["datos"] = $this->input->post("datos");
+                    $this->load->view("inventario/recorridos_aereos/rango_fechas", $this->data);
+                break;
+            }
+        }else{
+            //Si la peticion fue hecha mediante navegador, se redirecciona a la pagina de inicio
+            redirect('');
+        }
+    }
+
+    /**
      * Obtiene registros de base de datos
      * y los retorna a las vistas
      * 
@@ -67,6 +88,14 @@ class Inventario extends CI_Controller {
                     }
 
                     print json_encode($geojson, JSON_NUMERIC_CHECK);
+                break;
+
+                case 'fotos_aereas_fecha_comun':
+                    print json_encode($this->inventario_model->obtener($tipo, $id));
+                break;
+
+                case 'fotos_aereas_secuencias':
+                    print json_encode($this->inventario_model->obtener($tipo, $id));
                 break;
 
                 case "municipios_geometria":
@@ -174,12 +203,12 @@ class Inventario extends CI_Controller {
 
         // Opciones
         // $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
-        $this->data['opciones'] = array("menu_superior", "menu_lateral");
+        $this->data['opciones'] = array("menu_superior", "menu_lateral", "menu_interno", "filtro_superior", "filtro_interno");
         // $this->data['filtros'] = array("sectores", "vias", "costados", "anios_incidentes", "meses_incidentes", "tipos_atencion_incidentes");
-        $this->data['filtros'] = array("");
+        $this->data['filtros'] = array("sectores", "vias");
 
         // Vistas
-        $this->data['contenido_principal'] = 'inventario/recorridos/aereos';
+        $this->data['contenido_principal'] = 'inventario/recorridos_aereos/index';
         $this->load->view('core/template', $this->data);
     }
 
